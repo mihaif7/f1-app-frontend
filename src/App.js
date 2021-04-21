@@ -1,25 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Box, Center, Spinner } from "@chakra-ui/react";
+import React, { Suspense } from "react";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
+import "./App.css";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+
+const Seasons = React.lazy(() => import("./views/seasons/seasons"));
+const Races = React.lazy(() => import("./views/races/races"));
+const RaceInfo = React.lazy(() => import("./views/raceInfo/raceInfo"));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Box d="flex" minH="100vh" flexDirection="column">
+        <Header />
+        <Box flexGrow={1}>
+          <Suspense
+            fallback={
+              <Center h="100vh">
+                <Spinner size="xl" />
+              </Center>
+            }>
+            <Switch>
+              <Route exact path="/seasons" component={Seasons} />
+              <Route exact path="/season/:year" component={Races} />
+              <Route exact path="/season/:year/round/:raceId" component={RaceInfo} />
+              <Redirect from="/" to="/seasons" />
+            </Switch>
+          </Suspense>
+        </Box>
+        <Footer />
+      </Box>
+    </Router>
   );
 }
 
