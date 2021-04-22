@@ -85,7 +85,7 @@ const QualiResultsTable = ({ quali }) => {
   const [isLargerThan750] = useMediaQuery("(min-width: 750px)");
   const [isLargerThan585] = useMediaQuery("(min-width: 585px)");
 
-  console.log(quali);
+  // console.log(quali);
   return (
     <Box
       align="center"

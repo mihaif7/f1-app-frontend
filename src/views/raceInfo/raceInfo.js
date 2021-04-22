@@ -76,7 +76,7 @@ const RacesInfo = () => {
     // eslint-disable-next-line
   }, []);
 
-  console.log(quali);
+  // console.log(quali);
 
   return (
     <>
