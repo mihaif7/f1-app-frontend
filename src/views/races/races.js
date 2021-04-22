@@ -51,10 +51,10 @@ const Races = () => {
 
   const getData = async () => {
     await axios
-      .get(`${process.env.REACT_APP_API_URL}/races/${year}`, {
+      .get(`${process.env.REACT_APP_API_URL}/api/races/${year}`, {
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "http://192.168.0.107:3000",
+          "Access-Control-Allow-Origin": process.env.REACT_APP_ORIGIN,
         },
       })
       .then((res) => {
