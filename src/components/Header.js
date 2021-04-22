@@ -23,8 +23,7 @@ const NavLink = ({ children, onClose }) => (
       bg: useColorModeValue("gray.200", "gray.700"),
     }}
     as={ReachLink}
-    to={`/${children.toLowerCase()}`}
-    onClick={onClose}>
+    to={`/${children.toLowerCase()}`}>
     {children}
   </Link>
 );
