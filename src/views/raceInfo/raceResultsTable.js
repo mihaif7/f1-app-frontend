@@ -2,6 +2,7 @@ import {
   Accordion,
   AccordionButton,
   AccordionIcon,
+  AccordionItem,
   AccordionPanel,
   Box,
   Collapse,
@@ -15,7 +16,6 @@ import {
   Tr,
   useDisclosure,
   useMediaQuery,
-  AccordionItem,
 } from "@chakra-ui/react";
 
 const TableRow = ({ res }) => {
@@ -132,7 +132,6 @@ const SmallTable = ({ results }) => {
 };
 
 const RaceResultsTable = ({ results }) => {
-  const { isOpen, onToggle } = useDisclosure();
   const [isLargerThan750] = useMediaQuery("(min-width: 750px)");
   const [isLargerThan585] = useMediaQuery("(min-width: 585px)");
 

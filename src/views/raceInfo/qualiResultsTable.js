@@ -2,9 +2,10 @@ import {
   Accordion,
   AccordionButton,
   AccordionIcon,
+  AccordionItem,
   AccordionPanel,
+  Badge,
   Box,
-  Collapse,
   Table,
   Tbody,
   Td,
@@ -13,18 +14,13 @@ import {
   Th,
   Thead,
   Tr,
-  useDisclosure,
   useMediaQuery,
-  AccordionItem,
-  Badge,
 } from "@chakra-ui/react";
 
 const TableRow = ({ res }) => {
-  const { isOpen, onToggle } = useDisclosure();
-  const positionGained = res.grid - res.position;
   return (
     <>
-      <Tr key={res.driverId} onClick={onToggle} bg="gray.50">
+      <Tr key={res.driverId} bg="gray.50">
         <Td pr={2} isNumeric>
           {res.position}
         </Td>
@@ -86,7 +82,6 @@ const SmallTable = ({ quali }) => {
 };
 
 const QualiResultsTable = ({ quali }) => {
-  const { isOpen, onToggle } = useDisclosure();
   const [isLargerThan750] = useMediaQuery("(min-width: 750px)");
   const [isLargerThan585] = useMediaQuery("(min-width: 585px)");
 

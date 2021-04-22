@@ -1,36 +1,17 @@
-import {
-  Badge,
-  Box,
-  Center,
-  Flex,
-  Spinner,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  useMediaQuery,
-  ScaleFade,
-  SlideFade,
-  Icon,
-} from "@chakra-ui/react";
+import { Box, Center, Flex, Icon, SlideFade, Spinner } from "@chakra-ui/react";
 import axios from "axios";
-import { GrLocationPin } from "react-icons/gr";
 import { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import RaceResultsTable from "./raceResultsTable";
+import { GrLocationPin } from "react-icons/gr";
+import { useParams } from "react-router-dom";
 import QualiResultsTable from "./qualiResultsTable";
+import RaceResultsTable from "./raceResultsTable";
 
 const RacesInfo = () => {
-  let history = useHistory();
   const [fetching, setFetching] = useState(true);
   const [raceInfo, setRaceInfo] = useState();
   const [results, setResults] = useState();
   const [quali, setQuali] = useState();
-  let { year, raceId } = useParams();
+  let { raceId } = useParams();
 
   const getCircuitInfo = async () => {
     await axios
@@ -92,6 +73,7 @@ const RacesInfo = () => {
     getCircuitInfo();
     getResults();
     getQuali();
+    // eslint-disable-next-line
   }, []);
 
   console.log(quali);
