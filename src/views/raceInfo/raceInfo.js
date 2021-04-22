@@ -19,7 +19,7 @@ const RacesInfo = () => {
 
   const getCircuitInfo = async () => {
     await axios
-      .get(`http://192.168.0.107:5000/api/circuit/${raceId}`, {
+      .get(`${process.env.REACT_APP_API_URL}/circuit/${raceId}`, {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "http://192.168.0.107:3000",
@@ -36,7 +36,7 @@ const RacesInfo = () => {
 
   const getResults = async () => {
     await axios
-      .get(`http://192.168.0.107:5000/api/results/${raceId}`, {
+      .get(`${process.env.REACT_APP_API_URL}/results/${raceId}`, {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "http://192.168.0.107:3000",
@@ -53,7 +53,7 @@ const RacesInfo = () => {
 
   const getQuali = async () => {
     await axios
-      .get(`http://192.168.0.107:5000/api/results/quali/${raceId}`, {
+      .get(`${process.env.REACT_APP_API_URL}/results/quali/${raceId}`, {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "http://192.168.0.107:3000",
@@ -70,7 +70,7 @@ const RacesInfo = () => {
 
   const getStandingsConstructors = async () => {
     await axios
-      .get(`http://192.168.0.107:5000/api/results/standings/constructors/${raceId}`, {
+      .get(`${process.env.REACT_APP_API_URL}/results/standings/constructors/${raceId}`, {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "http://192.168.0.107:3000",
@@ -87,7 +87,7 @@ const RacesInfo = () => {
 
   const getStandingsDrivers = async () => {
     await axios
-      .get(`http://192.168.0.107:5000/api/results/standings/drivers/${raceId}`, {
+      .get(`${process.env.REACT_APP_API_URL}/results/standings/drivers/${raceId}`, {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "http://192.168.0.107:3000",

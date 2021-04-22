@@ -52,7 +52,7 @@ const Seasons = () => {
 
   const getData = async () => {
     await axios
-      .get("http://192.168.0.107:5000/api/seasons", {
+      .get("${process.env.REACT_APP_API_URL}/seasons", {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "http://192.168.0.107:3000",
