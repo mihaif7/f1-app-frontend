@@ -5,20 +5,24 @@ import { GrLocationPin } from "react-icons/gr";
 import { useParams } from "react-router-dom";
 import QualiResultsTable from "./qualiResultsTable";
 import RaceResultsTable from "./raceResultsTable";
+import DriversTable from "./driversTable";
+import StandingsTable from "./standingsTable";
 
 const RacesInfo = () => {
   const [fetching, setFetching] = useState(true);
   const [raceInfo, setRaceInfo] = useState();
   const [results, setResults] = useState();
   const [quali, setQuali] = useState();
+  const [standings, setStandings] = useState();
+  const [driverStandings, setDriverStandings] = useState();
   let { raceId } = useParams();
 
   const getCircuitInfo = async () => {
     await axios
-      .get(`http://localhost:5000/api/circuit/${raceId}`, {
+      .get(`http://192.168.0.107:5000/api/circuit/${raceId}`, {
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "http://localhost:3000",
+          "Access-Control-Allow-Origin": "http://192.168.0.107:3000",
         },
       })
       .then((res) => {
@@ -32,10 +36,10 @@ const RacesInfo = () => {
 
   const getResults = async () => {
     await axios
-      .get(`http://localhost:5000/api/results/${raceId}`, {
+      .get(`http://192.168.0.107:5000/api/results/${raceId}`, {
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "http://localhost:3000",
+          "Access-Control-Allow-Origin": "http://192.168.0.107:3000",
         },
       })
       .then((res) => {
@@ -49,15 +53,49 @@ const RacesInfo = () => {
 
   const getQuali = async () => {
     await axios
-      .get(`http://localhost:5000/api/results/quali/${raceId}`, {
+      .get(`http://192.168.0.107:5000/api/results/quali/${raceId}`, {
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "http://localhost:3000",
+          "Access-Control-Allow-Origin": "http://192.168.0.107:3000",
         },
       })
       .then((res) => {
         const newObject = res.data;
         setQuali(newObject);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getStandingsConstructors = async () => {
+    await axios
+      .get(`http://192.168.0.107:5000/api/results/standings/constructors/${raceId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "http://192.168.0.107:3000",
+        },
+      })
+      .then((res) => {
+        const newObject = res.data;
+        setStandings(newObject);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getStandingsDrivers = async () => {
+    await axios
+      .get(`http://192.168.0.107:5000/api/results/standings/drivers/${raceId}`, {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "http://192.168.0.107:3000",
+        },
+      })
+      .then((res) => {
+        const newObject = res.data;
+        setDriverStandings(newObject);
       })
       .catch((err) => {
         console.log(err);
@@ -73,14 +111,14 @@ const RacesInfo = () => {
     getCircuitInfo();
     getResults();
     getQuali();
+    getStandingsConstructors();
+    getStandingsDrivers();
     // eslint-disable-next-line
   }, []);
 
-  // console.log(quali);
-
   return (
     <>
-      {raceInfo && results && quali ? (
+      {raceInfo && results && quali && standings && driverStandings ? (
         <SlideFade in={true}>
           <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
             <Flex width="91vw" direction={["column", "row"]} mb="2">
@@ -170,8 +208,10 @@ const RacesInfo = () => {
               </Flex>
             </Flex>
 
-            <RaceResultsTable results={results} />
             <QualiResultsTable quali={quali} />
+            <RaceResultsTable results={results} />
+            <DriversTable driver={driverStandings} />
+            <StandingsTable standings={standings} />
           </Flex>
         </SlideFade>
       ) : (

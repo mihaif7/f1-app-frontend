@@ -51,10 +51,10 @@ const Races = () => {
 
   const getData = async () => {
     await axios
-      .get(`http://localhost:5000/api/races/${year}`, {
+      .get(`http://192.168.0.107:5000/api/races/${year}`, {
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "http://localhost:3000",
+          "Access-Control-Allow-Origin": "http://192.168.0.107:3000",
         },
       })
       .then((res) => {
