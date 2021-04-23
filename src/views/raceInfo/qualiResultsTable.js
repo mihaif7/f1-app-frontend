@@ -20,7 +20,7 @@ import {
 const TableRow = ({ res }) => {
   return (
     <>
-      <Tr key={res.driverId} bg="gray.50">
+      <Tr key={res.driverId} bg="gray.100">
         <Td pr={2} isNumeric>
           {res.position}
         </Td>
@@ -50,7 +50,7 @@ const TableRow = ({ res }) => {
 const SmallTable = ({ quali }) => {
   return (
     <Table size="sm" variant="unstyled">
-      <Thead bg="gray.50">
+      <Thead bg="gray.100">
         <Tr>
           <Th pr={0} isNumeric>
             #
@@ -66,7 +66,7 @@ const SmallTable = ({ quali }) => {
           <TableRow res={res} key={res.code} />
         ))}
       </Tbody>
-      <Tfoot bg="gray.50">
+      <Tfoot bg="gray.100">
         <Tr>
           <Th pr={0} isNumeric>
             #
@@ -95,14 +95,14 @@ const QualiResultsTable = ({ quali }) => {
       borderWidth="0px"
       borderColor="white"
       overflow="hidden"
-      bg="gray.50"
+      bg="gray.100"
       pt={2}
       pb={2}>
-      <Accordion allowToggle bg="gray.50" borderColor="gray.50">
+      <Accordion allowToggle bg="gray.100" borderColor="gray.100">
         <AccordionItem>
           <AccordionButton
             _focus={{ boxShadow: "none !important" }}
-            _hover={{ background: "gray.50" }}>
+            _hover={{ background: "gray.100" }}>
             <Box flex="1">
               <Text fontSize="xl" fontWeight="semibold" textAlign="left">
                 Qualifying

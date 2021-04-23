@@ -1,21 +1,32 @@
-import { Box, Center, Flex, Icon, SlideFade, Spinner } from "@chakra-ui/react";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  Icon,
+  SlideFade,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { GrLocationPin } from "react-icons/gr";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import DriversTable from "./driversTable";
 import QualiResultsTable from "./qualiResultsTable";
 import RaceResultsTable from "./raceResultsTable";
-import DriversTable from "./driversTable";
 import StandingsTable from "./standingsTable";
 
 const RacesInfo = () => {
+  let history = useHistory();
   const [fetching, setFetching] = useState(true);
   const [raceInfo, setRaceInfo] = useState();
   const [results, setResults] = useState();
   const [quali, setQuali] = useState();
   const [standings, setStandings] = useState();
   const [driverStandings, setDriverStandings] = useState();
-  let { raceId } = useParams();
+  let { year, raceId } = useParams();
 
   const getCircuitInfo = async () => {
     await axios
@@ -70,12 +81,15 @@ const RacesInfo = () => {
 
   const getStandingsConstructors = async () => {
     await axios
-      .get(`${process.env.REACT_APP_API_URL}/api/results/standings/constructors/${raceId}`, {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": process.env.REACT_APP_ORIGIN,
-        },
-      })
+      .get(
+        `${process.env.REACT_APP_API_URL}/api/results/standings/constructors/${raceId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": process.env.REACT_APP_ORIGIN,
+          },
+        }
+      )
       .then((res) => {
         const newObject = res.data;
         setStandings(newObject);
@@ -208,6 +222,32 @@ const RacesInfo = () => {
               </Flex>
             </Flex>
 
+            <Box
+              align="center"
+              m={["2", "2", "2", "4"]}
+              width="91vw"
+              borderRadius="lg"
+              borderWidth="0px"
+              borderColor="white"
+              overflow="hidden"
+              bg="gray.100"
+              alignItems="center">
+              <Button
+                d="flex"
+                w="100%"
+                height="64px"
+                py={4}
+                onClick={() => {
+                  history.push(`/season/${year}/round/${raceId}/headtohead`);
+                }}>
+                <Text fontSize="xl" fontWeight="semibold" textAlign="left" flex="1">
+                  Head to head
+                </Text>
+
+                <ExternalLinkIcon />
+              </Button>
+            </Box>
+
             <QualiResultsTable quali={quali} />
             <RaceResultsTable results={results} />
             <DriversTable driver={driverStandings} />
@@ -217,7 +257,7 @@ const RacesInfo = () => {
       ) : (
         !fetching && (
           <Center h="100vh">
-            <Spinner size="xl" color="red.500" />
+            <Spinner size="xl" />
           </Center>
         )
       )}

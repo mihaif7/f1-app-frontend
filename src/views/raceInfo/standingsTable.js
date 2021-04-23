@@ -20,7 +20,7 @@ import {
 const TableRow = ({ res }) => {
   return (
     <>
-      <Tr key={res.constructorId} bg="gray.50">
+      <Tr key={res.constructorId} bg="gray.100">
         <Td>{res.position}</Td>
         <Td fontWeight="500" whiteSpace="nowrap">
           {res.name}
@@ -38,7 +38,7 @@ const TableRow = ({ res }) => {
 const SmallTable = ({ standings }) => {
   return (
     <Table size="sm" variant="unstyled">
-      <Thead bg="gray.50">
+      <Thead bg="gray.100">
         <Tr>
           <Th isNumeric>#</Th>
           <Th>Team</Th>
@@ -50,7 +50,7 @@ const SmallTable = ({ standings }) => {
           <TableRow res={res} key={res.constructorId} />
         ))}
       </Tbody>
-      <Tfoot bg="gray.50">
+      <Tfoot bg="gray.100">
         <Tr>
           <Th isNumeric>#</Th>
           <Th>Team</Th>
@@ -74,14 +74,14 @@ const StandingsTable = ({ standings }) => {
       borderWidth="0px"
       borderColor="white"
       overflow="hidden"
-      bg="gray.50"
+      bg="gray.100"
       pt={2}
       pb={2}>
-      <Accordion allowToggle bg="gray.50" borderColor="gray.50">
+      <Accordion allowToggle bg="gray.100" borderColor="gray.100">
         <AccordionItem>
           <AccordionButton
             _focus={{ boxShadow: "none !important" }}
-            _hover={{ background: "gray.50" }}>
+            _hover={{ background: "gray.100" }}>
             <Box flex="1">
               <Text fontSize="xl" fontWeight="semibold" textAlign="left">
                 Constructors

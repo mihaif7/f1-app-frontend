@@ -20,7 +20,7 @@ import {
 const TableRow = ({ res }) => {
   return (
     <>
-      <Tr key={res.code} bg="gray.50">
+      <Tr key={res.code} bg="gray.100">
         <Td>{res.position}</Td>
         <Td fontWeight="500" whiteSpace="nowrap">
           {`${res.forename} ${res.surname}`}
@@ -39,7 +39,7 @@ const SmallTable = ({ driver }) => {
   // console.log("Aici:", driver);
   return (
     <Table size="sm" variant="unstyled">
-      <Thead bg="gray.50">
+      <Thead bg="gray.100">
         <Tr>
           <Th isNumeric>#</Th>
           <Th>Driver</Th>
@@ -51,7 +51,7 @@ const SmallTable = ({ driver }) => {
           <TableRow res={res} key={res.code} />
         ))}
       </Tbody>
-      <Tfoot bg="gray.50">
+      <Tfoot bg="gray.100">
         <Tr>
           <Th isNumeric>#</Th>
           <Th>Driver</Th>
@@ -76,14 +76,14 @@ const DriversTable = ({ driver }) => {
       borderWidth="0px"
       borderColor="white"
       overflow="hidden"
-      bg="gray.50"
+      bg="gray.100"
       pt={2}
       pb={2}>
-      <Accordion allowToggle bg="gray.50" borderColor="gray.50">
+      <Accordion allowToggle bg="gray.100" borderColor="gray.100">
         <AccordionItem>
           <AccordionButton
             _focus={{ boxShadow: "none !important" }}
-            _hover={{ background: "gray.50" }}>
+            _hover={{ background: "gray.100" }}>
             <Box flex="1">
               <Text fontSize="xl" fontWeight="semibold" textAlign="left">
                 Drivers

@@ -14,7 +14,7 @@ export default function SmallWithSocial() {
         spacing={4}
         justify={{ base: "center", md: "space-between" }}
         align={{ base: "center", md: "center" }}>
-        <Text>© 2020 LapByLap. All rights reserved</Text>
+        <Text>© 2021 LapByLap. All rights reserved</Text>
       </Container>
     </Box>
   );
