@@ -85,7 +85,7 @@ const Races = () => {
               <Skeleton
                 key={i}
                 height="110px"
-                width={["80vw", "80vw", "30vw", "20vw"]}
+                width={["91vw", "91vw", "91vw", "40vw"]}
                 colorScheme="gray"
                 mx={2}
                 borderRadius="lg"
