@@ -1,7 +1,19 @@
-import { Box, Table, Tbody, Td, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
+import {
+  Box,
+  Table,
+  Tbody,
+  Td,
+  Tfoot,
+  Th,
+  Thead,
+  Tr,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import { uuid } from "uuidv4";
 
 const TableRow = ({ res1, res2 }) => {
+  const [isSmall] = useMediaQuery("(min-width: 400px)");
+
   const beforeDif = (res1?.milliseconds - res2?.milliseconds) / 1000;
   const dif = beforeDif ? beforeDif.toFixed(3) : "";
 
@@ -12,33 +24,43 @@ const TableRow = ({ res1, res2 }) => {
   return (
     <>
       <Tr bg="gray.100">
-        <Td p={0} fontSize="sm" textAlign="right">
+        <Td p={0} fontSize={isSmall ? "sm" : "xs"} textAlign="right">
           {res1?.lap ?? res2?.lap}
         </Td>
         <Td
           py={0}
           px={1}
-          fontSize="sm"
+          fontSize={isSmall ? "sm" : "xs"}
           color={dif ? (dif < 0 ? "green.500" : "red.500") : "gray.500"}
           textAlign="right">
           {res1?.time}
         </Td>
-        <Td px={1} py={0} fontSize="sm" textAlign="right" color="blue.500">
+        <Td
+          px={1}
+          py={0}
+          fontSize={isSmall ? "sm" : "xs"}
+          textAlign="right"
+          color="blue.500">
           {pitCalc(res1?.pitMilliseconds)}
         </Td>
         <Td
           p={0}
-          fontSize="sm"
+          fontSize={isSmall ? "sm" : "xs"}
           color={dif ? (dif > 0 ? "green.500" : "red.500") : "gray.500"}
           textAlign="right">
           {res2?.time}
         </Td>
-        <Td px={1} py={0} fontSize="sm" textAlign="right" color="blue.500">
+        <Td
+          px={1}
+          py={0}
+          fontSize={isSmall ? "sm" : "xs"}
+          textAlign="right"
+          color="blue.500">
           {pitCalc(res2?.pitMilliseconds)}
         </Td>
         <Td
           p={0}
-          fontSize="sm"
+          fontSize={isSmall ? "sm" : "xs"}
           color={dif ? (dif < 0 ? "green.500" : "red.500") : "gray.500"}
           textAlign="right">
           {dif > 0 ? `+${dif}` : dif}
