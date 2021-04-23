@@ -20,7 +20,7 @@ import {
 const TableRow = ({ res }) => {
   return (
     <>
-      <Tr key={res.driverId} bg="gray.100">
+      <Tr key={res.driverId}>
         <Td pr={2} isNumeric>
           {res.position}
         </Td>
@@ -47,10 +47,10 @@ const TableRow = ({ res }) => {
   );
 };
 
-const SmallTable = ({ quali }) => {
+const SmallTable = ({ quali, cardBg }) => {
   return (
     <Table size="sm" variant="unstyled">
-      <Thead bg="gray.100">
+      <Thead>
         <Tr>
           <Th pr={0} isNumeric>
             #
@@ -66,7 +66,7 @@ const SmallTable = ({ quali }) => {
           <TableRow res={res} key={res.code} />
         ))}
       </Tbody>
-      <Tfoot bg="gray.100">
+      <Tfoot>
         <Tr>
           <Th pr={0} isNumeric>
             #
@@ -81,7 +81,7 @@ const SmallTable = ({ quali }) => {
   );
 };
 
-const QualiResultsTable = ({ quali }) => {
+const QualiResultsTable = ({ quali, cardBg }) => {
   const [isLargerThan750] = useMediaQuery("(min-width: 750px)");
   const [isLargerThan585] = useMediaQuery("(min-width: 585px)");
 
@@ -95,14 +95,14 @@ const QualiResultsTable = ({ quali }) => {
       borderWidth="0px"
       borderColor="white"
       overflow="hidden"
-      bg="gray.100"
+      bg={cardBg}
       pt={2}
       pb={2}>
-      <Accordion allowToggle bg="gray.100" borderColor="gray.100">
-        <AccordionItem>
+      <Accordion allowToggle>
+        <AccordionItem borderTopWidth="0px" _last={{ borderBottomWidth: "0px" }}>
           <AccordionButton
             _focus={{ boxShadow: "none !important" }}
-            _hover={{ background: "gray.100" }}>
+            _hover={{ background: cardBg }}>
             <Box flex="1">
               <Text fontSize="xl" fontWeight="semibold" textAlign="left">
                 Qualifying
@@ -113,7 +113,7 @@ const QualiResultsTable = ({ quali }) => {
           <AccordionPanel px={0} pb={0} overflow="auto">
             {isLargerThan585 ? (
               <Table size={isLargerThan750 ? "md" : "sm"}>
-                <Thead>
+                <Thead bg={cardBg}>
                   <Tr>
                     <Th pr={0} isNumeric>
                       #
@@ -162,7 +162,7 @@ const QualiResultsTable = ({ quali }) => {
                 </Tfoot>
               </Table>
             ) : (
-              <SmallTable quali={quali} />
+              <SmallTable quali={quali} cardBg={cardBg} />
             )}
           </AccordionPanel>
         </AccordionItem>

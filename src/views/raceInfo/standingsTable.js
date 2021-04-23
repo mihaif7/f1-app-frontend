@@ -20,7 +20,7 @@ import {
 const TableRow = ({ res }) => {
   return (
     <>
-      <Tr key={res.constructorId} bg="gray.100">
+      <Tr key={res.constructorId}>
         <Td>{res.position}</Td>
         <Td fontWeight="500" whiteSpace="nowrap">
           {res.name}
@@ -35,10 +35,10 @@ const TableRow = ({ res }) => {
   );
 };
 
-const SmallTable = ({ standings }) => {
+const SmallTable = ({ standings, cardBg }) => {
   return (
     <Table size="sm" variant="unstyled">
-      <Thead bg="gray.100">
+      <Thead>
         <Tr>
           <Th isNumeric>#</Th>
           <Th>Team</Th>
@@ -50,7 +50,7 @@ const SmallTable = ({ standings }) => {
           <TableRow res={res} key={res.constructorId} />
         ))}
       </Tbody>
-      <Tfoot bg="gray.100">
+      <Tfoot>
         <Tr>
           <Th isNumeric>#</Th>
           <Th>Team</Th>
@@ -61,7 +61,7 @@ const SmallTable = ({ standings }) => {
   );
 };
 
-const StandingsTable = ({ standings }) => {
+const StandingsTable = ({ standings, cardBg }) => {
   const [isLargerThan750] = useMediaQuery("(min-width: 750px)");
   const [isLargerThan585] = useMediaQuery("(min-width: 585px)");
 
@@ -74,14 +74,14 @@ const StandingsTable = ({ standings }) => {
       borderWidth="0px"
       borderColor="white"
       overflow="hidden"
-      bg="gray.100"
+      bg={cardBg}
       pt={2}
       pb={2}>
-      <Accordion allowToggle bg="gray.100" borderColor="gray.100">
-        <AccordionItem>
+      <Accordion allowToggle>
+        <AccordionItem borderTopWidth="0px" _last={{ borderBottomWidth: "0px" }}>
           <AccordionButton
             _focus={{ boxShadow: "none !important" }}
-            _hover={{ background: "gray.100" }}>
+            _hover={{ background: cardBg }}>
             <Box flex="1">
               <Text fontSize="xl" fontWeight="semibold" textAlign="left">
                 Constructors
@@ -92,7 +92,7 @@ const StandingsTable = ({ standings }) => {
           <AccordionPanel px={0} pb={0} overflow="auto">
             {isLargerThan585 ? (
               <Table size={isLargerThan750 ? "md" : "sm"}>
-                <Thead>
+                <Thead bg={cardBg}>
                   <Tr>
                     <Th pr={0} isNumeric>
                       #
@@ -127,7 +127,7 @@ const StandingsTable = ({ standings }) => {
                     );
                   })}
                 </Tbody>
-                <Tfoot>
+                <Tfoot bg={cardBg}>
                   <Tr>
                     <Th pr={0} isNumeric>
                       #
@@ -141,7 +141,7 @@ const StandingsTable = ({ standings }) => {
                 </Tfoot>
               </Table>
             ) : (
-              <SmallTable standings={standings} />
+              <SmallTable standings={standings} cardBg={cardBg} />
             )}
           </AccordionPanel>
         </AccordionItem>

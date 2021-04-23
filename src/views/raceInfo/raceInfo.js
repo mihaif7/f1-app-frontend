@@ -1,8 +1,15 @@
 import { ExternalLinkIcon } from "@chakra-ui/icons";
-import { Box, Button, Flex, Icon, Skeleton, SlideFade, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Skeleton,
+  SlideFade,
+  Text,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { GrLocationPin } from "react-icons/gr";
 import { useHistory, useParams } from "react-router-dom";
 import DriversTable from "./driversTable";
 import QualiResultsTable from "./qualiResultsTable";
@@ -17,6 +24,11 @@ const RacesInfo = () => {
   const [standings, setStandings] = useState();
   const [driverStandings, setDriverStandings] = useState();
   let { year, raceId } = useParams();
+
+  const cardBg = useColorModeValue("gray.100", "whiteAlpha.200");
+  const orange = useColorModeValue("orange.100", "yellow.800");
+  const smallText = useColorModeValue("gray.600", "whiteAlpha.600");
+  const bigText = useColorModeValue("grey.200", "whiteAlpha.900");
 
   const getCircuitInfo = async () => {
     await axios
@@ -126,7 +138,7 @@ const RacesInfo = () => {
                 mr={["0", "4"]}
                 mb={["4", "0"]}
                 flexGrow={["1", "0.5"]}
-                bg="gray.100"
+                bg={cardBg}
                 borderRadius="lg">
                 <Box
                   p="6"
@@ -135,7 +147,7 @@ const RacesInfo = () => {
                   justifyContent="center"
                   w="100%">
                   <Box
-                    color="gray.600"
+                    color={smallText}
                     fontWeight="semibold"
                     letterSpacing="wide"
                     fontSize="xs"
@@ -147,16 +159,14 @@ const RacesInfo = () => {
                     fontWeight="semibold"
                     fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
                     lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
-                    as="p"
-                    color="gray.700">
+                    as="p">
                     {raceInfo.raceName}
                   </Box>
                   <Box
-                    color="gray.600"
                     fontWeight="semibold"
                     letterSpacing="wide"
                     fontSize="xs"
-                    // textTransform="uppercase"
+                    color={smallText}
                     mt={2}>
                     Date: {raceInfo.date}
                   </Box>
@@ -166,7 +176,7 @@ const RacesInfo = () => {
                 align="center"
                 ml={["0", "4"]}
                 flexGrow={["1", "0.5"]}
-                bg="orange.100"
+                bg={orange}
                 borderRadius="lg">
                 <Box
                   p="6"
@@ -175,7 +185,7 @@ const RacesInfo = () => {
                   justifyContent="center"
                   w="100%">
                   <Box
-                    color="gray.600"
+                    color={smallText}
                     fontWeight="semibold"
                     letterSpacing="wide"
                     fontSize="xs"
@@ -183,7 +193,6 @@ const RacesInfo = () => {
                     mb={2}
                     d="flex"
                     alignItems="center">
-                    <Icon as={GrLocationPin} mr={1} />
                     Location
                   </Box>
                   <Box
@@ -191,11 +200,11 @@ const RacesInfo = () => {
                     fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
                     lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
                     as="p"
-                    color="gray.700">
+                    color={bigText}>
                     {raceInfo.circuitName}
                   </Box>
                   <Box
-                    color="gray.600"
+                    color={smallText}
                     fontWeight="semibold"
                     letterSpacing="wide"
                     fontSize="xs"
@@ -215,7 +224,6 @@ const RacesInfo = () => {
               borderWidth="0px"
               borderColor="white"
               overflow="hidden"
-              bg="gray.100"
               alignItems="center">
               <Button
                 d="flex"
@@ -233,10 +241,10 @@ const RacesInfo = () => {
               </Button>
             </Box>
 
-            <QualiResultsTable quali={quali} />
-            <RaceResultsTable results={results} />
-            <DriversTable driver={driverStandings} />
-            <StandingsTable standings={standings} />
+            <QualiResultsTable quali={quali} cardBg={cardBg} />
+            <RaceResultsTable results={results} cardBg={cardBg} />
+            <DriversTable driver={driverStandings} cardBg={cardBg} />
+            <StandingsTable standings={standings} cardBg={cardBg} />
           </Flex>
         </SlideFade>
       ) : (

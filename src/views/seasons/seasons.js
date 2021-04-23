@@ -16,15 +16,13 @@ const SeasonCard = ({ year, history }) => {
           onClick={() => {
             history.push(`/season/${year}`);
           }}
-          color="green.100"
-          width={["91vw", "45vw", "30vw", "20vw"]}>
+          width={["91vw", "40vw", "30vw", "20vw"]}>
           <Box p="6">
             <Box
               fontWeight="semibold"
               fontSize="3rem"
               lineHeight="3rem"
               as="p"
-              color="gray.700"
               minW="110px">
               {year}
             </Box>
@@ -84,7 +82,7 @@ const Seasons = () => {
               <Skeleton
                 key={i}
                 height="110px"
-                width={["91vw", "45vw", "30vw", "20vw"]}
+                width={["91vw", "40vw", "30vw", "20vw"]}
                 colorScheme="gray"
                 mx={2}
                 borderRadius="lg"

@@ -1,4 +1,11 @@
-import { Box, Flex, Select, Skeleton, SlideFade } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Select,
+  Skeleton,
+  SlideFade,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -13,6 +20,10 @@ const HeadToHead = () => {
   const [lapTimes2, setLapTimes2] = useState();
   const [fetching, setFetching] = useState(false);
   let { raceId } = useParams();
+
+  const cardBg = useColorModeValue("gray.100", "whiteAlpha.200");
+  const orange = useColorModeValue("orange.100", "yellow.800");
+  const smallText = useColorModeValue("gray.600", "whiteAlpha.600");
 
   const handleChange = (event) => {
     setFetching(true);
@@ -94,10 +105,10 @@ const HeadToHead = () => {
   return drivers && driver1 && driver2 && lapTimes1 && lapTimes2 ? (
     <SlideFade in={true}>
       <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
-        <Flex align="center" mb={4} bg="gray.100" borderRadius="lg" flexGrow={1}>
+        <Flex align="center" mb={4} bg={cardBg} borderRadius="lg" flexGrow={1}>
           <Box p="6" d="flex" flexDirection="column" justifyContent="center" w="100%">
             <Box
-              color="gray.600"
+              color={smallText}
               fontWeight="semibold"
               letterSpacing="wide"
               fontSize="xs"
@@ -109,12 +120,11 @@ const HeadToHead = () => {
               fontWeight="semibold"
               fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
               lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
-              as="p"
-              color="gray.700">
+              as="p">
               {raceInfo.raceName}
             </Box>
             <Box
-              color="gray.600"
+              color={smallText}
               fontWeight="semibold"
               letterSpacing="wide"
               fontSize="xs"
@@ -128,13 +138,13 @@ const HeadToHead = () => {
         <Flex
           align="center"
           mb={4}
-          bg="gray.100"
+          bg={cardBg}
           borderRadius="lg"
           direction="column"
           flexGrow={1}>
           <Box p="4" d="flex" flexDirection="column" justifyContent="center" w="100%">
             <Box
-              color="gray.600"
+              color={smallText}
               fontWeight="semibold"
               letterSpacing="wide"
               fontSize="sm"
@@ -148,7 +158,7 @@ const HeadToHead = () => {
                 onChange={handleChange}
                 pr={1}
                 variant="filled"
-                bg="orange.100">
+                bg={orange}>
                 {drivers.map((driver) => {
                   return (
                     <option
@@ -165,7 +175,7 @@ const HeadToHead = () => {
                 onChange={handleChange2}
                 pl={1}
                 variant="filled"
-                bg="orange.100">
+                bg={orange}>
                 {drivers.map((driver) => {
                   return (
                     <option
@@ -184,7 +194,7 @@ const HeadToHead = () => {
         <Flex
           align="center"
           mb={4}
-          bg="gray.100"
+          bg={cardBg}
           borderRadius="lg"
           direction="column"
           flexGrow={1}>

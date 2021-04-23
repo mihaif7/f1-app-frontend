@@ -16,7 +16,6 @@ const RaceCard = ({ race, history, year }) => {
           onClick={() => {
             history.push(`/season/${year}/round/${race.raceId}`);
           }}
-          color="green.100"
           width={["91vw", "91vw", "91vw", "40vw"]}>
           <Box p="6" d="flex" flexDirection="column" justifyContent="center">
             <Box
@@ -32,8 +31,7 @@ const RaceCard = ({ race, history, year }) => {
               fontWeight="semibold"
               fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
               lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
-              as="p"
-              color="gray.700">
+              as="p">
               {race.name}
             </Box>
           </Box>

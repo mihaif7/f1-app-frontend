@@ -3,7 +3,7 @@ import { Box, Container, Stack, Text, useColorModeValue } from "@chakra-ui/react
 export default function SmallWithSocial() {
   return (
     <Box
-      bg={useColorModeValue("gray.50", "gray.900")}
+      bg={useColorModeValue("white", "gray.800")}
       color={useColorModeValue("gray.700", "gray.200")}
       mt={4}>
       <Container

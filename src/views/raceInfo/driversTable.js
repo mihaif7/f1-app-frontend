@@ -20,7 +20,7 @@ import {
 const TableRow = ({ res }) => {
   return (
     <>
-      <Tr key={res.code} bg="gray.100">
+      <Tr key={res.code}>
         <Td>{res.position}</Td>
         <Td fontWeight="500" whiteSpace="nowrap">
           {`${res.forename} ${res.surname}`}
@@ -35,11 +35,11 @@ const TableRow = ({ res }) => {
   );
 };
 
-const SmallTable = ({ driver }) => {
+const SmallTable = ({ driver, cardBg }) => {
   // console.log("Aici:", driver);
   return (
     <Table size="sm" variant="unstyled">
-      <Thead bg="gray.100">
+      <Thead>
         <Tr>
           <Th isNumeric>#</Th>
           <Th>Driver</Th>
@@ -51,7 +51,7 @@ const SmallTable = ({ driver }) => {
           <TableRow res={res} key={res.code} />
         ))}
       </Tbody>
-      <Tfoot bg="gray.100">
+      <Tfoot>
         <Tr>
           <Th isNumeric>#</Th>
           <Th>Driver</Th>
@@ -62,7 +62,7 @@ const SmallTable = ({ driver }) => {
   );
 };
 
-const DriversTable = ({ driver }) => {
+const DriversTable = ({ driver, cardBg }) => {
   const [isLargerThan750] = useMediaQuery("(min-width: 750px)");
   const [isLargerThan585] = useMediaQuery("(min-width: 585px)");
 
@@ -76,14 +76,14 @@ const DriversTable = ({ driver }) => {
       borderWidth="0px"
       borderColor="white"
       overflow="hidden"
-      bg="gray.100"
+      bg={cardBg}
       pt={2}
       pb={2}>
-      <Accordion allowToggle bg="gray.100" borderColor="gray.100">
-        <AccordionItem>
+      <Accordion allowToggle>
+        <AccordionItem borderTopWidth="0px" _last={{ borderBottomWidth: "0px" }}>
           <AccordionButton
             _focus={{ boxShadow: "none !important" }}
-            _hover={{ background: "gray.100" }}>
+            _hover={{ background: cardBg }}>
             <Box flex="1">
               <Text fontSize="xl" fontWeight="semibold" textAlign="left">
                 Drivers
@@ -94,7 +94,7 @@ const DriversTable = ({ driver }) => {
           <AccordionPanel px={0} pb={0} overflow="auto">
             {isLargerThan585 ? (
               <Table size={isLargerThan750 ? "md" : "sm"}>
-                <Thead>
+                <Thead bg={cardBg}>
                   <Tr>
                     <Th pr={0} isNumeric>
                       #
@@ -143,7 +143,7 @@ const DriversTable = ({ driver }) => {
                 </Tfoot>
               </Table>
             ) : (
-              <SmallTable driver={driver} />
+              <SmallTable driver={driver} cardBg={cardBg} />
             )}
           </AccordionPanel>
         </AccordionItem>

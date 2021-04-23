@@ -23,7 +23,7 @@ const TableRow = ({ res1, res2 }) => {
 
   return (
     <>
-      <Tr bg="gray.100">
+      <Tr>
         <Td p={0} fontSize={isSmall ? "sm" : "xs"} textAlign="right">
           {res1?.lap ?? res2?.lap}
         </Td>
@@ -81,10 +81,9 @@ const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers }) => {
         borderRadius="lg"
         borderWidth="0px"
         borderColor="white"
-        overflow="auto"
-        bg="gray.100">
+        overflow="auto">
         <Table size="sm" variant="unstyled" my={4}>
-          <Thead bg="gray.100">
+          <Thead>
             <Tr>
               <Th textAlign="right" p={0}>
                 #
@@ -115,7 +114,7 @@ const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers }) => {
                   <TableRow res1={lapTimes1[index]} res2={res} key={uuid()} />
                 ))}
           </Tbody>
-          <Tfoot bg="gray.100">
+          <Tfoot>
             <Tr>
               <Th textAlign="right" p={0}>
                 #
