@@ -1,14 +1,5 @@
 import { ExternalLinkIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  Icon,
-  SlideFade,
-  Spinner,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Icon, Skeleton, SlideFade, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { GrLocationPin } from "react-icons/gr";
@@ -20,7 +11,6 @@ import StandingsTable from "./standingsTable";
 
 const RacesInfo = () => {
   let history = useHistory();
-  const [fetching, setFetching] = useState(true);
   const [raceInfo, setRaceInfo] = useState();
   const [results, setResults] = useState();
   const [quali, setQuali] = useState();
@@ -115,11 +105,6 @@ const RacesInfo = () => {
         console.log(err);
       });
   };
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setFetching(false), 1000);
-    return () => clearTimeout(timeout);
-  }, []);
 
   useEffect(() => {
     getCircuitInfo();
@@ -255,11 +240,62 @@ const RacesInfo = () => {
           </Flex>
         </SlideFade>
       ) : (
-        !fetching && (
-          <Center h="100vh">
-            <Spinner size="xl" />
-          </Center>
-        )
+        <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
+          <Flex width="91vw" direction={["column", "row"]} mb="2">
+            <Skeleton
+              height="110px"
+              align="center"
+              mr={["0", "4"]}
+              mb={["4", "0"]}
+              flexGrow={["1", "0.5"]}
+              bg="gray.100"
+              borderRadius="lg"
+            />
+            <Skeleton
+              height="110px"
+              align="center"
+              mr={["0", "4"]}
+              flexGrow={["1", "0.5"]}
+              bg="gray.100"
+              borderRadius="lg"
+            />
+          </Flex>
+          <Skeleton
+            align="center"
+            m={["2", "2", "2", "4"]}
+            width="91vw"
+            borderRadius="lg"
+            height="64px"
+          />
+          <Skeleton
+            align="center"
+            m={["2", "2", "2", "4"]}
+            width="91vw"
+            borderRadius="lg"
+            height="64px"
+          />
+          <Skeleton
+            align="center"
+            m={["2", "2", "2", "4"]}
+            width="91vw"
+            borderRadius="lg"
+            height="64px"
+          />
+          <Skeleton
+            align="center"
+            m={["2", "2", "2", "4"]}
+            width="91vw"
+            borderRadius="lg"
+            height="64px"
+          />
+          <Skeleton
+            align="center"
+            m={["2", "2", "2", "4"]}
+            width="91vw"
+            borderRadius="lg"
+            height="64px"
+          />
+        </Flex>
       )}
     </>
   );

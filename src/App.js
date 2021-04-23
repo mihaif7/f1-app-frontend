@@ -26,7 +26,11 @@ function App() {
               <Route exact path="/seasons" component={Seasons} />
               <Route exact path="/season/:year" component={Races} />
               <Route exact path="/season/:year/round/:raceId" component={RaceInfo} />
-              <Route exact path="/season/:year/round/:raceId/headtohead" component={HeadToHead} />
+              <Route
+                exact
+                path="/season/:year/round/:raceId/headtohead"
+                component={HeadToHead}
+              />
               <Redirect from="/" to="/seasons" />
             </Switch>
           </Suspense>

@@ -1,4 +1,4 @@
-import { Box, Button, Center, Flex, ScaleFade, Spinner } from "@chakra-ui/react";
+import { Box, Button, Flex, ScaleFade, Skeleton } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
@@ -17,7 +17,7 @@ const SeasonCard = ({ year, history }) => {
             history.push(`/season/${year}`);
           }}
           color="green.100"
-          width={["80vw", "80vw", "30vw", "20vw"]}>
+          width={["91vw", "45vw", "30vw", "20vw"]}>
           <Box p="6">
             <Box
               fontWeight="semibold"
@@ -47,8 +47,8 @@ const SeasonCard = ({ year, history }) => {
 
 const Seasons = () => {
   let history = useHistory();
-  const [fetching, setFetching] = useState(true);
   const [seasons, setSeasons] = useState([]);
+  const n = 6;
 
   const getData = async () => {
     await axios
@@ -69,30 +69,29 @@ const Seasons = () => {
   };
 
   useEffect(() => {
-    const timeout = setTimeout(() => setFetching(true), 500);
-    return () => clearTimeout(timeout);
-  }, []);
-
-  useEffect(() => {
     getData();
     // eslint-disable-next-line
   }, []);
 
   return (
     <>
-      {seasons.length !== 0 ? (
-        <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
-          {seasons.map(({ year }) => {
-            return <SeasonCard year={year} history={history} key={year} />;
-          })}
-        </Flex>
-      ) : (
-        !fetching && (
-          <Center h="100vh">
-            <Spinner size="xl" color="red.500" />
-          </Center>
-        )
-      )}
+      <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
+        {seasons.length !== 0
+          ? seasons.map(({ year }) => {
+              return <SeasonCard year={year} history={history} key={year} />;
+            })
+          : [...Array(n)].map((e, i) => (
+              <Skeleton
+                key={i}
+                height="110px"
+                width={["91vw", "45vw", "30vw", "20vw"]}
+                colorScheme="gray"
+                mx={2}
+                borderRadius="lg"
+                m={["2", "2", "2", "4"]}
+              />
+            ))}
+      </Flex>
     </>
   );
 };

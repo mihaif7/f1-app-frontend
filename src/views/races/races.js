@@ -1,4 +1,4 @@
-import { Box, Button, Center, Flex, ScaleFade, Spinner } from "@chakra-ui/react";
+import { Box, Button, Flex, ScaleFade, Skeleton } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
@@ -45,9 +45,9 @@ const RaceCard = ({ race, history, year }) => {
 
 const Races = () => {
   let history = useHistory();
-  const [fetching, setFetching] = useState(true);
   const [races, setRaces] = useState([]);
   let { year } = useParams();
+  const n = 6;
 
   const getData = async () => {
     await axios
@@ -67,11 +67,6 @@ const Races = () => {
   };
 
   useEffect(() => {
-    const timeout = setTimeout(() => setFetching(false), 500);
-    return () => clearTimeout(timeout);
-  }, []);
-
-  useEffect(() => {
     getData();
 
     // eslint-disable-next-line
@@ -79,21 +74,25 @@ const Races = () => {
 
   return (
     <>
-      {races.length !== 0 ? (
-        <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
-          {races.map((race) => {
-            return (
-              <RaceCard race={race} history={history} year={year} key={race.raceId} />
-            );
-          })}
-        </Flex>
-      ) : (
-        !fetching && (
-          <Center h="100vh">
-            <Spinner size="xl" color="red.500" />
-          </Center>
-        )
-      )}
+      <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
+        {races.length !== 0
+          ? races.map((race) => {
+              return (
+                <RaceCard race={race} history={history} year={year} key={race.raceId} />
+              );
+            })
+          : [...Array(n)].map((e, i) => (
+              <Skeleton
+                key={i}
+                height="110px"
+                width={["80vw", "80vw", "30vw", "20vw"]}
+                colorScheme="gray"
+                mx={2}
+                borderRadius="lg"
+                m={["2", "2", "2", "4"]}
+              />
+            ))}
+      </Flex>
     </>
   );
 };
