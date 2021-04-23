@@ -14,31 +14,32 @@ import {
 import { Link as ReachLink } from "react-router-dom";
 
 const Links = [
-  { name: "Seasons", url: "/seasons" },
+  { name: "All Seasons", url: "/seasons" },
   { name: "2021 Season", url: "/season/2021" },
 ];
 
-const NavLink = ({ children, onClose }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={"md"}
-    _hover={{
-      textDecoration: "none",
-      bg: useColorModeValue("gray.200", "gray.700"),
-    }}
-    as={ReachLink}
-    to={children.url}
-    onClick={onClose}>
-    {children.name}
-  </Link>
-);
+const NavLink = ({ children, onClose, isOpen }) => {
+  return (
+    <Link
+      px={2}
+      py={1}
+      rounded={"md"}
+      _hover={{
+        textDecoration: "none",
+        bg: useColorModeValue("gray.200", "gray.700"),
+      }}
+      as={ReachLink}
+      to={children.url}
+      onClick={isOpen ? onClose : null}>
+      {children.name}
+    </Link>
+  );
+};
 
 export default function Simple() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode();
 
-  console.log(colorMode);
   return (
     <Box
       bg={useColorModeValue("white", "gray.800")}
@@ -55,14 +56,12 @@ export default function Simple() {
         px={4}
         height="72px">
         <HStack spacing={8} alignItems={"center"}>
-          <Box fontWeight="600" as={ReachLink} to="/seasons">
+          <Box fontWeight="600" as={ReachLink} to="/seasons" onClick={onClose}>
             LapByLap
           </Box>
           <HStack as={"nav"} spacing={4} display={{ base: "none", md: "flex" }}>
             {Links.map((link) => (
-              <NavLink key={link.name} onClose={onClose}>
-                {link}
-              </NavLink>
+              <NavLink key={link.name}>{link}</NavLink>
             ))}
           </HStack>
         </HStack>
@@ -90,7 +89,9 @@ export default function Simple() {
         <Box pb={4} pt={1} px={4}>
           <Stack as={"nav"} spacing={4}>
             {Links.map((link) => (
-              <NavLink key={link.url}>{link}</NavLink>
+              <NavLink key={link.url} onClose={onClose} isOpen={isOpen}>
+                {link}
+              </NavLink>
             ))}
           </Stack>
         </Box>
