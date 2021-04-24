@@ -43,7 +43,7 @@ const RaceCard = ({ race, history, year }) => {
 
 const Races = () => {
   let history = useHistory();
-  const [races, setRaces] = useState([]);
+  const [races, setRaces] = useState();
   let { year } = useParams();
   const n = 6;
 
@@ -73,7 +73,7 @@ const Races = () => {
   return (
     <>
       <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
-        {races.length !== 0
+        {races
           ? races.map((race) => {
               return (
                 <RaceCard race={race} history={history} year={year} key={race.raceId} />

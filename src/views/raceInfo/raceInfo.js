@@ -154,7 +154,7 @@ const RacesInfo = () => {
                     fontSize="xs"
                     textTransform="uppercase"
                     mb={2}>
-                    Round {raceInfo.round}
+                    Race {raceInfo.round}
                   </Box>
                   <Box
                     fontWeight="semibold"
