@@ -10,6 +10,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import HthTable from "./hthTable";
+import Summary from "./summary";
 
 const HeadToHead = () => {
   const [raceInfo, setRaceInfo] = useState();
@@ -99,8 +100,9 @@ const HeadToHead = () => {
   useEffect(() => {
     getCircuitInfo();
     getDrivers();
+    window.scrollTo(0, 0);
     // eslint-disable-next-line
-  }, []);
+  }, [raceId, year]);
 
   return drivers && driver1 && driver2 && lapTimes1 && lapTimes2 ? (
     <SlideFade in={true}>
@@ -128,7 +130,6 @@ const HeadToHead = () => {
               fontWeight="semibold"
               letterSpacing="wide"
               fontSize="xs"
-              // textTransform="uppercase"
               mt={2}>
               Date: {raceInfo.date}
             </Box>
@@ -148,7 +149,6 @@ const HeadToHead = () => {
               fontWeight="semibold"
               letterSpacing="wide"
               fontSize="sm"
-              // textTransform="uppercase"
               mb={4}>
               Select two drivers
             </Box>
@@ -195,6 +195,16 @@ const HeadToHead = () => {
           </Box>
         </Flex>
 
+        <Summary
+          cardBg={cardBg}
+          raceId={raceId}
+          driver1={driver1}
+          driver2={driver2}
+          drivers={drivers}
+          fetching={fetching}
+          year={year}
+        />
+
         <Flex
           align="center"
           mb={4}
@@ -219,6 +229,7 @@ const HeadToHead = () => {
     <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
       <Skeleton height="110px" borderRadius="lg" w="100%" mb={4} />
       <Skeleton height="110px" borderRadius="lg" w="100%" mb={4} />
+      <Skeleton height="152px" borderRadius="lg" w="100%" mb={4} />
       <Skeleton height="500px" borderRadius="lg" w="100%" mb={4} />
     </Flex>
   );

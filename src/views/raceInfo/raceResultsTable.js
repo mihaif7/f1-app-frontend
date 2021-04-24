@@ -26,7 +26,7 @@ const TableRow = ({ res, isLargerThan370, cardBg }) => {
   const colorDetails = useColorModeValue("orange.100", "yellow.800");
   const smallText = useColorModeValue("gray.600", "whiteAlpha.800");
 
-  const positionGained = res.grid - res.position;
+  const positionGained = res.position ? res.grid - res.position : "R";
   return (
     <>
       <Tr onClick={onToggle} bg={cardBg}>
@@ -34,7 +34,7 @@ const TableRow = ({ res, isLargerThan370, cardBg }) => {
           {res.positionText}
         </Td>
         <Td fontWeight="500" whiteSpace="nowrap">
-          {res.code ?? res.surname.substring(0, 3).toUpperCase() }
+          {res.code ?? res.surname.substring(0, 3).toUpperCase()}
         </Td>
         <Td whiteSpace="nowrap" width="100%">
           {res.status === "Finished" ? res.time : res.status}
@@ -59,10 +59,10 @@ const TableRow = ({ res, isLargerThan370, cardBg }) => {
               <Box p={2} d="flex" justifyContent="space-between">
                 <Box>
                   <Text fontSize="sm" fontWeight="semibold" pb={1} color={smallText}>
-                    Constructor
+                    Name
                   </Text>
                   <Text fontSize="sm" pl={1}>
-                    {res.name}
+                    {`${res.forename} ${res.surname}`}
                   </Text>
                 </Box>
                 <Box>
@@ -70,31 +70,33 @@ const TableRow = ({ res, isLargerThan370, cardBg }) => {
                     fontSize="sm"
                     fontWeight="semibold"
                     pb={1}
-                    textAlign="right"
-                    color={smallText}>
-                    Status
+                    color={smallText}
+                    textAlign="right">
+                    Constructor
                   </Text>
                   <Text fontSize="sm" pr={1} textAlign="right">
-                    {res.status}
+                    {res.name}
                   </Text>
                 </Box>
               </Box>
-              <Box p={2} d="flex" justifyContent="space-between">
-                <Box>
-                  <Text fontSize="sm" fontWeight="semibold" pb={1} color={smallText}>
-                    Fastest Lap
-                  </Text>
-                  <Text fontSize="sm" pl={1}>{`Lap ${res.fastestLap}`}</Text>
+              {res.fastestLapTime && (
+                <Box p={2} d="flex" justifyContent="space-between">
+                  <Box>
+                    <Text fontSize="sm" fontWeight="semibold" pb={1} color={smallText}>
+                      Fastest Lap
+                    </Text>
+                    <Text fontSize="sm" pl={1}>{`Lap ${res.fastestLap}`}</Text>
+                  </Box>
+                  <Box>
+                    <Text fontSize="sm" fontWeight="semibold" pb={1} color={smallText}>
+                      Fastest Lap Time
+                    </Text>
+                    <Text fontSize="sm" textAlign="right" pr={1}>
+                      {res.fastestLapTime}
+                    </Text>
+                  </Box>
                 </Box>
-                <Box>
-                  <Text fontSize="sm" fontWeight="semibold" pb={1} color={smallText}>
-                    Fastest Lap Time
-                  </Text>
-                  <Text fontSize="sm" textAlign="right" pr={1}>
-                    {res.fastestLapTime}
-                  </Text>
-                </Box>
-              </Box>
+              )}
               <Box p={2} d="flex" justifyContent="space-between">
                 <Box>
                   <Text fontSize="sm" fontWeight="semibold" pb={1} color={smallText}>
