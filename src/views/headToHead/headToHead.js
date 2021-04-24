@@ -195,16 +195,6 @@ const HeadToHead = () => {
           </Box>
         </Flex>
 
-        <Summary
-          cardBg={cardBg}
-          raceId={raceId}
-          driver1={driver1}
-          driver2={driver2}
-          drivers={drivers}
-          fetching={fetching}
-          year={year}
-        />
-
         <Flex
           align="center"
           mb={4}
@@ -223,6 +213,16 @@ const HeadToHead = () => {
             />
           </SlideFade>
         </Flex>
+
+        <Summary
+          cardBg={cardBg}
+          raceId={raceId}
+          driver1={driver1}
+          driver2={driver2}
+          drivers={drivers}
+          fetching={fetching}
+          year={year}
+        />
       </Flex>
     </SlideFade>
   ) : (
