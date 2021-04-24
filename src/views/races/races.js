@@ -1,4 +1,4 @@
-import { Box, Button, Flex, ScaleFade, Skeleton } from "@chakra-ui/react";
+import { Box, Button, Flex, Skeleton, SlideFade, useMediaQuery } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
@@ -7,7 +7,7 @@ import { useHistory, useParams } from "react-router-dom";
 const RaceCard = ({ race, history, year }) => {
   const { ref, inView } = useInView();
   return (
-    <ScaleFade initialScale={0.9} in={inView}>
+    <SlideFade initialScale={0.9} in={inView}>
       <Flex align="center" m={["2", "2", "2", "4"]} ref={ref}>
         <Button
           d="flex"
@@ -37,15 +37,16 @@ const RaceCard = ({ race, history, year }) => {
           </Box>
         </Button>
       </Flex>
-    </ScaleFade>
+    </SlideFade>
   );
 };
 
 const Races = () => {
   let history = useHistory();
   const [races, setRaces] = useState();
+  const [fetching, setFetching] = useState(false);
+  const [big] = useMediaQuery("(min-width: 768px)");
   let { year } = useParams();
-  const n = 6;
 
   const getData = async () => {
     await axios
@@ -65,6 +66,7 @@ const Races = () => {
   };
 
   useEffect(() => {
+    setTimeout(() => setFetching(true), 250);
     getData();
     window.scrollTo(0, 0);
     // eslint-disable-next-line
@@ -79,7 +81,8 @@ const Races = () => {
                 <RaceCard race={race} history={history} year={year} key={race.raceId} />
               );
             })
-          : [...Array(n)].map((e, i) => (
+          : fetching &&
+            [...Array(big ? 16 : 6)].map((e, i) => (
               <Skeleton
                 key={i}
                 height="110px"

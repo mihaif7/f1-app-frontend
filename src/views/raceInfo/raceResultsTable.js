@@ -172,8 +172,8 @@ const RaceResultsTable = ({ results, cardBg }) => {
   return (
     <Box
       align="center"
-      m={["2", "2", "2", "4"]}
-      width="91vw"
+      m={2}
+      width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
       borderRadius="lg"
       borderWidth="0px"
       borderColor="white"
@@ -198,12 +198,10 @@ const RaceResultsTable = ({ results, cardBg }) => {
               <Table size={isLargerThan750 ? "md" : "sm"}>
                 <Thead bg={cardBg}>
                   <Tr>
-                    <Th pr={0} isNumeric>
-                      #
-                    </Th>
+                    <Th isNumeric>#</Th>
                     <Th>Driver</Th>
                     <Th>Team</Th>
-                    <Th pl={0}>PTS</Th>
+                    <Th>PTS</Th>
                     <Th isNumeric>+/-</Th>
                     <Th isNumeric>Laps</Th>
                   </Tr>
@@ -212,15 +210,13 @@ const RaceResultsTable = ({ results, cardBg }) => {
                   {results.map((res) => {
                     const positionGained = res.grid - res.position;
                     return (
-                      <Tr key={res.code}>
-                        <Td pr={0} isNumeric>
-                          {res.positionText}
-                        </Td>
+                      <Tr key={res.code} height="55px">
+                        <Td isNumeric>{res.positionText}</Td>
                         <Td fontWeight="500" whiteSpace="nowrap">
                           {isLargerThan585 ? `${res.forename} ${res.surname}` : res.code}
                         </Td>
                         <Td whiteSpace="nowrap">{res.name}</Td>
-                        <Td pl={0}>{res.points}</Td>
+                        <Td>{res.points}</Td>
                         <Td
                           isNumeric
                           color={positionGained > -1 ? "green.500" : "red.500"}>
@@ -233,12 +229,10 @@ const RaceResultsTable = ({ results, cardBg }) => {
                 </Tbody>
                 <Tfoot>
                   <Tr>
-                    <Th pr={0} isNumeric>
-                      #
-                    </Th>
+                    <Th isNumeric>#</Th>
                     <Th>Driver</Th>
                     <Th>Team</Th>
-                    <Th pl={0}>PTS</Th>
+                    <Th>PTS</Th>
                     <Th isNumeric>+/-</Th>
                     <Th isNumeric>Laps</Th>
                   </Tr>

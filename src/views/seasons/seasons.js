@@ -1,4 +1,4 @@
-import { Box, Button, Flex, ScaleFade, Skeleton } from "@chakra-ui/react";
+import { Box, Button, Flex, Skeleton, SlideFade, useMediaQuery } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 const SeasonCard = ({ year, history }) => {
   const { ref, inView } = useInView();
   return (
-    <ScaleFade initialScale={0.9} in={inView}>
+    <SlideFade initialScale={0.9} in={inView}>
       <Flex align="center" m={["2", "2", "2", "4"]} ref={ref}>
         <Button
           d="flex"
@@ -39,14 +39,15 @@ const SeasonCard = ({ year, history }) => {
           </Box>
         </Button>
       </Flex>
-    </ScaleFade>
+    </SlideFade>
   );
 };
 
 const Seasons = () => {
   let history = useHistory();
-  const [seasons, setSeasons] = useState([]);
-  const n = 6;
+  const [seasons, setSeasons] = useState();
+  const [fetching, setFetching] = useState(false);
+  const [big] = useMediaQuery("(min-width: 768px)");
 
   const getData = async () => {
     await axios
@@ -67,19 +68,22 @@ const Seasons = () => {
   };
 
   useEffect(() => {
+    setTimeout(() => setFetching(true), 250);
     getData();
     window.scrollTo(0, 0);
+
     // eslint-disable-next-line
   }, []);
 
   return (
     <>
       <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
-        {seasons.length !== 0
+        {seasons
           ? seasons.map(({ year }) => {
               return <SeasonCard year={year} history={history} key={year} />;
             })
-          : [...Array(n)].map((e, i) => (
+          : fetching &&
+            [...Array(big ? 25 : 6)].map((e, i) => (
               <Skeleton
                 key={i}
                 height="110px"

@@ -8,6 +8,7 @@ import {
   Tr,
   SlideFade,
   useMediaQuery,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -15,6 +16,7 @@ import { useEffect, useState } from "react";
 const Summary = ({ cardBg, raceId, driver1, driver2, drivers, fetching, year }) => {
   const [fastest1, setFastest1] = useState();
   const [fastest2, setFastest2] = useState();
+  const tableColor = useColorModeValue("blackAlpha", "whiteAlpha");
   const [isSmall] = useMediaQuery("(min-width: 400px)");
 
   const findDriver = (driverToFind) => {
@@ -111,15 +113,14 @@ const Summary = ({ cardBg, raceId, driver1, driver2, drivers, fetching, year }) 
       bg={cardBg}
       borderRadius="lg"
       direction="column"
-      flexGrow={1}
       justifyContent="center"
-      w="100%"
       p="4"
       overflow="auto"
-      minH="150px">
+      minH="150px"
+      width={["91vw", "91vw", "91vw", "91vw", "80vw"]}>
       {fastest1 && fastest2 ? (
         <SlideFade in={!fetching}>
-          <Table size="sm" variant="unstyled">
+          <Table size="sm" colorScheme={tableColor}>
             <Thead>
               <Tr>
                 <Th></Th>
@@ -130,7 +131,7 @@ const Summary = ({ cardBg, raceId, driver1, driver2, drivers, fetching, year }) 
             </Thead>
             <Tbody>
               <Tr>
-                <Td pr={isSmall ? 4 : 0}>Fastest Lap</Td>
+                <Td pr={0}>Fastest Lap</Td>
                 <Td
                   fontWeight="semibold"
                   pr={isSmall ? 4 : 0}
@@ -157,7 +158,7 @@ const Summary = ({ cardBg, raceId, driver1, driver2, drivers, fetching, year }) 
                 </Td>
               </Tr>
               <Tr>
-                <Td pr={isSmall ? 4 : 0}>Avg. Pace</Td>
+                <Td pr={0}>Avg. Pace</Td>
                 <Td
                   fontWeight="semibold"
                   pr={isSmall ? 4 : 0}
@@ -184,7 +185,7 @@ const Summary = ({ cardBg, raceId, driver1, driver2, drivers, fetching, year }) 
                 </Td>
               </Tr>
               <Tr>
-                <Td pr={isSmall ? 4 : 0}>Slowest Lap</Td>
+                <Td pr={0}>Slowest Lap</Td>
                 <Td
                   fontWeight="semibold"
                   pr={isSmall ? 4 : 0}
@@ -220,7 +221,7 @@ const Summary = ({ cardBg, raceId, driver1, driver2, drivers, fetching, year }) 
               {year > 2011 ? (
                 <>
                   <Tr>
-                    <Td pr={isSmall ? 4 : 0}>Pit Stops</Td>
+                    <Td pr={0}>Pit Stops</Td>
                     <Td
                       fontWeight="semibold"
                       pr={isSmall ? 4 : 0}
@@ -259,7 +260,7 @@ const Summary = ({ cardBg, raceId, driver1, driver2, drivers, fetching, year }) 
                     </Td>
                   </Tr>
                   <Tr>
-                    <Td pr={isSmall ? 4 : 0}>Avg. Pit Stop</Td>
+                    <Td pr={0}>Avg. Pit Stop</Td>
                     <Td
                       fontWeight="semibold"
                       pr={isSmall ? 4 : 0}

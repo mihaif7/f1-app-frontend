@@ -1,4 +1,4 @@
-import { Box, Center, Spinner } from "@chakra-ui/react";
+import { Box, Center } from "@chakra-ui/react";
 import React, { Suspense } from "react";
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
@@ -15,13 +15,9 @@ function App() {
     <Router>
       <Box d="flex" minH="100vh" flexDirection="column">
         <Header />
-        <Box flexGrow={1}>
-          <Suspense
-            fallback={
-              <Center h="100vh">
-                <Spinner size="xl" />
-              </Center>
-            }>
+
+        <Suspense fallback={<Center flexGrow="1"></Center>}>
+          <Box flexGrow={1}>
             <Switch>
               <Route exact path="/seasons" component={Seasons} />
               <Route exact path="/season/:year" component={Races} />
@@ -33,8 +29,8 @@ function App() {
               />
               <Redirect from="/" to="/seasons" />
             </Switch>
-          </Suspense>
-        </Box>
+          </Box>
+        </Suspense>
         <Footer />
       </Box>
     </Router>

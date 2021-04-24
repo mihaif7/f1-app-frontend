@@ -109,7 +109,7 @@ const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers, year }) => 
     <>
       <Box
         align="center"
-        width="91vw"
+        flexGrow={1}
         borderRadius="lg"
         borderWidth="0px"
         borderColor="white"

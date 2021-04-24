@@ -4,6 +4,7 @@ import {
   Select,
   Skeleton,
   SlideFade,
+  Stack,
   useColorModeValue,
 } from "@chakra-ui/react";
 import axios from "axios";
@@ -107,101 +108,105 @@ const HeadToHead = () => {
   return drivers && driver1 && driver2 && lapTimes1 && lapTimes2 ? (
     <SlideFade in={true}>
       <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
-        <Flex align="center" mb={4} bg={cardBg} borderRadius="lg" flexGrow={1}>
-          <Box p="6" d="flex" flexDirection="column" justifyContent="center" w="100%">
-            <Box
-              color={smallText}
-              fontWeight="semibold"
-              letterSpacing="wide"
-              fontSize="xs"
-              textTransform="uppercase"
-              mb={2}>
-              Race {raceInfo.round}
+        <Stack
+          width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
+          direction={["column", "row"]}
+          spacing="4">
+          <Flex align="center" bg={cardBg} borderRadius="lg" flexGrow={["1", "0.5"]}>
+            <Box p="6" d="flex" flexDirection="column" justifyContent="center" w="100%">
+              <Box
+                color={smallText}
+                fontWeight="semibold"
+                letterSpacing="wide"
+                fontSize="xs"
+                textTransform="uppercase"
+                mb={2}>
+                Race {raceInfo.round}
+              </Box>
+              <Box
+                fontWeight="semibold"
+                fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
+                lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
+                as="p">
+                {raceInfo.raceName}
+              </Box>
+              <Box
+                color={smallText}
+                fontWeight="semibold"
+                letterSpacing="wide"
+                fontSize="xs"
+                mt={2}>
+                Date: {raceInfo.date}
+              </Box>
             </Box>
-            <Box
-              fontWeight="semibold"
-              fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
-              lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
-              as="p">
-              {raceInfo.raceName}
+          </Flex>
+
+          <Flex
+            align="center"
+            bg={cardBg}
+            borderRadius="lg"
+            direction="column"
+            flexGrow={["1", "0.5"]}>
+            <Box p="4" d="flex" flexDirection="column" justifyContent="center" w="100%">
+              <Box
+                color={smallText}
+                fontWeight="semibold"
+                letterSpacing="wide"
+                fontSize="sm"
+                mb={4}>
+                Select two drivers
+              </Box>
+              <Box d="flex">
+                <Select
+                  value={driver1}
+                  onChange={handleChange}
+                  pr={1}
+                  variant="filled"
+                  bg={orange}>
+                  {drivers.map((driver) => {
+                    return (
+                      <option
+                        value={driver.driverId}
+                        key={driver.driverId}
+                        disabled={driver.driverId === driver2}>
+                        {year > 2013
+                          ? `#${driver.number} ${driver.code}`
+                          : driver.code ?? driver.surname.substring(0, 3).toUpperCase()}
+                      </option>
+                    );
+                  })}
+                </Select>
+                <Select
+                  value={driver2}
+                  onChange={handleChange2}
+                  pl={1}
+                  variant="filled"
+                  bg={orange}>
+                  {drivers.map((driver) => {
+                    return (
+                      <option
+                        value={driver.driverId}
+                        key={driver.driverId}
+                        disabled={driver.driverId === driver1}>
+                        {year > 2013
+                          ? `#${driver.number} ${driver.code}`
+                          : driver.code ?? driver.surname.substring(0, 3).toUpperCase()}
+                      </option>
+                    );
+                  })}
+                </Select>
+              </Box>
             </Box>
-            <Box
-              color={smallText}
-              fontWeight="semibold"
-              letterSpacing="wide"
-              fontSize="xs"
-              mt={2}>
-              Date: {raceInfo.date}
-            </Box>
-          </Box>
-        </Flex>
+          </Flex>
+        </Stack>
 
         <Flex
           align="center"
-          mb={4}
+          my={4}
           bg={cardBg}
           borderRadius="lg"
           direction="column"
-          flexGrow={1}>
-          <Box p="4" d="flex" flexDirection="column" justifyContent="center" w="100%">
-            <Box
-              color={smallText}
-              fontWeight="semibold"
-              letterSpacing="wide"
-              fontSize="sm"
-              mb={4}>
-              Select two drivers
-            </Box>
-            <Box d="flex">
-              <Select
-                value={driver1}
-                onChange={handleChange}
-                pr={1}
-                variant="filled"
-                bg={orange}>
-                {drivers.map((driver) => {
-                  return (
-                    <option
-                      value={driver.driverId}
-                      key={driver.driverId}
-                      disabled={driver.driverId === driver2}>
-                      {year > 2013
-                        ? `#${driver.number} ${driver.code}`
-                        : driver.code ?? driver.surname.substring(0, 3).toUpperCase()}
-                    </option>
-                  );
-                })}
-              </Select>
-              <Select
-                value={driver2}
-                onChange={handleChange2}
-                pl={1}
-                variant="filled"
-                bg={orange}>
-                {drivers.map((driver) => {
-                  return (
-                    <option
-                      value={driver.driverId}
-                      key={driver.driverId}
-                      disabled={driver.driverId === driver1}>
-                      {year > 2013
-                        ? `#${driver.number} ${driver.code}`
-                        : driver.code ?? driver.surname.substring(0, 3).toUpperCase()}
-                    </option>
-                  );
-                })}
-              </Select>
-            </Box>
-          </Box>
-        </Flex>
-
-        <Flex
-          align="center"
-          mb={4}
-          bg={cardBg}
-          borderRadius="lg"
-          direction="column"
-          flexGrow={1}>
+          width={["91vw", "91vw", "91vw", "91vw", "80vw"]}>
           <SlideFade in={!fetching}>
             <HthTable
               year={year}
@@ -227,10 +232,26 @@ const HeadToHead = () => {
     </SlideFade>
   ) : (
     <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
-      <Skeleton height="110px" borderRadius="lg" w="100%" mb={4} />
-      <Skeleton height="110px" borderRadius="lg" w="100%" mb={4} />
-      <Skeleton height="500px" borderRadius="lg" w="100%" mb={4} />
-      <Skeleton height="152px" borderRadius="lg" w="100%" mb={4} />
+      <Stack
+        width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
+        direction={["column", "row"]}
+        spacing="4">
+        <Skeleton height="120px" borderRadius="lg" w="100%" />
+        <Skeleton height="120px" borderRadius="lg" w="100%" />
+      </Stack>
+      <Skeleton
+        mt={4}
+        height="500px"
+        borderRadius="lg"
+        width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
+        mb={4}
+      />
+      <Skeleton
+        height="152px"
+        borderRadius="lg"
+        width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
+        mb={4}
+      />
     </Flex>
   );
 };

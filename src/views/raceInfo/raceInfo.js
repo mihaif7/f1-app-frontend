@@ -5,6 +5,7 @@ import {
   Flex,
   Skeleton,
   SlideFade,
+  Stack,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -133,14 +134,11 @@ const RacesInfo = () => {
       {raceInfo && results && quali && standings && driverStandings ? (
         <SlideFade in={true}>
           <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
-            <Flex width="91vw" direction={["column", "row"]} mb="2">
-              <Flex
-                align="center"
-                mr={["0", "4"]}
-                mb={["4", "0"]}
-                flexGrow={["1", "0.5"]}
-                bg={cardBg}
-                borderRadius="lg">
+            <Stack
+              width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
+              direction={["column", "row"]}
+              spacing="4">
+              <Flex align="center" flexGrow={["1", "0.5"]} bg={cardBg} borderRadius="lg">
                 <Box
                   p="6"
                   d="flex"
@@ -173,12 +171,7 @@ const RacesInfo = () => {
                   </Box>
                 </Box>
               </Flex>
-              <Flex
-                align="center"
-                ml={["0", "4"]}
-                flexGrow={["1", "0.5"]}
-                bg={orange}
-                borderRadius="lg">
+              <Flex align="center" flexGrow={["1", "0.5"]} bg={orange} borderRadius="lg">
                 <Box
                   p="6"
                   d="flex"
@@ -215,12 +208,13 @@ const RacesInfo = () => {
                   </Box>
                 </Box>
               </Flex>
-            </Flex>
+            </Stack>
 
             <Box
               align="center"
-              m={["2", "2", "2", "4"]}
-              width="91vw"
+              m={2}
+              mt={4}
+              width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
               borderRadius="lg"
               borderWidth="0px"
               borderColor="white"
@@ -250,57 +244,58 @@ const RacesInfo = () => {
         </SlideFade>
       ) : (
         <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
-          <Flex width="91vw" direction={["column", "row"]} mb="2">
+          <Stack
+            width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
+            direction={["column", "row"]}
+            spacing="4">
             <Skeleton
-              height="110px"
+              height="120px"
               align="center"
-              mr={["0", "4"]}
-              mb={["4", "0"]}
               flexGrow={["1", "0.5"]}
               bg="gray.100"
               borderRadius="lg"
             />
             <Skeleton
-              height="110px"
+              height="120px"
               align="center"
-              mr={["0", "4"]}
               flexGrow={["1", "0.5"]}
               bg="gray.100"
               borderRadius="lg"
             />
-          </Flex>
+          </Stack>
           <Skeleton
             align="center"
-            m={["2", "2", "2", "4"]}
-            width="91vw"
+            m={2}
+            mt={4}
+            width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
             borderRadius="lg"
             height="64px"
           />
           <Skeleton
             align="center"
-            m={["2", "2", "2", "4"]}
-            width="91vw"
+            m={2}
+            width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
             borderRadius="lg"
             height="64px"
           />
           <Skeleton
             align="center"
-            m={["2", "2", "2", "4"]}
-            width="91vw"
+            m={2}
+            width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
             borderRadius="lg"
             height="64px"
           />
           <Skeleton
             align="center"
-            m={["2", "2", "2", "4"]}
-            width="91vw"
+            m={2}
+            width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
             borderRadius="lg"
             height="64px"
           />
           <Skeleton
             align="center"
-            m={["2", "2", "2", "4"]}
-            width="91vw"
+            m={2}
+            width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
             borderRadius="lg"
             height="64px"
           />
