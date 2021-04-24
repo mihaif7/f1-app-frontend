@@ -229,8 +229,8 @@ const HeadToHead = () => {
     <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
       <Skeleton height="110px" borderRadius="lg" w="100%" mb={4} />
       <Skeleton height="110px" borderRadius="lg" w="100%" mb={4} />
-      <Skeleton height="152px" borderRadius="lg" w="100%" mb={4} />
       <Skeleton height="500px" borderRadius="lg" w="100%" mb={4} />
+      <Skeleton height="152px" borderRadius="lg" w="100%" mb={4} />
     </Flex>
   );
 };
