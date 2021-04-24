@@ -61,9 +61,7 @@ const TableRow = ({ res, isLargerThan370, cardBg }) => {
                   <Text fontSize="sm" fontWeight="semibold" pb={1} color={smallText}>
                     Name
                   </Text>
-                  <Text fontSize="sm" pl={1}>
-                    {`${res.forename} ${res.surname}`}
-                  </Text>
+                  <Text fontSize="sm">{`${res.forename} ${res.surname}`}</Text>
                 </Box>
                 <Box>
                   <Text
@@ -74,7 +72,7 @@ const TableRow = ({ res, isLargerThan370, cardBg }) => {
                     textAlign="right">
                     Constructor
                   </Text>
-                  <Text fontSize="sm" pr={1} textAlign="right">
+                  <Text fontSize="sm" textAlign="right">
                     {res.name}
                   </Text>
                 </Box>
@@ -85,13 +83,13 @@ const TableRow = ({ res, isLargerThan370, cardBg }) => {
                     <Text fontSize="sm" fontWeight="semibold" pb={1} color={smallText}>
                       Fastest Lap
                     </Text>
-                    <Text fontSize="sm" pl={1}>{`Lap ${res.fastestLap}`}</Text>
+                    <Text fontSize="sm">{`Lap ${res.fastestLap}`}</Text>
                   </Box>
                   <Box>
                     <Text fontSize="sm" fontWeight="semibold" pb={1} color={smallText}>
                       Fastest Lap Time
                     </Text>
-                    <Text fontSize="sm" textAlign="right" pr={1}>
+                    <Text fontSize="sm" textAlign="right">
                       {res.fastestLapTime}
                     </Text>
                   </Box>
@@ -102,7 +100,7 @@ const TableRow = ({ res, isLargerThan370, cardBg }) => {
                   <Text fontSize="sm" fontWeight="semibold" pb={1} color={smallText}>
                     Start Position
                   </Text>
-                  <Text fontSize="sm" pl={1}>{`P${res.grid}`}</Text>
+                  <Text fontSize="sm">{`P${res.grid}`}</Text>
                 </Box>
                 <Box>
                   <Text fontSize="sm" fontWeight="semibold" pb={1} color={smallText}>
@@ -112,8 +110,7 @@ const TableRow = ({ res, isLargerThan370, cardBg }) => {
                     fontSize="sm"
                     color={positionGained > -1 ? "green.500" : "red.500"}
                     textAlign="right"
-                    fontWeight="500"
-                    pr={1}>
+                    fontWeight="500">
                     {positionGained > 0 ? `+${positionGained}` : positionGained}
                   </Text>
                 </Box>
