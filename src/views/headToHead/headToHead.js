@@ -19,7 +19,7 @@ const HeadToHead = () => {
   const [lapTimes1, setLapTimes1] = useState();
   const [lapTimes2, setLapTimes2] = useState();
   const [fetching, setFetching] = useState(false);
-  let { raceId } = useParams();
+  let { year, raceId } = useParams();
 
   const cardBg = useColorModeValue("gray.100", "whiteAlpha.200");
   const orange = useColorModeValue("orange.100", "yellow.800");
@@ -164,9 +164,11 @@ const HeadToHead = () => {
                     <option
                       value={driver.driverId}
                       key={driver.driverId}
-                      disabled={
-                        driver.driverId === driver2
-                      }>{`#${driver.number} ${driver.code}`}</option>
+                      disabled={driver.driverId === driver2}>
+                      {year > 2013
+                        ? `#${driver.number} ${driver.code}`
+                        : driver.code ?? driver.surname.substring(0, 3).toUpperCase()}
+                    </option>
                   );
                 })}
               </Select>
@@ -181,9 +183,11 @@ const HeadToHead = () => {
                     <option
                       value={driver.driverId}
                       key={driver.driverId}
-                      disabled={
-                        driver.driverId === driver1
-                      }>{`#${driver.number} ${driver.code}`}</option>
+                      disabled={driver.driverId === driver1}>
+                      {year > 2013
+                        ? `#${driver.number} ${driver.code}`
+                        : driver.code ?? driver.surname.substring(0, 3).toUpperCase()}
+                    </option>
                   );
                 })}
               </Select>
@@ -200,6 +204,7 @@ const HeadToHead = () => {
           flexGrow={1}>
           <SlideFade in={!fetching}>
             <HthTable
+              year={year}
               drivers={drivers}
               driver1={driver1}
               driver2={driver2}

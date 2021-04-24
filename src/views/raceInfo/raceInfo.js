@@ -124,6 +124,7 @@ const RacesInfo = () => {
     getQuali();
     getStandingsConstructors();
     getStandingsDrivers();
+    window.scrollTo(0, 0);
     // eslint-disable-next-line
   }, []);
 
@@ -241,7 +242,7 @@ const RacesInfo = () => {
               </Button>
             </Box>
 
-            <QualiResultsTable quali={quali} cardBg={cardBg} />
+            {year > 2005 && <QualiResultsTable quali={quali} cardBg={cardBg} />}
             <RaceResultsTable results={results} cardBg={cardBg} />
             <DriversTable driver={driverStandings} cardBg={cardBg} />
             <StandingsTable standings={standings} cardBg={cardBg} />

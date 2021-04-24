@@ -19,6 +19,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
+import { v4 as uuidv4 } from "uuid";
 
 const TableRow = ({ res, isLargerThan370, cardBg }) => {
   const { isOpen, onToggle } = useDisclosure();
@@ -28,12 +29,12 @@ const TableRow = ({ res, isLargerThan370, cardBg }) => {
   const positionGained = res.grid - res.position;
   return (
     <>
-      <Tr key={res.code} onClick={onToggle} bg={cardBg}>
+      <Tr onClick={onToggle} bg={cardBg}>
         <Td pr={0} isNumeric>
           {res.positionText}
         </Td>
         <Td fontWeight="500" whiteSpace="nowrap">
-          {res.code}
+          {res.code ?? res.surname.substring(0, 3).toUpperCase() }
         </Td>
         <Td whiteSpace="nowrap" width="100%">
           {res.status === "Finished" ? res.time : res.status}
@@ -65,7 +66,12 @@ const TableRow = ({ res, isLargerThan370, cardBg }) => {
                   </Text>
                 </Box>
                 <Box>
-                  <Text fontSize="sm" fontWeight="semibold" pb={1} textAlign="right" color={smallText}>
+                  <Text
+                    fontSize="sm"
+                    fontWeight="semibold"
+                    pb={1}
+                    textAlign="right"
+                    color={smallText}>
                     Status
                   </Text>
                   <Text fontSize="sm" pr={1} textAlign="right">
@@ -139,7 +145,7 @@ const SmallTable = ({ results, cardBg }) => {
           <TableRow
             res={res}
             isLargerThan370={isLargerThan370}
-            key={res.code}
+            key={uuidv4()}
             cardBg={cardBg}
           />
         ))}

@@ -47,7 +47,7 @@ const TableRow = ({ res }) => {
   );
 };
 
-const SmallTable = ({ quali, cardBg }) => {
+const SmallTable = ({ quali }) => {
   return (
     <Table size="sm" variant="unstyled">
       <Thead>
@@ -81,8 +81,60 @@ const SmallTable = ({ quali, cardBg }) => {
   );
 };
 
-const QualiResultsTable = ({ quali, cardBg }) => {
+const BigTable = ({ quali, cardBg, isLargerThan585 }) => {
   const [isLargerThan750] = useMediaQuery("(min-width: 750px)");
+  return (
+    <Table size={isLargerThan750 ? "md" : "sm"}>
+      <Thead bg={cardBg}>
+        <Tr>
+          <Th pr={0} isNumeric>
+            #
+          </Th>
+          <Th>Driver</Th>
+          <Th>Team</Th>
+          <Th pl={0}>PTS</Th>
+          <Th isNumeric>+/-</Th>
+          <Th isNumeric>Laps</Th>
+        </Tr>
+      </Thead>
+      <Tbody>
+        {quali.map((res) => {
+          const positionGained = res.grid - res.position;
+          return (
+            <Tr key={res.driverId}>
+              <Td pr={0} isNumeric>
+                {res.position}
+              </Td>
+              <Td fontWeight="500" whiteSpace="nowrap">
+                {isLargerThan585 ? `${res.forename} ${res.surname}` : res.code}
+              </Td>
+              <Td whiteSpace="nowrap">{res.name}</Td>
+              <Td pl={0}>{res.points}</Td>
+              <Td isNumeric color={positionGained > -1 ? "green.500" : "red.500"}>
+                {positionGained > 0 ? `+${positionGained}` : positionGained}
+              </Td>
+              <Td isNumeric>{res.laps}</Td>
+            </Tr>
+          );
+        })}
+      </Tbody>
+      <Tfoot>
+        <Tr>
+          <Th pr={0} isNumeric>
+            #
+          </Th>
+          <Th>Driver</Th>
+          <Th>Team</Th>
+          <Th pl={0}>PTS</Th>
+          <Th isNumeric>+/-</Th>
+          <Th isNumeric>Laps</Th>
+        </Tr>
+      </Tfoot>
+    </Table>
+  );
+};
+
+const QualiResultsTable = ({ quali, cardBg }) => {
   const [isLargerThan585] = useMediaQuery("(min-width: 585px)");
 
   // console.log(quali);
@@ -112,55 +164,7 @@ const QualiResultsTable = ({ quali, cardBg }) => {
           </AccordionButton>
           <AccordionPanel px={0} pb={0} overflow="auto">
             {isLargerThan585 ? (
-              <Table size={isLargerThan750 ? "md" : "sm"}>
-                <Thead bg={cardBg}>
-                  <Tr>
-                    <Th pr={0} isNumeric>
-                      #
-                    </Th>
-                    <Th>Driver</Th>
-                    <Th>Team</Th>
-                    <Th pl={0}>PTS</Th>
-                    <Th isNumeric>+/-</Th>
-                    <Th isNumeric>Laps</Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {quali.map((res) => {
-                    const positionGained = res.grid - res.position;
-                    return (
-                      <Tr key={res.driverId}>
-                        <Td pr={0} isNumeric>
-                          {res.position}
-                        </Td>
-                        <Td fontWeight="500" whiteSpace="nowrap">
-                          {isLargerThan585 ? `${res.forename} ${res.surname}` : res.code}
-                        </Td>
-                        <Td whiteSpace="nowrap">{res.name}</Td>
-                        <Td pl={0}>{res.points}</Td>
-                        <Td
-                          isNumeric
-                          color={positionGained > -1 ? "green.500" : "red.500"}>
-                          {positionGained > 0 ? `+${positionGained}` : positionGained}
-                        </Td>
-                        <Td isNumeric>{res.laps}</Td>
-                      </Tr>
-                    );
-                  })}
-                </Tbody>
-                <Tfoot>
-                  <Tr>
-                    <Th pr={0} isNumeric>
-                      #
-                    </Th>
-                    <Th>Driver</Th>
-                    <Th>Team</Th>
-                    <Th pl={0}>PTS</Th>
-                    <Th isNumeric>+/-</Th>
-                    <Th isNumeric>Laps</Th>
-                  </Tr>
-                </Tfoot>
-              </Table>
+              <BigTable quli={quali} cardBg={cardBg} isLargerThan585={isLargerThan585} />
             ) : (
               <SmallTable quali={quali} cardBg={cardBg} />
             )}

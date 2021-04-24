@@ -17,10 +17,12 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 
+import { v4 as uuidv4 } from "uuid";
+
 const TableRow = ({ res }) => {
   return (
     <>
-      <Tr key={res.code}>
+      <Tr>
         <Td>{res.position}</Td>
         <Td fontWeight="500" whiteSpace="nowrap">
           {`${res.forename} ${res.surname}`}
@@ -48,7 +50,7 @@ const SmallTable = ({ driver, cardBg }) => {
       </Thead>
       <Tbody>
         {driver.map((res) => (
-          <TableRow res={res} key={res.code} />
+          <TableRow res={res} key={uuidv4()} />
         ))}
       </Tbody>
       <Tfoot>

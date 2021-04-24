@@ -9,9 +9,9 @@ import {
   Tr,
   useMediaQuery,
 } from "@chakra-ui/react";
-import { uuid } from "uuidv4";
+import { v4 as uuidv4 } from "uuid";
 
-const TableRow = ({ res1, res2 }) => {
+const TableRow = ({ res1, res2, year, pit1, pit2 }) => {
   const [isSmall] = useMediaQuery("(min-width: 400px)");
 
   const beforeDif = (res1?.milliseconds - res2?.milliseconds) / 1000;
@@ -31,33 +31,53 @@ const TableRow = ({ res1, res2 }) => {
           py={0}
           px={1}
           fontSize={isSmall ? "sm" : "xs"}
-          color={dif ? (dif < 0 ? "green.500" : "red.500") : "gray.500"}
+          color={
+            dif
+              ? res1.pitLap === res1.lap || pit1 === res1.lap - 1
+                ? "blue.500"
+                : dif < 0
+                ? "green.500"
+                : "red.500"
+              : "gray.500"
+          }
           textAlign="right">
           {res1?.time}
         </Td>
-        <Td
-          px={1}
-          py={0}
-          fontSize={isSmall ? "sm" : "xs"}
-          textAlign="right"
-          color="blue.500">
-          {pitCalc(res1?.pitMilliseconds)}
-        </Td>
+        {year > 2011 && (
+          <Td
+            px={1}
+            py={0}
+            fontSize={isSmall ? "sm" : "xs"}
+            textAlign="right"
+            color="blue.500">
+            {pitCalc(res1?.pitMilliseconds)}
+          </Td>
+        )}
         <Td
           p={0}
           fontSize={isSmall ? "sm" : "xs"}
-          color={dif ? (dif > 0 ? "green.500" : "red.500") : "gray.500"}
+          color={
+            dif
+              ? res2.pitLap === res2.lap || pit2 === res2.lap - 1
+                ? "blue.500"
+                : dif > 0
+                ? "green.500"
+                : "red.500"
+              : "gray.500"
+          }
           textAlign="right">
           {res2?.time}
         </Td>
-        <Td
-          px={1}
-          py={0}
-          fontSize={isSmall ? "sm" : "xs"}
-          textAlign="right"
-          color="blue.500">
-          {pitCalc(res2?.pitMilliseconds)}
-        </Td>
+        {year > 2011 && (
+          <Td
+            px={1}
+            py={0}
+            fontSize={isSmall ? "sm" : "xs"}
+            textAlign="right"
+            color="blue.500">
+            {pitCalc(res2?.pitMilliseconds)}
+          </Td>
+        )}
         <Td
           p={0}
           fontSize={isSmall ? "sm" : "xs"}
@@ -70,8 +90,20 @@ const TableRow = ({ res1, res2 }) => {
   );
 };
 
-const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers }) => {
+const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers, year }) => {
   //   console.log(lapTimes1, lapTimes2);
+
+  const findDriver = (driverToFind) => {
+    const found = drivers.find((driver) => driver.driverId === driverToFind);
+    let toReturn;
+
+    if (found.code !== null) {
+      toReturn = found.code;
+    } else {
+      toReturn = found.surname.substring(0, 3).toUpperCase();
+    }
+    return toReturn;
+  };
 
   return (
     <>
@@ -89,29 +121,47 @@ const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers }) => {
                 #
               </Th>
               <Th textAlign="right" p={0}>
-                {drivers.find((driver) => driver.driverId === driver1)?.code}
+                {findDriver(driver1)}
               </Th>
+              {year > 2011 && (
+                <Th textAlign="right" p={0}>
+                  Pit
+                </Th>
+              )}
               <Th textAlign="right" p={0}>
-                Pit
+                {findDriver(driver2)}
               </Th>
-              <Th textAlign="right" p={0}>
-                {drivers.find((driver) => driver.driverId === driver2)?.code}
-              </Th>
-              <Th textAlign="right" p={0}>
-                Pit
-              </Th>
+              {year > 2011 && (
+                <Th textAlign="right" p={0}>
+                  Pit
+                </Th>
+              )}
               <Th textAlign="right" p={0}>
                 +/-
               </Th>
             </Tr>
           </Thead>
           <Tbody fontWeight="semibold">
-            {lapTimes1.length > lapTimes2.length
+            {lapTimes1.length >= lapTimes2.length
               ? lapTimes1.map((res, index) => (
-                  <TableRow res1={res} res2={lapTimes2[index]} key={uuid()} />
+                  <TableRow
+                    res1={res}
+                    pit1={lapTimes1[index - 1]?.pitLap}
+                    res2={lapTimes2[index]}
+                    pit2={lapTimes2[index - 1]?.pitLap}
+                    key={uuidv4()}
+                    year={year}
+                  />
                 ))
               : lapTimes2.map((res, index) => (
-                  <TableRow res1={lapTimes1[index]} res2={res} key={uuid()} />
+                  <TableRow
+                    res1={lapTimes1[index]}
+                    pit1={lapTimes1[index - 1]?.pitLap}
+                    res2={res}
+                    pit2={lapTimes2[index - 1]?.pitLap}
+                    key={uuidv4()}
+                    year={year}
+                  />
                 ))}
           </Tbody>
           <Tfoot>
@@ -120,17 +170,21 @@ const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers }) => {
                 #
               </Th>
               <Th textAlign="right" p={0}>
-                {drivers.find((driver) => driver.driverId === driver1)?.code}
+                {findDriver(driver1)}
               </Th>
+              {year > 2011 && (
+                <Th textAlign="right" p={0}>
+                  Pit
+                </Th>
+              )}
               <Th textAlign="right" p={0}>
-                Pit
+                {findDriver(driver2)}
               </Th>
-              <Th textAlign="right" p={0}>
-                {drivers.find((driver) => driver.driverId === driver2)?.code}
-              </Th>
-              <Th textAlign="right" p={0}>
-                Pit
-              </Th>
+              {year > 2011 && (
+                <Th textAlign="right" p={0}>
+                  Pit
+                </Th>
+              )}
               <Th textAlign="right" p={0}>
                 +/-
               </Th>

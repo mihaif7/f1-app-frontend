@@ -66,9 +66,9 @@ const Races = () => {
 
   useEffect(() => {
     getData();
-
+    window.scrollTo(0, 0);
     // eslint-disable-next-line
-  }, []);
+  }, [year]);
 
   return (
     <>
