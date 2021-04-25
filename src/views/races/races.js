@@ -44,7 +44,7 @@ const RaceCard = ({ race, history, year }) => {
 const Races = () => {
   let history = useHistory();
   const [races, setRaces] = useState();
-  const [fetching, setFetching] = useState(false);
+  const [fetching, ] = useState(false);
   const [big] = useMediaQuery("(min-width: 768px)");
   let { year } = useParams();
 
@@ -66,7 +66,7 @@ const Races = () => {
   };
 
   useEffect(() => {
-    setTimeout(() => setFetching(true), 250);
+    // setTimeout(() => setFetching(true), 250);
     getData();
     window.scrollTo(0, 0);
     // eslint-disable-next-line
