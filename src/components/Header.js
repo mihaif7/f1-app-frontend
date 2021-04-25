@@ -16,8 +16,8 @@ import { Link as ReachLink } from "react-router-dom";
 
 const Links = [
   // { name: "Last Race", url: "/last-race" },
-  { name: "2021 Season", url: "/season/2021" },
   { name: "All Seasons", url: "/seasons" },
+  { name: "2021 Season", url: "/season/2021" },
 ];
 
 const NavLink = ({ children, onClose, isOpen }) => {
