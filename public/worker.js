@@ -1,5 +1,5 @@
-var CACHE_NAME = "polling_front";
-var urlsToCache = ["/"];
+var CACHE_NAME = "f1-app-frontend";
+var urlsToCache = ["/", "/seasons"];
 
 // Install a service worker
 self.addEventListener("install", (event) => {
@@ -27,7 +27,7 @@ self.addEventListener("fetch", (event) => {
 
 // Update a service worker
 self.addEventListener("activate", (event) => {
-  var cacheWhitelist = ["polling_front"];
+  var cacheWhitelist = ["f1-app-frontend"];
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(

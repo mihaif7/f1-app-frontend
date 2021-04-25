@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const TableRow = ({ res1, res2, year, pit1, pit2 }) => {
   const [isSmall] = useMediaQuery("(min-width: 400px)");
+  const [noXSmall] = useMediaQuery("(min-width: 350px)");
 
   const beforeDif = (res1?.milliseconds - res2?.milliseconds) / 1000;
   const dif = beforeDif ? beforeDif.toFixed(3) : "";
@@ -24,7 +25,12 @@ const TableRow = ({ res1, res2, year, pit1, pit2 }) => {
   return (
     <>
       <Tr>
-        <Td p={0} fontSize={isSmall ? "sm" : "xs"} textAlign="right">
+        <Td
+          py={0}
+          pl={noXSmall ? 4 : 0}
+          pr={0}
+          fontSize={isSmall ? "sm" : "xs"}
+          textAlign="right">
           {res1?.lap ?? res2?.lap}
         </Td>
         <Td
@@ -79,7 +85,9 @@ const TableRow = ({ res1, res2, year, pit1, pit2 }) => {
           </Td>
         )}
         <Td
-          p={0}
+          py={0}
+          pl={0}
+          pr={noXSmall ? 4 : 0}
           fontSize={isSmall ? "sm" : "xs"}
           color={dif ? (dif < 0 ? "green.500" : "red.500") : "gray.500"}
           textAlign="right">
@@ -91,8 +99,8 @@ const TableRow = ({ res1, res2, year, pit1, pit2 }) => {
 };
 
 const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers, year }) => {
-  //   console.log(lapTimes1, lapTimes2);
-
+  const [noXSmall] = useMediaQuery("(min-width: 350px)");
+  const [mediumTable] = useMediaQuery("(min-width: 768px)");
   const findDriver = (driverToFind) => {
     const found = drivers.find((driver) => driver.driverId === driverToFind);
     let toReturn;
@@ -109,7 +117,7 @@ const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers, year }) => 
     <>
       <Box
         align="center"
-        flexGrow={1}
+        width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
         borderRadius="lg"
         borderWidth="0px"
         borderColor="white"
@@ -117,7 +125,7 @@ const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers, year }) => 
         <Table size="sm" variant="unstyled" my={4}>
           <Thead>
             <Tr>
-              <Th textAlign="right" p={0}>
+              <Th textAlign="right" py={0} pl={noXSmall ? 4 : 0} pr={0}>
                 #
               </Th>
               <Th textAlign="right" p={0}>
@@ -136,7 +144,7 @@ const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers, year }) => 
                   Pit
                 </Th>
               )}
-              <Th textAlign="right" p={0}>
+              <Th textAlign="right" py={0} pr={noXSmall ? 4 : 0} pl={0}>
                 +/-
               </Th>
             </Tr>
@@ -166,7 +174,7 @@ const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers, year }) => 
           </Tbody>
           <Tfoot>
             <Tr>
-              <Th textAlign="right" p={0}>
+              <Th textAlign="right" py={0} pl={noXSmall ? 4 : 0} pr={0}>
                 #
               </Th>
               <Th textAlign="right" p={0}>
@@ -185,7 +193,7 @@ const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers, year }) => 
                   Pit
                 </Th>
               )}
-              <Th textAlign="right" p={0}>
+              <Th textAlign="right" py={0} pr={noXSmall ? 4 : 0} pl={0}>
                 +/-
               </Th>
             </Tr>

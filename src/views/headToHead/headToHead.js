@@ -146,6 +146,7 @@ const HeadToHead = () => {
             bg={cardBg}
             borderRadius="lg"
             direction="column"
+            justifyContent="center"
             flexGrow={["1", "0.5"]}>
             <Box p="4" d="flex" flexDirection="column" justifyContent="center" w="100%">
               <Box
