@@ -7,7 +7,6 @@ import {
   Th,
   Thead,
   Tr,
-  useColorModeValue,
   useMediaQuery,
 } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
@@ -246,9 +245,8 @@ const TableRowBig = ({ res1, res2, year, pit1, pit2 }) => {
 };
 
 const BigTable = ({ findDriver, lapTimes1, lapTimes2, driver1, driver2, year }) => {
-  const tableColor = useColorModeValue("blackAlpha", "whiteAlpha");
   return (
-    <Table size="md" my={4} colorScheme={tableColor}>
+    <Table size="md" my={4} variant="unstyled">
       <Thead>
         <Tr>
           <Th textAlign="right">#</Th>

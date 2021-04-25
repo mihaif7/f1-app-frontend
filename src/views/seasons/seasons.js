@@ -46,7 +46,7 @@ const SeasonCard = ({ year, history }) => {
 const Seasons = () => {
   let history = useHistory();
   const [seasons, setSeasons] = useState();
-  const [fetching, ] = useState(true);
+  const [fetching, setFetching] = useState(true);
   const [big] = useMediaQuery("(min-width: 768px)");
 
   const getData = async () => {
@@ -68,7 +68,7 @@ const Seasons = () => {
   };
 
   useEffect(() => {
-    // setTimeout(() => setFetching(true), 250);
+    setTimeout(() => setFetching(true), 250);
     getData();
     window.scrollTo(0, 0);
 
