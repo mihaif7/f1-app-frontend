@@ -211,7 +211,7 @@ const RaceResultsTable = ({ results, cardBg }) => {
                   {results.map((res) => {
                     const positionGained = res.grid - res.position;
                     return (
-                      <Tr key={res.code} height="55px">
+                      <Tr key={uuidv4()} height="55px">
                         <Td isNumeric>{res.positionText}</Td>
                         <Td fontWeight="500" whiteSpace="nowrap">
                           {isLargerThan585 ? `${res.forename} ${res.surname}` : res.code}

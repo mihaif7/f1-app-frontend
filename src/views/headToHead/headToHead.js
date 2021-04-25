@@ -109,10 +109,12 @@ const HeadToHead = () => {
     <SlideFade in={true}>
       <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
         <Stack
-          width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
-          direction={["column", "row"]}
-          spacing="4">
-          <Flex align="center" bg={cardBg} borderRadius="lg" flexGrow={["1", "0.5"]}>
+          width={["91vw", "80vw", "80vw", "80vw", "50vw"]}
+          direction="column"
+          spacing="4"
+          justifyContent="center"
+          my={4}>
+          <Flex align="center" bg={cardBg} borderRadius="lg" flexGrow={(1, 0.5)}>
             <Box p="6" d="flex" flexDirection="column" justifyContent="center" w="100%">
               <Box
                 color={smallText}
@@ -140,7 +142,6 @@ const HeadToHead = () => {
               </Box>
             </Box>
           </Flex>
-
           <Flex
             align="center"
             bg={cardBg}
@@ -199,36 +200,36 @@ const HeadToHead = () => {
               </Box>
             </Box>
           </Flex>
-        </Stack>
+          <Flex
+            align="center"
+            bg={cardBg}
+            borderRadius="lg"
+            direction="column"
+            flexGrow={["1", "0.5"]}>
+            <SlideFade in={!fetching}>
+              <HthTable
+                year={year}
+                drivers={drivers}
+                driver1={driver1}
+                driver2={driver2}
+                lapTimes1={lapTimes1}
+                lapTimes2={lapTimes2}
+              />
+            </SlideFade>
+          </Flex>
 
-        <Flex
-          align="center"
-          my={4}
-          bg={cardBg}
-          borderRadius="lg"
-          direction="column"
-          width={["91vw", "91vw", "91vw", "91vw", "80vw"]}>
-          <SlideFade in={!fetching}>
-            <HthTable
-              year={year}
-              drivers={drivers}
+          <Box my={4}>
+            <Summary
+              cardBg={cardBg}
+              raceId={raceId}
               driver1={driver1}
               driver2={driver2}
-              lapTimes1={lapTimes1}
-              lapTimes2={lapTimes2}
+              drivers={drivers}
+              fetching={fetching}
+              year={year}
             />
-          </SlideFade>
-        </Flex>
-
-        <Summary
-          cardBg={cardBg}
-          raceId={raceId}
-          driver1={driver1}
-          driver2={driver2}
-          drivers={drivers}
-          fetching={fetching}
-          year={year}
-        />
+          </Box>
+        </Stack>
       </Flex>
     </SlideFade>
   ) : (

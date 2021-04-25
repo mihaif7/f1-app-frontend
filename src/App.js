@@ -15,9 +15,8 @@ function App() {
     <Router>
       <Box d="flex" minH="100vh" flexDirection="column">
         <Header />
-
         <Suspense fallback={<Center flexGrow="1"></Center>}>
-          <Box flexGrow={1}>
+          <Box flexGrow={1} pt={4}>
             <Switch>
               <Route exact path="/seasons" component={Seasons} />
               <Route exact path="/season/:year" component={Races} />
