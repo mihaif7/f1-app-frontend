@@ -117,7 +117,7 @@ const Summary = ({ cardBg, raceId, driver1, driver2, drivers, fetching, year }) 
       p="4"
       overflow="auto"
       minH="150px"
-      maxW="91vw">
+      width={["91vw", "91vw", "91vw", "91vw", "80vw"]}>
       {fastest1 && fastest2 ? (
         <SlideFade in={!fetching}>
           <Table size="sm" colorScheme={tableColor}>
