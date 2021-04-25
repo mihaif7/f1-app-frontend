@@ -43,7 +43,6 @@ export default function Simple() {
   const { colorMode, toggleColorMode } = useColorMode();
   const { ref, inView } = useInView();
 
-  console.log(inView)
   return (
     <>
       <Box

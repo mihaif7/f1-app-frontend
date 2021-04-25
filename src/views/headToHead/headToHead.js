@@ -233,28 +233,27 @@ const HeadToHead = () => {
       </Flex>
     </SlideFade>
   ) : (
-    <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
-      <Stack
-        width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
-        direction={["column", "row"]}
-        spacing="4">
-        <Skeleton height="120px" borderRadius="lg" w="100%" />
-        <Skeleton height="120px" borderRadius="lg" w="100%" />
-      </Stack>
-      <Skeleton
-        mt={4}
-        height="500px"
-        borderRadius="lg"
-        width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
-        mb={4}
-      />
-      <Skeleton
-        height="152px"
-        borderRadius="lg"
-        width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
-        mb={4}
-      />
-    </Flex>
+    <>
+      <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
+        <Stack
+          width={["91vw", "80vw", "80vw", "80vw", "50vw"]}
+          direction="column"
+          spacing="4"
+          justifyContent="center"
+          my={4}>
+          <Stack
+            width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
+            direction={["column", "row"]}
+            spacing="4"></Stack>
+
+          <Skeleton height="120px" borderRadius="lg" w="100%" />
+          <Skeleton height="120px" borderRadius="lg" w="100%" />
+
+          <Skeleton mt={4} height="700px" borderRadius="lg" mb={4} />
+          <Skeleton height="152px" borderRadius="lg" mb={4} />
+        </Stack>
+      </Flex>
+    </>
   );
 };
 
