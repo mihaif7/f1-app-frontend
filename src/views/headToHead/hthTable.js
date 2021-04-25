@@ -100,7 +100,6 @@ const TableRow = ({ res1, res2, year, pit1, pit2 }) => {
 
 const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers, year }) => {
   const [noXSmall] = useMediaQuery("(min-width: 350px)");
-  const [mediumTable] = useMediaQuery("(min-width: 768px)");
   const findDriver = (driverToFind) => {
     const found = drivers.find((driver) => driver.driverId === driverToFind);
     let toReturn;

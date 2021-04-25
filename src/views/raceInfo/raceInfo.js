@@ -137,6 +137,7 @@ const RacesInfo = () => {
             <Stack
               width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
               direction={["column", "row"]}
+              mb={[0, 2]}
               spacing="4">
               <Flex align="center" flexGrow={["1", "0.5"]} bg={cardBg} borderRadius="lg">
                 <Box
@@ -212,7 +213,7 @@ const RacesInfo = () => {
 
             <Box
               align="center"
-              m={2}
+              m={[0, 2]}
               mt={4}
               width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
               borderRadius="lg"

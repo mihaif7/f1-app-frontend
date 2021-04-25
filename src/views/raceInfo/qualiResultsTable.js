@@ -142,7 +142,8 @@ const QualiResultsTable = ({ quali, cardBg }) => {
   return (
     <Box
       align="center"
-      m={2}
+      m={[0, 2]}
+      mt={4}
       width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
       borderRadius="lg"
       borderWidth="0px"
