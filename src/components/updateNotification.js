@@ -9,11 +9,9 @@ const UpdateNotification = () => {
   const onSWUpdate = (registration) => {
     setShowReload(true);
     setWaitingWorker(registration.waiting);
-    console.log("yes")
   };
 
   useEffect(() => {
-    console.log(onSWUpdate);
     serviceWorkerRegistration.register({ onUpdate: onSWUpdate });
   }, []);
 
@@ -23,8 +21,6 @@ const UpdateNotification = () => {
     //eslint-disable-next-line
     window.location.href = window.location.href;
   };
-
-  console.log(showReload, waitingWorker);
 
   return (
     <>
