@@ -22,6 +22,7 @@ const HeadToHead = () => {
   const [lapTimes2, setLapTimes2] = useState();
   const [fetching, setFetching] = useState(false);
   let { year, raceId } = useParams();
+  //
 
   const cardBg = useColorModeValue("gray.100", "whiteAlpha.200");
   const orange = useColorModeValue("orange.100", "yellow.800");
