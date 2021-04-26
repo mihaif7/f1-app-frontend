@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-d
 import "./App.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import UpdateNotification from "./views/components/updateNotification";
+import UpdateNotification from "./components/updateNotification";
 
 const Seasons = React.lazy(() => import("./views/seasons/seasons"));
 const Races = React.lazy(() => import("./views/races/races"));

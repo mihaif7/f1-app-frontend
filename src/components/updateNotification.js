@@ -1,6 +1,6 @@
 import { Box, Button, Slide } from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import * as serviceWorkerRegistration from "../../serviceWorkerRegistration";
+import * as serviceWorkerRegistration from "../serviceWorkerRegistration";
 
 const UpdateNotification = () => {
   const [showReload, setShowReload] = React.useState(false);
@@ -9,9 +9,11 @@ const UpdateNotification = () => {
   const onSWUpdate = (registration) => {
     setShowReload(true);
     setWaitingWorker(registration.waiting);
+    console.log("yes")
   };
 
   useEffect(() => {
+    console.log(onSWUpdate);
     serviceWorkerRegistration.register({ onUpdate: onSWUpdate });
   }, []);
 
@@ -21,6 +23,8 @@ const UpdateNotification = () => {
     //eslint-disable-next-line
     window.location.href = window.location.href;
   };
+
+  console.log(showReload, waitingWorker);
 
   return (
     <>
