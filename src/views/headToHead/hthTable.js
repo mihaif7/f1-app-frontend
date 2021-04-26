@@ -101,7 +101,7 @@ const TableRowSmall = ({ res1, res2, year, pit1, pit2 }) => {
 const SmallTable = ({ findDriver, lapTimes1, lapTimes2, driver1, driver2, year }) => {
   const [noXSmall] = useMediaQuery("(min-width: 350px)");
   return (
-    <Table size="sm" variant="unstyled" my={4}>
+    <Table size="sm" variant="unstyled" my={4} w="100%">
       <Thead>
         <Tr>
           <Th textAlign="right" py={0} pl={noXSmall ? 4 : 0} pr={0}>
@@ -246,7 +246,7 @@ const TableRowBig = ({ res1, res2, year, pit1, pit2 }) => {
 
 const BigTable = ({ findDriver, lapTimes1, lapTimes2, driver1, driver2, year }) => {
   return (
-    <Table size="md" my={4} variant="unstyled">
+    <Table size="md" my={4} variant="unstyled" w="100%">
       <Thead>
         <Tr>
           <Th textAlign="right">#</Th>
@@ -317,6 +317,7 @@ const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers, year }) => 
         align="center"
         borderRadius="lg"
         borderWidth="0px"
+        width="100%"
         borderColor="white"
         overflow="auto">
         {bigTable ? (

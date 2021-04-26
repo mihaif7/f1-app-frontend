@@ -206,7 +206,7 @@ const HeadToHead = () => {
             borderRadius="lg"
             direction="column"
             flexGrow={["1", "0.5"]}>
-            <SlideFade in={!fetching}>
+            <SlideFade in={!fetching} style={{width: "100%"}}>
               <HthTable
                 year={year}
                 drivers={drivers}
