@@ -18,6 +18,7 @@ const UpdateNotification = () => {
   const reloadPage = () => {
     waitingWorker?.postMessage({ type: "SKIP_WAITING" });
     setShowReload(false);
+    //eslint-disable-next-line
     window.location.href = window.location.href;
   };
 
