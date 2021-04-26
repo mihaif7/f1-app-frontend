@@ -20,21 +20,64 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { v4 as uuidv4 } from "uuid";
+import "./team-colors.css";
 
-const TableRow = ({ res, isLargerThan370, cardBg }) => {
+const TableRow = ({ res, isLargerThan370, cardBg, year }) => {
   const { isOpen, onToggle } = useDisclosure();
   const colorDetails = useColorModeValue("orange.100", "yellow.800");
   const smallText = useColorModeValue("gray.600", "whiteAlpha.800");
+  let background;
 
   const positionGained = res.position ? res.grid - res.position : "R";
+
+  switch (res.constructorRef) {
+    case "red_bull":
+      background = "red-bull";
+      break;
+    case "mercedes":
+      background = "mercedes";
+      break;
+    case "mclaren":
+      background = "mclaren";
+      break;
+    case "ferrari":
+      background = "ferrari";
+      break;
+    case "alphatauri":
+      background = "alpha-tauri";
+      break;
+    case "aston_martin":
+      background = "aston-martin";
+      break;
+    case "alfa":
+      background = "alfa-romeo";
+      break;
+    case "williams":
+      background = "williams";
+      break;
+    case "alpine":
+      background = "alpine";
+      break;
+    case "haas":
+      background = "haas";
+      break;
+    default:
+      break;
+  }
+
   return (
     <>
       <Tr onClick={onToggle} bg={cardBg}>
         <Td pr={0} isNumeric>
           {res.positionText}
         </Td>
-        <Td fontWeight="500" whiteSpace="nowrap">
-          {res.code ?? res.surname.substring(0, 3).toUpperCase()}
+        <Td fontWeight="500">
+          <Box d="flex">
+            {year === "2021" && (
+              <Box h="16px" w="5px" borderRadius="lg" className={background} mr={2} />
+            )}
+            {res.code ?? res.surname.substring(0, 3).toUpperCase()}
+          </Box>
         </Td>
         <Td whiteSpace="nowrap" width="100%">
           {res.status === "Finished" ? res.time : res.status}
@@ -123,7 +166,7 @@ const TableRow = ({ res, isLargerThan370, cardBg }) => {
   );
 };
 
-const SmallTable = ({ results, cardBg }) => {
+const SmallTable = ({ results, cardBg, year }) => {
   const [isLargerThan370] = useMediaQuery("(min-width: 370px)");
   return (
     <Table size="sm" variant="unstyled">
@@ -146,6 +189,7 @@ const SmallTable = ({ results, cardBg }) => {
             isLargerThan370={isLargerThan370}
             key={uuidv4()}
             cardBg={cardBg}
+            year={year}
           />
         ))}
       </Tbody>
@@ -165,7 +209,7 @@ const SmallTable = ({ results, cardBg }) => {
   );
 };
 
-const RaceResultsTable = ({ results, cardBg }) => {
+const RaceResultsTable = ({ results, cardBg, year }) => {
   const [isLargerThan750] = useMediaQuery("(min-width: 750px)");
   const [isLargerThan585] = useMediaQuery("(min-width: 585px)");
 
@@ -240,7 +284,7 @@ const RaceResultsTable = ({ results, cardBg }) => {
                 </Tfoot>
               </Table>
             ) : (
-              <SmallTable results={results} cardbg={cardBg} />
+              <SmallTable results={results} cardbg={cardBg} year={year} />
             )}
           </AccordionPanel>
         </AccordionItem>

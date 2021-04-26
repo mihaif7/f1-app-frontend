@@ -238,7 +238,7 @@ const RacesInfo = () => {
             </Box>
 
             {year > 2005 && <QualiResultsTable quali={quali} cardBg={cardBg} />}
-            <RaceResultsTable results={results} cardBg={cardBg} />
+            <RaceResultsTable results={results} cardBg={cardBg} year={year}/>
             <DriversTable driver={driverStandings} cardBg={cardBg} />
             <StandingsTable standings={standings} cardBg={cardBg} />
           </Flex>

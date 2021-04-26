@@ -16,16 +16,62 @@ import {
   Tr,
   useMediaQuery,
 } from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
+import "./team-colors.css";
 
 const TableRow = ({ res }) => {
+  let { year } = useParams();
+  let background;
+
+  switch (res.constructorRef) {
+    case "red_bull":
+      background = "red-bull";
+      break;
+    case "mercedes":
+      background = "mercedes";
+      break;
+    case "mclaren":
+      background = "mclaren";
+      break;
+    case "ferrari":
+      background = "ferrari";
+      break;
+    case "alphatauri":
+      background = "alpha-tauri";
+      break;
+    case "aston_martin":
+      background = "aston-martin";
+      break;
+    case "alfa":
+      background = "alfa-romeo";
+      break;
+    case "williams":
+      background = "williams";
+      break;
+    case "alpine":
+      background = "alpine";
+      break;
+    case "haas":
+      background = "haas";
+      break;
+    default:
+      break;
+  }
   return (
     <>
       <Tr key={res.constructorId}>
-        <Td>{res.position}</Td>
-        <Td fontWeight="500" whiteSpace="nowrap">
-          {res.name}
+        <Td fontWeight="500" whiteSpace="nowrap" pr={0}>
+          {res.position}
         </Td>
-        <Td textAlign="center">
+        <Td fontWeight="500" w="99%">
+          <Box d="flex">
+            {year === "2021" && (
+              <Box h="16px" w="5px" borderRadius="lg" className={background} mr={2} />
+            )}
+            {res.name}
+          </Box>
+        </Td>
+        <Td textAlign="center" whiteSpace="nowrap">
           <Badge borderRadius="full" px="2" colorScheme="orange" minW="37px">
             {res.points}
           </Badge>
@@ -40,9 +86,13 @@ const SmallTable = ({ standings, cardBg }) => {
     <Table size="sm" variant="unstyled">
       <Thead>
         <Tr>
-          <Th isNumeric>#</Th>
+          <Th isNumeric whiteSpace="nowrap" pr={0}>
+            #
+          </Th>
           <Th>Team</Th>
-          <Th textAlign="center">PTS</Th>
+          <Th textAlign="center" whiteSpace="nowrap">
+            PTS
+          </Th>
         </Tr>
       </Thead>
       <Tbody>
@@ -52,9 +102,13 @@ const SmallTable = ({ standings, cardBg }) => {
       </Tbody>
       <Tfoot>
         <Tr>
-          <Th isNumeric>#</Th>
+          <Th isNumeric whiteSpace="nowrap" pr={0}>
+            #
+          </Th>
           <Th>Team</Th>
-          <Th textAlign="center">PTS</Th>
+          <Th textAlign="center" whiteSpace="nowrap">
+            PTS
+          </Th>
         </Tr>
       </Tfoot>
     </Table>
