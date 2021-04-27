@@ -17,46 +17,11 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import "./team-colors.css";
+import "./team-colors.scss";
+import colorLabels from "./utils/colorLabels";
 
 const TableRow = ({ res }) => {
   let { year } = useParams();
-  let background;
-
-  switch (res.constructorRef) {
-    case "red_bull":
-      background = "red-bull";
-      break;
-    case "mercedes":
-      background = "mercedes";
-      break;
-    case "mclaren":
-      background = "mclaren";
-      break;
-    case "ferrari":
-      background = "ferrari";
-      break;
-    case "alphatauri":
-      background = "alpha-tauri";
-      break;
-    case "aston_martin":
-      background = "aston-martin";
-      break;
-    case "alfa":
-      background = "alfa-romeo";
-      break;
-    case "williams":
-      background = "williams";
-      break;
-    case "alpine":
-      background = "alpine";
-      break;
-    case "haas":
-      background = "haas";
-      break;
-    default:
-      break;
-  }
   return (
     <>
       <Tr key={res.constructorId}>
@@ -65,8 +30,14 @@ const TableRow = ({ res }) => {
         </Td>
         <Td fontWeight="500" w="99%">
           <Box d="flex">
-            {year === "2021" && (
-              <Box h="16px" w="5px" borderRadius="lg" className={background} mr={2} />
+            {year > 2013 && (
+              <Box
+                h="16px"
+                w="5px"
+                borderRadius="lg"
+                className={colorLabels(res.constructorRef, year)}
+                mr={2}
+              />
             )}
             {res.name}
           </Box>
@@ -116,6 +87,7 @@ const SmallTable = ({ standings, cardBg }) => {
 };
 
 const StandingsTable = ({ standings, cardBg }) => {
+  let { year } = useParams();
   const [isLargerThan750] = useMediaQuery("(min-width: 750px)");
   const [isLargerThan585] = useMediaQuery("(min-width: 585px)");
 
@@ -160,7 +132,18 @@ const StandingsTable = ({ standings, cardBg }) => {
                       <Tr key={res.constructorId}>
                         <Td isNumeric>{res.position}</Td>
                         <Td fontWeight="500" whiteSpace="nowrap">
-                          {res.name}
+                          <Box d="flex">
+                            {year > 2013 && (
+                              <Box
+                                h="20px"
+                                w="5px"
+                                borderRadius="lg"
+                                className={colorLabels(res.constructorRef, year)}
+                                mr={2}
+                              />
+                            )}
+                            {res.name}
+                          </Box>
                         </Td>
                         <Td textAlign="center">
                           <Badge

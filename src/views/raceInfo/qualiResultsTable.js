@@ -17,46 +17,11 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import "./team-colors.css";
+import "./team-colors.scss";
+import colorLabels from "./utils/colorLabels";
 
 const TableRow = ({ res }) => {
   let { year } = useParams();
-  let background;
-
-  switch (res.constructorRef) {
-    case "red_bull":
-      background = "red-bull";
-      break;
-    case "mercedes":
-      background = "mercedes";
-      break;
-    case "mclaren":
-      background = "mclaren";
-      break;
-    case "ferrari":
-      background = "ferrari";
-      break;
-    case "alphatauri":
-      background = "alpha-tauri";
-      break;
-    case "aston_martin":
-      background = "aston-martin";
-      break;
-    case "alfa":
-      background = "alfa-romeo";
-      break;
-    case "williams":
-      background = "williams";
-      break;
-    case "alpine":
-      background = "alpine";
-      break;
-    case "haas":
-      background = "haas";
-      break;
-    default:
-      break;
-  }
 
   return (
     <>
@@ -66,8 +31,14 @@ const TableRow = ({ res }) => {
         </Td>
         <Td fontWeight="500" px={0}>
           <Box d="flex">
-            {year === "2021" && (
-              <Box h="16px" w="5px" borderRadius="lg" className={background} mr={2} />
+            {year > 2013 && (
+              <Box
+                h="16px"
+                w="5px"
+                borderRadius="lg"
+                className={colorLabels(res.constructorRef, year)}
+                mr={2}
+              />
             )}
             {res.code ?? res.surname.substring(0, 3).toUpperCase()}
           </Box>
@@ -128,6 +99,7 @@ const SmallTable = ({ quali }) => {
 
 const BigTable = ({ quali, cardBg }) => {
   const [isLargerThan750] = useMediaQuery("(min-width: 750px)");
+  let { year } = useParams();
   // console.log(quali);
   return (
     <Table size={isLargerThan750 ? "md" : "sm"}>
@@ -146,7 +118,18 @@ const BigTable = ({ quali, cardBg }) => {
             <Tr key={res.driverId}>
               <Td isNumeric>{res.position}</Td>
               <Td fontWeight="500" whiteSpace="nowrap" px={0}>
-                {`${res.forename} ${res.surname}`}
+                <Box d="flex">
+                  {year > 2013 && (
+                    <Box
+                      h="20px"
+                      w="5px"
+                      borderRadius="lg"
+                      className={colorLabels(res.constructorRef, year)}
+                      mr={2}
+                    />
+                  )}
+                  {`${res.forename} ${res.surname}`}
+                </Box>
               </Td>
               <Td>
                 <Badge borderRadius="full" px="2" colorScheme="yellow">

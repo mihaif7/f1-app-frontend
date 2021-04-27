@@ -20,50 +20,15 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { v4 as uuidv4 } from "uuid";
-import "./team-colors.css";
+import colorLabels from "./utils/colorLabels";
+import "./team-colors.scss";
 
 const TableRow = ({ res, isLargerThan370, cardBg, year }) => {
   const { isOpen, onToggle } = useDisclosure();
   const colorDetails = useColorModeValue("orange.100", "yellow.800");
   const smallText = useColorModeValue("gray.600", "whiteAlpha.800");
-  let background;
 
   const positionGained = res.position ? res.grid - res.position : "R";
-
-  switch (res.constructorRef) {
-    case "red_bull":
-      background = "red-bull";
-      break;
-    case "mercedes":
-      background = "mercedes";
-      break;
-    case "mclaren":
-      background = "mclaren";
-      break;
-    case "ferrari":
-      background = "ferrari";
-      break;
-    case "alphatauri":
-      background = "alpha-tauri";
-      break;
-    case "aston_martin":
-      background = "aston-martin";
-      break;
-    case "alfa":
-      background = "alfa-romeo";
-      break;
-    case "williams":
-      background = "williams";
-      break;
-    case "alpine":
-      background = "alpine";
-      break;
-    case "haas":
-      background = "haas";
-      break;
-    default:
-      break;
-  }
 
   return (
     <>
@@ -73,8 +38,14 @@ const TableRow = ({ res, isLargerThan370, cardBg, year }) => {
         </Td>
         <Td fontWeight="500">
           <Box d="flex">
-            {year === "2021" && (
-              <Box h="16px" w="5px" borderRadius="lg" className={background} mr={2} />
+            {year > 2013 && (
+              <Box
+                h="16px"
+                w="5px"
+                borderRadius="lg"
+                className={colorLabels(res.constructorRef, year)}
+                mr={2}
+              />
             )}
             {res.code ?? res.surname.substring(0, 3).toUpperCase()}
           </Box>
@@ -258,7 +229,20 @@ const RaceResultsTable = ({ results, cardBg, year }) => {
                       <Tr key={uuidv4()} height="55px">
                         <Td isNumeric>{res.positionText}</Td>
                         <Td fontWeight="500" whiteSpace="nowrap">
-                          {isLargerThan585 ? `${res.forename} ${res.surname}` : res.code}
+                          <Box d="flex">
+                            {year > 2013 && (
+                              <Box
+                                h="20px"
+                                w="5px"
+                                borderRadius="lg"
+                                className={colorLabels(res.constructorRef, year)}
+                                mr={2}
+                              />
+                            )}
+                            {isLargerThan585
+                              ? `${res.forename} ${res.surname}`
+                              : res.code}
+                          </Box>
                         </Td>
                         <Td whiteSpace="nowrap">{res.name}</Td>
                         <Td>{res.points}</Td>
