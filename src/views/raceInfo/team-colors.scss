@@ -1,30 +1,37 @@
 .red_bull {
 
   background-color: #00007D;
+  color: #eaeaff;
 
   &.y-2021 {
     background-color: #0600EF !important;
+    color: #d1e8f5;
   }
 
   &.y-2020 {
     background-color: #0600EF !important;
+    color: #d1e8f5;
   }
 
   &.y-2019 {
     background-color: #1E41FF !important;
+    color: #d1e8f5;
   }
 
   &.y-2018 {
     background-color: #00327D !important;
+    color: #dfe6f1 !important;
   }
 
   &.y-2015 {
     background-color: #4F1AAB !important;
+    color: #ece8f3 !important;
   }
 }
 
 .mercedes {
   background-color: #00CFBA;
+  color: #1D4044;
 
   &.y-2021 {
     background-color: #00d2be !important;
@@ -46,31 +53,38 @@
 
 .mclaren {
   background-color: #FF7B08;
+  color: #f7f6e0;
 }
 
 .ferrari {
   background-color: #C30000;
+  color: #f7e8e8;
 
   &.y-2021 {
     background-color: #dc0000 !important;
+    color: #ffd2d2;
   }
 
   &.y-2020 {
     background-color: #DC0000 !important;
+    color: #ffd2d2;
   }
 
   &.y-2019 {
     background-color: #DC0000 !important;
+    color: #ffd2d2;
   }
 
   &.y-2018 {
     background-color: #DC0000 !important;
+    color: #ffd2d2;
   }
 
 }
 
 .aston_martin {
   background-color: #006f62;
+  color: #cfe7e4;
 
   &.y-2021 {
     background-color: #006f62 !important;
@@ -79,6 +93,7 @@
 
 .alpine {
   background-color: #0090ff;
+  color: #ddeffc;
 
   &.y-2021 {
     background-color: #0090ff !important;
@@ -87,6 +102,7 @@
 
 .alphatauri {
   background-color: #2b4562;
+  color: #e3e8ec;
 
   &.y-2021 {
     background-color: #2b4562 !important;
@@ -95,11 +111,13 @@
   &.y-2020 {
     border: 0.5px grey solid;
     background-color: #FFFFFF !important;
+    color: #424040;
   }
 }
 
 .alfa {
   background-color: #900000;
+  color: #f0d8d8;
 
   &.y-2021 {
     background-color: #900000 !important;
@@ -116,15 +134,18 @@
 
 .williams {
   background-color: #FFFFFF;
+  color: #424040;
   border: 0.5px grey solid;
 
   &.y-2021 {
     background-color: #005aff !important;
+    color: #c5d5f3;
     border: 0px
   }
 
   &.y-2020 {
     background-color: #0082FA !important;
+    color: #e5e9f1;
     border: 0px
   }
 
@@ -132,28 +153,34 @@
 
 .haas {
   background-color: #6C0000;
+  color: #f8eaea;
 
   &.y-2021 {
     background-color: #ffffff !important;
+    color: #424040;
     border: 0.5px grey solid;
   }
 
   &.y-2020 {
     background-color: #787878 !important;
+    color: #ececec;
   }
 
   &.y-2019 {
     background-color: #F0D787 !important;
+    color: #3d3722;
     // border: 0.5px grey solid;
   }
 
   &.y-2018 {
     background-color: #5A5A5A !important;
+    color: #e6e6e6;
   }
 }
 
 .racing_point {
   background-color: #F596C8;
+  color: #ffffff;
 
   &.y-2020 {
     background-color: #F596C8 !important;
@@ -166,39 +193,32 @@
 
 .renault {
   background-color: #FFD800;
-
-  &.y-2020 {
-    background-color: #FFF500 !important;
-  }
-
-  &.y-2019 {
-    background-color: #FFF500 !important;
-  }
-
-  &.y-2018 {
-    background-color: #FFF500 !important;
-  }
-
+  color: #2e2700;
 }
 
 .toro_rosso {
   background-color: #0000FF;
+  color: #e8e8fa;
 
   &.y-2019 {
     background-color: #469BFF !important;
+    color: rgb(255, 255, 255) !important;
   }
 
   &.y-2018 {
     background-color: #0032FF !important;
+    color: #dde3fa !important;
   }
 
-  &.y-2015{
+  &.y-2015 {
     background-color: #0005C1 !important;
+    color: #eceffa !important;
   }
 }
 
 .force_india {
   background-color: #FF80C7;
+  color: #ffffff;
 
   &.y-2018 {
     background-color: #F596C8 !important;
@@ -208,6 +228,7 @@
 
 .sauber {
   background-color: #006EFF;
+  color: #e2ebf8;
 
   &.y-2018 {
     background-color: #9B0000 !important;
@@ -220,12 +241,24 @@
 
 .lotus_f1 {
   background-color: #FFB800;
+  color: #332f25;
 }
 
-.marussia{
+.marussia {
   background-color: #6E0000;
+  color: #d8d8d8;
+}
+
+.manor {
+  background-color: #6E0000;
+  color: #d8d8d8;
 }
 
 .caterham {
   background-color: #004225;
+  color: #e4f7ee;
+}
+
+.no-border {
+  border: 0px !important
 }

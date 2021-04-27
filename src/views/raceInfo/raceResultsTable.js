@@ -1,3 +1,4 @@
+import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import {
   Accordion,
   AccordionButton,
@@ -15,20 +16,19 @@ import {
   Thead,
   Tr,
   useDisclosure,
-  useMediaQuery,
-  useColorModeValue,
+  useMediaQuery
 } from "@chakra-ui/react";
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { v4 as uuidv4 } from "uuid";
-import colorLabels from "./utils/colorLabels";
 import "./team-colors.scss";
+import colorLabels from "./utils/colorLabels";
 
 const TableRow = ({ res, isLargerThan370, cardBg, year }) => {
   const { isOpen, onToggle } = useDisclosure();
-  const colorDetails = useColorModeValue("orange.100", "yellow.800");
-  const smallText = useColorModeValue("gray.600", "whiteAlpha.800");
+  // const colorDetails = useColorModeValue("orange.100", "yellow.800");
+  // const smallText = useColorModeValue("gray.600", "whiteAlpha.800");
 
   const positionGained = res.position ? res.grid - res.position : "R";
+  const color = colorLabels(res.constructorRef, year);
 
   return (
     <>
@@ -39,13 +39,7 @@ const TableRow = ({ res, isLargerThan370, cardBg, year }) => {
         <Td fontWeight="500">
           <Box d="flex">
             {year > 2013 && (
-              <Box
-                h="16px"
-                w="5px"
-                borderRadius="lg"
-                className={colorLabels(res.constructorRef, year)}
-                mr={2}
-              />
+              <Box h="16px" w="5px" borderRadius="lg" className={color} mr={2} />
             )}
             {res.code ?? res.surname.substring(0, 3).toUpperCase()}
           </Box>
@@ -66,24 +60,19 @@ const TableRow = ({ res, isLargerThan370, cardBg, year }) => {
           {isOpen ? <MinusIcon /> : <AddIcon />}
         </Td>
       </Tr>
-      <Tr bg={colorDetails} boxShadow="inner">
+      <Tr className={`${color} no-border`} boxShadow="inner">
         <Td colSpan={isLargerThan370 ? 6 : 5} p={0} borderBottomWidth={0}>
           <Collapse in={isOpen} animateOpacity>
             <Box m={3} d="flex" flexDir="column">
               <Box p={2} d="flex" justifyContent="space-between">
                 <Box>
-                  <Text fontSize="sm" fontWeight="semibold" pb={1} color={smallText}>
+                  <Text fontSize="sm" fontWeight="semibold" pb={1}>
                     Name
                   </Text>
                   <Text fontSize="sm">{`${res.forename} ${res.surname}`}</Text>
                 </Box>
                 <Box>
-                  <Text
-                    fontSize="sm"
-                    fontWeight="semibold"
-                    pb={1}
-                    color={smallText}
-                    textAlign="right">
+                  <Text fontSize="sm" fontWeight="semibold" pb={1} textAlign="right">
                     Constructor
                   </Text>
                   <Text fontSize="sm" textAlign="right">
@@ -94,13 +83,13 @@ const TableRow = ({ res, isLargerThan370, cardBg, year }) => {
               {res.fastestLapTime && (
                 <Box p={2} d="flex" justifyContent="space-between">
                   <Box>
-                    <Text fontSize="sm" fontWeight="semibold" pb={1} color={smallText}>
+                    <Text fontSize="sm" fontWeight="semibold" pb={1}>
                       Fastest Lap
                     </Text>
                     <Text fontSize="sm">{`Lap ${res.fastestLap}`}</Text>
                   </Box>
                   <Box>
-                    <Text fontSize="sm" fontWeight="semibold" pb={1} color={smallText}>
+                    <Text fontSize="sm" fontWeight="semibold" pb={1}>
                       Fastest Lap Time
                     </Text>
                     <Text fontSize="sm" textAlign="right">
@@ -111,18 +100,18 @@ const TableRow = ({ res, isLargerThan370, cardBg, year }) => {
               )}
               <Box p={2} d="flex" justifyContent="space-between">
                 <Box>
-                  <Text fontSize="sm" fontWeight="semibold" pb={1} color={smallText}>
+                  <Text fontSize="sm" fontWeight="semibold" pb={1}>
                     Start Position
                   </Text>
                   <Text fontSize="sm">{`P${res.grid}`}</Text>
                 </Box>
                 <Box>
-                  <Text fontSize="sm" fontWeight="semibold" pb={1} color={smallText}>
+                  <Text fontSize="sm" fontWeight="semibold" pb={1}>
                     Positions gained
                   </Text>
                   <Text
                     fontSize="sm"
-                    color={positionGained > -1 ? "green.500" : "red.500"}
+                    // color={positionGained > -1 ? "green.500" : "red.500"}
                     textAlign="right"
                     fontWeight="500">
                     {positionGained > 0 ? `+${positionGained}` : positionGained}
