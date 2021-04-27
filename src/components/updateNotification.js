@@ -8,17 +8,11 @@ const UpdateNotification = () => {
 
   const onSWUpdate = (registration) => {
     setShowReload(true);
-    console.log(registration)
     setWaitingWorker(registration.waiting);
   };
 
   useEffect(() => {
     serviceWorkerRegistration.register({ onUpdate: onSWUpdate });
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.ready.then((value) => {
-        console.log(value.waiting !== null);
-      });
-    }
   }, []);
 
   const reloadPage = () => {
