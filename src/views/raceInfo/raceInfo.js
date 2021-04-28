@@ -140,7 +140,7 @@ const RacesInfo = () => {
               direction={["column", "column", "column", "row", "row"]}
               mb={2}
               spacing="4">
-              <Flex align="center" bg={cardBg} borderRadius="lg">
+              <Flex align="center" bg={cardBg} borderRadius="lg" flex="1 1 33%">
                 <Box
                   p="6"
                   d="flex"
@@ -174,7 +174,7 @@ const RacesInfo = () => {
                   </Box>
                 </Box>
               </Flex>
-              <Flex align="center" bg={orange} borderRadius="lg">
+              <Flex align="center" bg={orange} borderRadius="lg" flex="1 1 33%">
                 <Box
                   p="6"
                   d="flex"
@@ -211,7 +211,7 @@ const RacesInfo = () => {
                   </Box>
                 </Box>
               </Flex>
-              <Flex align="center" borderRadius="lg" flex="1">
+              <Flex align="center" borderRadius="lg" flex="1 1 33%">
                 <Button
                   d="flex"
                   w="100%"
