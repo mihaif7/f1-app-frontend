@@ -143,7 +143,7 @@ const BigTable = ({ quali, cardBg }) => {
                   {res.q2}
                 </Badge>
               </Td>
-              <Td textAlign="center" py={2} pl={2} py={2}>
+              <Td textAlign="center" py={2} pl={2}>
                 <Badge borderRadius="full" px="2" colorScheme="purple">
                   {res.q3}
                 </Badge>
