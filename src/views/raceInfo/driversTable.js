@@ -18,8 +18,8 @@ import {
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import "./team-colors.scss";
-import colorLabels from "./utils/colorLabels";
+import "./../team-colors.scss";
+import { colorLabels } from "../../utils/colorLabels";
 
 const TableRow = ({ res }) => {
   let { year } = useParams();
@@ -124,7 +124,7 @@ const DriversTable = ({ driver, cardBg }) => {
                 <Thead bg={cardBg}>
                   <Tr>
                     <Th isNumeric>#</Th>
-                    <Th>Driver</Th>
+                    <Th w="99%">Driver</Th>
                     <Th textAlign="center">PTS</Th>
                   </Tr>
                 </Thead>

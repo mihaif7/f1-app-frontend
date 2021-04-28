@@ -17,8 +17,8 @@ import {
   useMediaQuery,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
-import "./team-colors.scss";
-import colorLabels from "./utils/colorLabels";
+import "./../team-colors.scss";
+import { colorLabels } from "../../utils/colorLabels";
 
 const TableRow = ({ res }) => {
   let { year } = useParams();
@@ -122,7 +122,7 @@ const StandingsTable = ({ standings, cardBg }) => {
                 <Thead bg={cardBg}>
                   <Tr>
                     <Th isNumeric>#</Th>
-                    <Th>Team</Th>
+                    <Th w="99%">Team</Th>
                     <Th textAlign="center">PTS</Th>
                   </Tr>
                 </Thead>

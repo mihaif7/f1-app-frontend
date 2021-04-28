@@ -19,8 +19,8 @@ import {
   useMediaQuery
 } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
-import "./team-colors.scss";
-import colorLabels from "./utils/colorLabels";
+import "./../team-colors.scss";
+import {colorLabels} from "../../utils/colorLabels";
 
 const TableRow = ({ res, isLargerThan370, cardBg, year }) => {
   const { isOpen, onToggle } = useDisclosure();
@@ -205,7 +205,7 @@ const RaceResultsTable = ({ results, cardBg, year }) => {
                   <Tr>
                     <Th isNumeric>#</Th>
                     <Th>Driver</Th>
-                    <Th>Team</Th>
+                    <Th w="99%">Team</Th>
                     <Th>PTS</Th>
                     <Th isNumeric>+/-</Th>
                     <Th isNumeric>Laps</Th>

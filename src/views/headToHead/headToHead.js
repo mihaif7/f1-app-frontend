@@ -6,12 +6,15 @@ import {
   SlideFade,
   Stack,
   useColorModeValue,
+  useColorMode,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import HthTable from "./hthTable";
 import Summary from "./summary";
+import { colorHtHSelect } from "../../utils/colorLabels";
+import "./../team-colors.scss";
 
 const HeadToHead = () => {
   const [raceInfo, setRaceInfo] = useState();
@@ -22,7 +25,7 @@ const HeadToHead = () => {
   const [lapTimes2, setLapTimes2] = useState();
   const [fetching, setFetching] = useState(false);
   let { year, raceId } = useParams();
-  //
+  const { colorMode } = useColorMode();
 
   const cardBg = useColorModeValue("gray.100", "whiteAlpha.200");
   const orange = useColorModeValue("orange.100", "yellow.800");
@@ -165,13 +168,23 @@ const HeadToHead = () => {
                   onChange={handleChange}
                   pr={1}
                   variant="filled"
-                  bg={orange}>
+                  rootProps={
+                    year > 2013 && {
+                      className: "left-select " + colorHtHSelect(driver1, drivers, year),
+                    }
+                  }
+                  fontWeight={500}
+                  className={colorHtHSelect(driver1, drivers, year)}
+                  bg={year <= 2013 && orange}>
                   {drivers.map((driver) => {
                     return (
                       <option
                         value={driver.driverId}
                         key={driver.driverId}
-                        disabled={driver.driverId === driver2}>
+                        disabled={driver.driverId === driver2}
+                        className={
+                          colorMode === "light" ? "drop-text-light" : "drop-text-dark"
+                        }>
                         {year > 2013
                           ? `#${driver.number} ${driver.code}`
                           : driver.code ?? driver.surname.substring(0, 3).toUpperCase()}
@@ -184,13 +197,23 @@ const HeadToHead = () => {
                   onChange={handleChange2}
                   pl={1}
                   variant="filled"
-                  bg={orange}>
+                  rootProps={
+                    year > 2013 && {
+                      className: "right-select " + colorHtHSelect(driver2, drivers, year),
+                    }
+                  }
+                  fontWeight={500}
+                  className={colorHtHSelect(driver2, drivers, year)}
+                  bg={year <= 2013 && orange}>
                   {drivers.map((driver) => {
                     return (
                       <option
                         value={driver.driverId}
                         key={driver.driverId}
-                        disabled={driver.driverId === driver1}>
+                        disabled={driver.driverId === driver1}
+                        className={
+                          colorMode === "light" ? "drop-text-light" : "drop-text-dark"
+                        }>
                         {year > 2013
                           ? `#${driver.number} ${driver.code}`
                           : driver.code ?? driver.surname.substring(0, 3).toUpperCase()}
@@ -207,7 +230,7 @@ const HeadToHead = () => {
             borderRadius="lg"
             direction="column"
             flexGrow={["1", "0.5"]}>
-            <SlideFade in={!fetching} style={{width: "100%"}}>
+            <SlideFade in={!fetching} style={{ width: "100%" }}>
               <HthTable
                 year={year}
                 drivers={drivers}

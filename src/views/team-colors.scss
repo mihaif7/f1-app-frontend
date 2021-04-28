@@ -1,11 +1,11 @@
 .red_bull {
 
-  background-color: #00007D;
+  background-color: #00007D !important;
   color: #eaeaff;
 
   &.y-2021 {
-    background-color: #0600EF !important;
-    color: #d1e8f5;
+    background-color: #211da3 !important;
+    color: #ecf3f7;
   }
 
   &.y-2020 {
@@ -30,7 +30,7 @@
 }
 
 .mercedes {
-  background-color: #00CFBA;
+  background-color: #00CFBA !important;
   color: #1D4044;
 
   &.y-2021 {
@@ -52,12 +52,12 @@
 }
 
 .mclaren {
-  background-color: #FF7B08;
-  color: #f7f6e0;
+  background-color: #FF7B08 !important;
+  color: #f8f7ea;
 }
 
 .ferrari {
-  background-color: #C30000;
+  background-color: #C30000 !important;
   color: #f7e8e8;
 
   &.y-2021 {
@@ -83,8 +83,8 @@
 }
 
 .aston_martin {
-  background-color: #006f62;
-  color: #cfe7e4;
+  background-color: #006f62 !important;
+  color: #ffffff;
 
   &.y-2021 {
     background-color: #006f62 !important;
@@ -101,7 +101,7 @@
 }
 
 .alphatauri {
-  background-color: #2b4562;
+  background-color: #2b4562 !important;
   color: #e3e8ec;
 
   &.y-2021 {
@@ -116,7 +116,7 @@
 }
 
 .alfa {
-  background-color: #900000;
+  background-color: #900000 !important;
   color: #f0d8d8;
 
   &.y-2021 {
@@ -133,13 +133,13 @@
 }
 
 .williams {
-  background-color: #FFFFFF;
+  background-color: #FFFFFF !important;
   color: #424040;
   border: 0.5px grey solid;
 
   &.y-2021 {
     background-color: #005aff !important;
-    color: #c5d5f3;
+    color: #e8effc;
     border: 0px
   }
 
@@ -152,7 +152,7 @@
 }
 
 .haas {
-  background-color: #6C0000;
+  background-color: #6C0000 !important;
   color: #f8eaea;
 
   &.y-2021 {
@@ -179,7 +179,7 @@
 }
 
 .racing_point {
-  background-color: #F596C8;
+  background-color: #F596C8 !important;
   color: #ffffff;
 
   &.y-2020 {
@@ -192,12 +192,12 @@
 }
 
 .renault {
-  background-color: #FFD800;
+  background-color: #FFD800 !important;
   color: #2e2700;
 }
 
 .toro_rosso {
-  background-color: #0000FF;
+  background-color: #0000FF !important;
   color: #e8e8fa;
 
   &.y-2019 {
@@ -217,7 +217,7 @@
 }
 
 .force_india {
-  background-color: #FF80C7;
+  background-color: #FF80C7 !important;
   color: #ffffff;
 
   &.y-2018 {
@@ -227,7 +227,7 @@
 }
 
 .sauber {
-  background-color: #006EFF;
+  background-color: #006EFF !important;
   color: #e2ebf8;
 
   &.y-2018 {
@@ -240,25 +240,49 @@
 }
 
 .lotus_f1 {
-  background-color: #FFB800;
+  background-color: #FFB800 !important;
   color: #332f25;
 }
 
 .marussia {
-  background-color: #6E0000;
+  background-color: #6E0000 !important;
   color: #d8d8d8;
 }
 
 .manor {
-  background-color: #6E0000;
+  background-color: #6E0000 !important;
   color: #d8d8d8;
 }
 
 .caterham {
-  background-color: #004225;
+  background-color: #004225 !important;
   color: #e4f7ee;
 }
 
 .no-border {
   border: 0px !important
+}
+
+.drop-text-light {
+  color: #1A202C;
+  font-weight: 500;
+}
+
+.drop-text-dark {
+  color: #EEEFF0;
+  font-weight: 500;
+}
+
+.right-select {
+  margin-left: 4px;
+  border-radius: 0.5rem;
+  padding-left: 0px;
+  border: 0px !important;
+}
+
+.left-select {
+  margin-right: 4px;
+  border-radius: 0.5rem;
+  padding-right: 0px;
+  border: 0px !important;
 }
