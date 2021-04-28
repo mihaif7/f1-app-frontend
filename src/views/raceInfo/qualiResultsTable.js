@@ -186,7 +186,7 @@ const QualiResultsTable = ({ quali, cardBg }) => {
             <AccordionButton
               _focus={{ boxShadow: "none !important" }}
               _hover={{ background: cardBg }}>
-              <Box>
+              <Box flex="1">
                 <Text fontSize="xl" fontWeight="semibold" textAlign="left">
                   Qualifying
                 </Text>
