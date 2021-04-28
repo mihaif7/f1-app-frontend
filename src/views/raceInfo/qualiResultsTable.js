@@ -172,8 +172,8 @@ const QualiResultsTable = ({ quali, cardBg }) => {
       flexGrow={1}
       align="center">
       {isLargerThan585 ? (
-        <Box h="100%" d="flex" flexDir="column">
-          <Box flex="1" px="6" py="2">
+        <Box h="100%">
+          <Box px="6" py="2">
             <Text fontSize="xl" fontWeight="semibold" textAlign="left">
               Qualifying
             </Text>
@@ -186,7 +186,7 @@ const QualiResultsTable = ({ quali, cardBg }) => {
             <AccordionButton
               _focus={{ boxShadow: "none !important" }}
               _hover={{ background: cardBg }}>
-              <Box flex="1">
+              <Box>
                 <Text fontSize="xl" fontWeight="semibold" textAlign="left">
                   Qualifying
                 </Text>
