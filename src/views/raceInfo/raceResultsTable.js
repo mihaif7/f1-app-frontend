@@ -16,11 +16,11 @@ import {
   Thead,
   Tr,
   useDisclosure,
-  useMediaQuery
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
 import "./../team-colors.scss";
-import {colorLabels} from "../../utils/colorLabels";
+import { colorLabels } from "../../utils/colorLabels";
 
 const TableRow = ({ res, isLargerThan370, cardBg, year }) => {
   const { isOpen, onToggle } = useDisclosure();
@@ -176,8 +176,6 @@ const RaceResultsTable = ({ results, cardBg, year }) => {
   return (
     <Box
       align="center"
-      m={[0, 2]}
-      mt={4}
       width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
       borderRadius="lg"
       borderWidth="0px"
@@ -185,83 +183,88 @@ const RaceResultsTable = ({ results, cardBg, year }) => {
       overflow="hidden"
       bg={cardBg}
       pt={2}
-      pb={2}>
-      <Accordion allowToggle>
-        <AccordionItem borderTopWidth="0px" _last={{ borderBottomWidth: "0px" }}>
-          <AccordionButton
-            _focus={{ boxShadow: "none !important" }}
-            _hover={{ background: cardBg }}>
-            <Box flex="1">
-              <Text fontSize="xl" fontWeight="semibold" textAlign="left">
-                Results
-              </Text>
-            </Box>
-            <AccordionIcon />
-          </AccordionButton>
-          <AccordionPanel px={0} pb={0}>
-            {isLargerThan585 ? (
-              <Table size={isLargerThan750 ? "md" : "sm"}>
-                <Thead bg={cardBg}>
-                  <Tr>
-                    <Th isNumeric>#</Th>
-                    <Th>Driver</Th>
-                    <Th w="99%">Team</Th>
-                    <Th>PTS</Th>
-                    <Th isNumeric>+/-</Th>
-                    <Th isNumeric>Laps</Th>
+      pb={[2, 4]}
+      my={2}>
+      {isLargerThan585 ? (
+        <>
+          <Box flex="1" px="6" py="2">
+            <Text fontSize="xl" fontWeight="semibold" textAlign="left">
+              Results
+            </Text>
+          </Box>
+
+          <Table size={isLargerThan750 ? "md" : "sm"}>
+            <Thead bg={cardBg}>
+              <Tr>
+                <Th isNumeric>#</Th>
+                <Th pl={0}>Driver</Th>
+                <Th w="99%">Team</Th>
+                <Th>PTS</Th>
+                <Th isNumeric>+/-</Th>
+                <Th isNumeric>Laps</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {results.map((res) => {
+                const positionGained = res.position ? res.grid - res.position : "R";
+                return (
+                  <Tr key={uuidv4()}>
+                    <Td isNumeric py={2}>
+                      {res.positionText}
+                    </Td>
+                    <Td fontWeight="500" whiteSpace="nowrap" py={2} pl={0}>
+                      <Box d="flex">
+                        {year > 2013 && (
+                          <Box
+                            h="20px"
+                            w="5px"
+                            borderRadius="lg"
+                            className={colorLabels(res.constructorRef, year)}
+                            mr={2}
+                          />
+                        )}
+                        {isLargerThan585 ? `${res.forename} ${res.surname}` : res.code}
+                      </Box>
+                    </Td>
+                    <Td whiteSpace="nowrap" py={2}>
+                      {res.name}
+                    </Td>
+                    <Td py={2}>{res.points}</Td>
+                    <Td
+                      isNumeric
+                      color={positionGained > -1 ? "green.500" : "red.500"}
+                      py={2}
+                      fontWeight="500">
+                      {positionGained > 0 ? `+${positionGained}` : positionGained}
+                    </Td>
+                    <Td isNumeric py={2}>
+                      {res.laps}
+                    </Td>
                   </Tr>
-                </Thead>
-                <Tbody>
-                  {results.map((res) => {
-                    const positionGained = res.grid - res.position;
-                    return (
-                      <Tr key={uuidv4()} height="55px">
-                        <Td isNumeric>{res.positionText}</Td>
-                        <Td fontWeight="500" whiteSpace="nowrap">
-                          <Box d="flex">
-                            {year > 2013 && (
-                              <Box
-                                h="20px"
-                                w="5px"
-                                borderRadius="lg"
-                                className={colorLabels(res.constructorRef, year)}
-                                mr={2}
-                              />
-                            )}
-                            {isLargerThan585
-                              ? `${res.forename} ${res.surname}`
-                              : res.code}
-                          </Box>
-                        </Td>
-                        <Td whiteSpace="nowrap">{res.name}</Td>
-                        <Td>{res.points}</Td>
-                        <Td
-                          isNumeric
-                          color={positionGained > -1 ? "green.500" : "red.500"}>
-                          {positionGained > 0 ? `+${positionGained}` : positionGained}
-                        </Td>
-                        <Td isNumeric>{res.laps}</Td>
-                      </Tr>
-                    );
-                  })}
-                </Tbody>
-                <Tfoot>
-                  <Tr>
-                    <Th isNumeric>#</Th>
-                    <Th>Driver</Th>
-                    <Th>Team</Th>
-                    <Th>PTS</Th>
-                    <Th isNumeric>+/-</Th>
-                    <Th isNumeric>Laps</Th>
-                  </Tr>
-                </Tfoot>
-              </Table>
-            ) : (
+                );
+              })}
+            </Tbody>
+          </Table>
+        </>
+      ) : (
+        <Accordion allowToggle>
+          <AccordionItem borderTopWidth="0px" _last={{ borderBottomWidth: "0px" }}>
+            <AccordionButton
+              _focus={{ boxShadow: "none !important" }}
+              _hover={{ background: cardBg }}>
+              <Box flex="1">
+                <Text fontSize="xl" fontWeight="semibold" textAlign="left">
+                  Results
+                </Text>
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel px={0} pb={0}>
               <SmallTable results={results} cardbg={cardBg} year={year} />
-            )}
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
+      )}
     </Box>
   );
 };

@@ -96,84 +96,81 @@ const DriversTable = ({ driver, cardBg }) => {
   return (
     <Box
       align="center"
-      m={[0, 2]}
-      mt={4}
-      width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
       borderRadius="lg"
       borderWidth="0px"
       borderColor="white"
       overflow="hidden"
       bg={cardBg}
       pt={2}
-      pb={2}>
-      <Accordion allowToggle>
-        <AccordionItem borderTopWidth="0px" _last={{ borderBottomWidth: "0px" }}>
-          <AccordionButton
-            _focus={{ boxShadow: "none !important" }}
-            _hover={{ background: cardBg }}>
-            <Box flex="1">
-              <Text fontSize="xl" fontWeight="semibold" textAlign="left">
-                Drivers
-              </Text>
-            </Box>
-            <AccordionIcon />
-          </AccordionButton>
-          <AccordionPanel px={0} pb={0} overflow="auto">
-            {isLargerThan585 ? (
-              <Table size={isLargerThan750 ? "md" : "sm"}>
-                <Thead bg={cardBg}>
-                  <Tr>
-                    <Th isNumeric>#</Th>
-                    <Th w="99%">Driver</Th>
-                    <Th textAlign="center">PTS</Th>
+      pb={[2, 4]}>
+      {isLargerThan585 ? (
+        <>
+          <Box flex="1" px="6" py="2">
+            <Text fontSize="xl" fontWeight="semibold" textAlign="left">
+              Drivers
+            </Text>
+          </Box>
+          <Table size={isLargerThan750 ? "md" : "sm"}>
+            <Thead bg={cardBg}>
+              <Tr>
+                <Th isNumeric>#</Th>
+                <Th w="99%" pl={0}>
+                  Driver
+                </Th>
+                <Th textAlign="center">PTS</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {driver.map((res) => {
+                return (
+                  <Tr key={res.driverId}>
+                    <Td isNumeric py={2}>
+                      {res.position}
+                    </Td>
+                    <Td fontWeight="500" whiteSpace="nowrap" py={2} pl={0}>
+                      <Box d="flex">
+                        {year > 2013 && (
+                          <Box
+                            h="20px"
+                            w="5px"
+                            borderRadius="lg"
+                            className={colorLabels(res.constructorRef, year)}
+                            mr={2}
+                          />
+                        )}
+                        {`${res.forename} ${res.surname}`}
+                      </Box>
+                    </Td>
+                    <Td textAlign="center" py={2}>
+                      <Badge borderRadius="full" px="2" colorScheme="orange" minW="37px">
+                        {res.points}
+                      </Badge>
+                    </Td>
                   </Tr>
-                </Thead>
-                <Tbody>
-                  {driver.map((res) => {
-                    return (
-                      <Tr key={res.driverId}>
-                        <Td isNumeric>{res.position}</Td>
-                        <Td fontWeight="500" whiteSpace="nowrap">
-                          <Box d="flex">
-                            {year > 2013 && (
-                              <Box
-                                h="20px"
-                                w="5px"
-                                borderRadius="lg"
-                                className={colorLabels(res.constructorRef, year)}
-                                mr={2}
-                              />
-                            )}
-                            {`${res.forename} ${res.surname}`}
-                          </Box>
-                        </Td>
-                        <Td textAlign="center">
-                          <Badge
-                            borderRadius="full"
-                            px="2"
-                            colorScheme="orange"
-                            minW="37px">
-                            {res.points}
-                          </Badge>
-                        </Td>
-                      </Tr>
-                    );
-                  })}
-                </Tbody>
-                <Tfoot>
-                  <Tr>
-                    <Th isNumeric>#</Th>
-                    <Th>Driver</Th>
-                    <Th textAlign="center">PTS</Th>
-                  </Tr>
-                </Tfoot>
-              </Table>
-            ) : (
+                );
+              })}
+            </Tbody>
+          </Table>
+        </>
+      ) : (
+        <Accordion allowToggle>
+          <AccordionItem borderTopWidth="0px" _last={{ borderBottomWidth: "0px" }}>
+            <AccordionButton
+              _focus={{ boxShadow: "none !important" }}
+              _hover={{ background: cardBg }}>
+              <Box flex="1">
+                <Text fontSize="xl" fontWeight="semibold" textAlign="left">
+                  Drivers
+                </Text>
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel px={0} pb={0} overflow="auto">
               <SmallTable driver={driver} cardBg={cardBg} />
-            )}
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
+      )}
     </Box>
   );
 };

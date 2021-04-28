@@ -8,7 +8,7 @@ const RaceCard = ({ race, history, year }) => {
   const { ref, inView } = useInView();
   return (
     <SlideFade initialScale={0.9} in={inView}>
-      <Flex align="center" m={["2", "2", "2", "4"]} ref={ref}>
+      <Flex align="center" m={2} ref={ref}>
         <Button
           d="flex"
           height="110px"

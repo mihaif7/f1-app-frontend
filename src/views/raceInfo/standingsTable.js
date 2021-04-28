@@ -92,86 +92,88 @@ const StandingsTable = ({ standings, cardBg }) => {
   const [isLargerThan585] = useMediaQuery("(min-width: 585px)");
 
   return (
-    <Box
-      align="center"
-      m={[0, 2]}
-      mt={4}
-      width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
-      borderRadius="lg"
-      borderWidth="0px"
-      borderColor="white"
-      overflow="hidden"
-      bg={cardBg}
-      pt={2}
-      pb={2}>
-      <Accordion allowToggle>
-        <AccordionItem borderTopWidth="0px" _last={{ borderBottomWidth: "0px" }}>
-          <AccordionButton
-            _focus={{ boxShadow: "none !important" }}
-            _hover={{ background: cardBg }}>
-            <Box flex="1">
+    <Box align="center" overflow="hidden">
+      <Box
+        borderRadius="lg"
+        borderWidth="0px"
+        borderColor="white"
+        bg={cardBg}
+        pt={2}
+        pb={[2, 4]}>
+        {isLargerThan585 ? (
+          <>
+            <Box flex="1" px="6" py="2">
               <Text fontSize="xl" fontWeight="semibold" textAlign="left">
                 Constructors
               </Text>
             </Box>
-            <AccordionIcon />
-          </AccordionButton>
-          <AccordionPanel px={0} pb={0} overflow="auto">
-            {isLargerThan585 ? (
-              <Table size={isLargerThan750 ? "md" : "sm"}>
-                <Thead bg={cardBg}>
-                  <Tr>
-                    <Th isNumeric>#</Th>
-                    <Th w="99%">Team</Th>
-                    <Th textAlign="center">PTS</Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  {standings.map((res) => {
-                    return (
-                      <Tr key={res.constructorId}>
-                        <Td isNumeric>{res.position}</Td>
-                        <Td fontWeight="500" whiteSpace="nowrap">
-                          <Box d="flex">
-                            {year > 2013 && (
-                              <Box
-                                h="20px"
-                                w="5px"
-                                borderRadius="lg"
-                                className={colorLabels(res.constructorRef, year)}
-                                mr={2}
-                              />
-                            )}
-                            {res.name}
-                          </Box>
-                        </Td>
-                        <Td textAlign="center">
-                          <Badge
-                            borderRadius="full"
-                            px="2"
-                            colorScheme="orange"
-                            minW="37px">
-                            {res.points}
-                          </Badge>
-                        </Td>
-                      </Tr>
-                    );
-                  })}
-                </Tbody>
-                <Tfoot bg={cardBg}>
-                  <Tr>
-                    <Th isNumeric>#</Th>
-                    <Th>Team</Th>
-                    <Th textAlign="center">PTS</Th>
-                  </Tr>
-                </Tfoot>
-              </Table>
-            ) : (
-              <SmallTable standings={standings} cardBg={cardBg} />
-            )}
-          </AccordionPanel>
-        </AccordionItem>
-      </Accordion>
+
+            <Table size={isLargerThan750 ? "md" : "sm"}>
+              <Thead bg={cardBg}>
+                <Tr>
+                  <Th isNumeric>#</Th>
+                  <Th w="99%" pl={0}>
+                    Team
+                  </Th>
+                  <Th textAlign="center">PTS</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {standings.map((res) => {
+                  return (
+                    <Tr key={res.constructorId}>
+                      <Td isNumeric py={2}>
+                        {res.position}
+                      </Td>
+                      <Td fontWeight="500" whiteSpace="nowrap" py={2} pl={0}>
+                        <Box d="flex">
+                          {year > 2013 && (
+                            <Box
+                              h="20px"
+                              w="5px"
+                              borderRadius="lg"
+                              className={colorLabels(res.constructorRef, year)}
+                              mr={2}
+                            />
+                          )}
+                          {res.name}
+                        </Box>
+                      </Td>
+                      <Td textAlign="center" py={2}>
+                        <Badge
+                          borderRadius="full"
+                          px="2"
+                          colorScheme="orange"
+                          minW="37px">
+                          {res.points}
+                        </Badge>
+                      </Td>
+                    </Tr>
+                  );
+                })}
+              </Tbody>
+            </Table>
+          </>
+        ) : (
+          <Accordion allowToggle>
+            <AccordionItem borderTopWidth="0px" _last={{ borderBottomWidth: "0px" }}>
+              <AccordionButton
+                _focus={{ boxShadow: "none !important" }}
+                _hover={{ background: cardBg }}>
+                <Box flex="1">
+                  <Text fontSize="xl" fontWeight="semibold" textAlign="left">
+                    Constructors
+                  </Text>
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+              <AccordionPanel px={0} pb={0} overflow="auto">
+                <SmallTable standings={standings} cardBg={cardBg} />
+              </AccordionPanel>
+            </AccordionItem>
+          </Accordion>
+        )}
+      </Box>
     </Box>
   );
 };

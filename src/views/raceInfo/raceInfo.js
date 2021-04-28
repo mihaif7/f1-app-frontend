@@ -8,6 +8,7 @@ import {
   Stack,
   Text,
   useColorModeValue,
+  VStack,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -28,6 +29,8 @@ const RacesInfo = () => {
 
   const cardBg = useColorModeValue("gray.100", "whiteAlpha.200");
   const orange = useColorModeValue("orange.100", "yellow.800");
+  const hthButton = useColorModeValue("green.100", "green.700");
+  const hthButtonHover = useColorModeValue("green.200", "green.800");
   const smallText = useColorModeValue("gray.600", "whiteAlpha.600");
   const bigText = useColorModeValue("grey.200", "whiteAlpha.900");
 
@@ -136,10 +139,10 @@ const RacesInfo = () => {
           <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
             <Stack
               width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
-              direction={["column", "row"]}
-              mb={[0, 2]}
+              direction={["column", "column", "column", "row", "row"]}
+              mb={2}
               spacing="4">
-              <Flex align="center" flexGrow={["1", "0.5"]} bg={cardBg} borderRadius="lg">
+              <Flex align="center" bg={cardBg} borderRadius="lg">
                 <Box
                   p="6"
                   d="flex"
@@ -167,12 +170,13 @@ const RacesInfo = () => {
                     letterSpacing="wide"
                     fontSize="xs"
                     color={smallText}
-                    mt={2}>
+                    mt={2}
+                    textTransform="uppercase">
                     Date: {raceInfo.date}
                   </Box>
                 </Box>
               </Flex>
-              <Flex align="center" flexGrow={["1", "0.5"]} bg={orange} borderRadius="lg">
+              <Flex align="center" bg={orange} borderRadius="lg">
                 <Box
                   p="6"
                   d="flex"
@@ -209,38 +213,46 @@ const RacesInfo = () => {
                   </Box>
                 </Box>
               </Flex>
+              <Flex align="center" borderRadius="lg" flex="1">
+                <Button
+                  d="flex"
+                  w="100%"
+                  h="100%"
+                  py={4}
+                  onClick={() => {
+                    history.push(`/season/${year}/round/${raceId}/headtohead`);
+                  }}
+                  background={hthButton}
+                  _hover={{ backgroundColor: hthButtonHover }}
+                  _active={{ backgroundColor: hthButtonHover }}>
+                  <Text
+                    fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
+                    fontWeight="semibold"
+                    textAlign="left">
+                    Head to head
+                  </Text>
+
+                  {/* <ExternalLinkIcon /> */}
+                </Button>
+              </Flex>
             </Stack>
 
-            <Box
-              align="center"
-              m={[0, 2]}
-              mt={4}
+            <RaceResultsTable results={results} cardBg={cardBg} year={year} />
+
+            <Stack
               width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
-              borderRadius="lg"
-              borderWidth="0px"
-              borderColor="white"
-              overflow="hidden"
-              alignItems="center">
-              <Button
-                d="flex"
-                w="100%"
-                height="64px"
-                py={4}
-                onClick={() => {
-                  history.push(`/season/${year}/round/${raceId}/headtohead`);
-                }}>
-                <Text fontSize="xl" fontWeight="semibold" textAlign="left" flex="1">
-                  Head to head
-                </Text>
-
-                <ExternalLinkIcon />
-              </Button>
-            </Box>
-
-            {year > 2005 && <QualiResultsTable quali={quali} cardBg={cardBg} />}
-            <RaceResultsTable results={results} cardBg={cardBg} year={year}/>
-            <DriversTable driver={driverStandings} cardBg={cardBg} />
-            <StandingsTable standings={standings} cardBg={cardBg} />
+              direction={["column", "column", "column", "column", "column", "row"]}
+              spacing="4"
+              mt={2}>
+              <Stack
+                direction={["column", "column", "column", "row", "row"]}
+                flexGrow="1"
+                spacing="4">
+                {year > 2005 && <QualiResultsTable quali={quali} cardBg={cardBg} />}
+                <DriversTable driver={driverStandings} cardBg={cardBg} />
+              </Stack>
+              <StandingsTable standings={standings} cardBg={cardBg} />
+            </Stack>
           </Flex>
         </SlideFade>
       ) : (
@@ -249,6 +261,13 @@ const RacesInfo = () => {
             width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
             direction={["column", "row"]}
             spacing="4">
+            <Skeleton
+              height="120px"
+              align="center"
+              flexGrow={["1", "0.5"]}
+              bg="gray.100"
+              borderRadius="lg"
+            />
             <Skeleton
               height="120px"
               align="center"

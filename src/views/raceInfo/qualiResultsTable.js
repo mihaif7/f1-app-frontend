@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import "./../team-colors.scss";
-import {colorLabels} from "../../utils/colorLabels";
+import { colorLabels } from "../../utils/colorLabels";
 
 const TableRow = ({ res }) => {
   let { year } = useParams();
@@ -102,7 +102,7 @@ const BigTable = ({ quali, cardBg }) => {
   let { year } = useParams();
   // console.log(quali);
   return (
-    <Table size={isLargerThan750 ? "md" : "sm"}>
+    <Table size={isLargerThan750 ? "md" : "sm"} flexGrow={1}>
       <Thead bg={cardBg}>
         <Tr>
           <Th isNumeric>#</Th>
@@ -113,11 +113,13 @@ const BigTable = ({ quali, cardBg }) => {
         </Tr>
       </Thead>
       <Tbody>
-        {quali.map((res) => {
+        {quali.map((res, index) => {
           return (
             <Tr key={res.driverId}>
-              <Td isNumeric>{res.position}</Td>
-              <Td fontWeight="500" whiteSpace="nowrap" px={0}>
+              <Td isNumeric py={2}>
+                {res.position}
+              </Td>
+              <Td fontWeight="500" whiteSpace="nowrap" px={0} py={2}>
                 <Box d="flex">
                   {year > 2013 && (
                     <Box
@@ -131,17 +133,17 @@ const BigTable = ({ quali, cardBg }) => {
                   {`${res.forename} ${res.surname}`}
                 </Box>
               </Td>
-              <Td textAlign="center">
+              <Td textAlign="center" py={2} px={2}>
                 <Badge borderRadius="full" px="2" colorScheme="yellow">
                   {res.q1}
                 </Badge>
               </Td>
-              <Td textAlign="center">
+              <Td textAlign="center" py={2} px={2}>
                 <Badge borderRadius="full" px="2" colorScheme="green">
                   {res.q2}
                 </Badge>
               </Td>
-              <Td textAlign="center">
+              <Td textAlign="center" py={2} pl={2} py={2}>
                 <Badge borderRadius="full" px="2" colorScheme="purple">
                   {res.q3}
                 </Badge>
@@ -150,15 +152,6 @@ const BigTable = ({ quali, cardBg }) => {
           );
         })}
       </Tbody>
-      <Tfoot>
-        <Tr>
-          <Th isNumeric>#</Th>
-          <Th>Driver</Th>
-          <Th textAlign="center">Q1</Th>
-          <Th textAlign="center">Q2</Th>
-          <Th textAlign="center">Q3</Th>
-        </Tr>
-      </Tfoot>
     </Table>
   );
 };
@@ -169,26 +162,24 @@ const QualiResultsTable = ({ quali, cardBg }) => {
   // console.log(quali);
   return (
     <Box
-      align="center"
-      m={[0, 2]}
-      mt={4}
-      width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
       borderRadius="lg"
       borderWidth="0px"
       borderColor="white"
       overflow="hidden"
       bg={cardBg}
       pt={2}
-      pb={2}>
+      pb={[2, 4]}
+      flexGrow={1}
+      align="center">
       {isLargerThan585 ? (
-        <>
-          <Box flex="1" px="4" py="2">
+        <Box h="100%" d="flex" flexDir="column">
+          <Box flex="1" px="6" py="2">
             <Text fontSize="xl" fontWeight="semibold" textAlign="left">
               Qualifying
             </Text>
           </Box>
           <BigTable quali={quali} cardBg={cardBg} isLargerThan585={isLargerThan585} />
-        </>
+        </Box>
       ) : (
         <Accordion allowToggle>
           <AccordionItem borderTopWidth="0px" _last={{ borderBottomWidth: "0px" }}>
