@@ -13,6 +13,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import HthTable from "./hthTable";
 import Summary from "./summary";
+import Boxplot from "./Boxplot";
+import ParentSize from "@visx/responsive/lib/components/ParentSize";
 import { colorHtHSelect } from "../../utils/colorLabels";
 import "./../team-colors.scss";
 
@@ -242,6 +244,25 @@ const HeadToHead = () => {
             </SlideFade>
           </Flex>
 
+          <Flex
+            align="center"
+            bg={cardBg}
+            borderRadius="lg"
+            direction="column"
+            flexGrow={["1", "0.5"]}>
+            <SlideFade in={!fetching} style={{ width: "100%", height: "50vh" }}>
+              <ParentSize>
+                {({ width, height }) => (
+                  <Boxplot
+                    width={width}
+                    height={height}
+                    lapTimes1={lapTimes1}
+                    lapTimes2={lapTimes2}
+                  />
+                )}
+              </ParentSize>
+            </SlideFade>
+          </Flex>
           <Box my={4}>
             <Summary
               cardBg={cardBg}

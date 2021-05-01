@@ -16,7 +16,8 @@ const RaceCard = ({ race, history, year }) => {
           onClick={() => {
             history.push(`/season/${year}/round/${race.raceId}`);
           }}
-          width={["91vw", "91vw", "91vw", "40vw"]}>
+          width={["91vw", "91vw", "91vw", "40vw"]}
+          borderRadius="lg">
           <Box p="6" d="flex" flexDirection="column" justifyContent="center">
             <Box
               color="gray.500"
@@ -90,7 +91,7 @@ const Races = () => {
                 colorScheme="gray"
                 mx={2}
                 borderRadius="lg"
-                m={["2", "2", "2", "4"]}
+                m={2}
               />
             ))}
       </Flex>

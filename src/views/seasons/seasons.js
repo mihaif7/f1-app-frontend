@@ -16,7 +16,8 @@ const SeasonCard = ({ year, history }) => {
           onClick={() => {
             history.push(`/season/${year}`);
           }}
-          width={["91vw", "40vw", "30vw", "20vw"]}>
+          width={["91vw", "40vw", "30vw", "20vw"]}
+          borderRadius="lg">
           <Box p="6">
             <Box
               fontWeight="semibold"
@@ -90,7 +91,7 @@ const Seasons = () => {
                 colorScheme="gray"
                 mx={2}
                 borderRadius="lg"
-                m={["2", "2", "2", "4"]}
+                m={2}
               />
             ))}
       </Flex>
