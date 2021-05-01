@@ -22,12 +22,17 @@ import { v4 as uuidv4 } from "uuid";
 import "./../team-colors.scss";
 import { colorLabels } from "../../utils/colorLabels";
 
-const TableRow = ({ res, isLargerThan370, cardBg, year }) => {
+const TableRow = ({ res, isLargerThan370, cardBg, year, lastGrid }) => {
   const { isOpen, onToggle } = useDisclosure();
   // const colorDetails = useColorModeValue("orange.100", "yellow.800");
   // const smallText = useColorModeValue("gray.600", "whiteAlpha.800");
 
-  const positionGained = res.position ? res.grid - res.position : "R";
+  const positionGained =
+    res.grid !== 0
+      ? res.position
+        ? res.grid - res.position
+        : "R"
+      : lastGrid - res.position;
   const color = colorLabels(res.constructorRef, year);
 
   return (
@@ -103,7 +108,7 @@ const TableRow = ({ res, isLargerThan370, cardBg, year }) => {
                   <Text fontSize="sm" fontWeight="semibold" pb={1}>
                     Start Position
                   </Text>
-                  <Text fontSize="sm">{`P${res.grid}`}</Text>
+                  <Text fontSize="sm">{res.grid !== 0 ? `P${res.grid}` : "Pit Lane"}</Text>
                 </Box>
                 <Box>
                   <Text fontSize="sm" fontWeight="semibold" pb={1}>
@@ -128,6 +133,7 @@ const TableRow = ({ res, isLargerThan370, cardBg, year }) => {
 
 const SmallTable = ({ results, cardBg, year }) => {
   const [isLargerThan370] = useMediaQuery("(min-width: 370px)");
+  const lastGrid = results.length;
   return (
     <Table size="sm" variant="unstyled">
       <Thead bg={cardBg}>
@@ -150,6 +156,7 @@ const SmallTable = ({ results, cardBg, year }) => {
             key={uuidv4()}
             cardBg={cardBg}
             year={year}
+            lastGrid={lastGrid}
           />
         ))}
       </Tbody>
@@ -172,6 +179,7 @@ const SmallTable = ({ results, cardBg, year }) => {
 const RaceResultsTable = ({ results, cardBg, year }) => {
   const [isLargerThan750] = useMediaQuery("(min-width: 750px)");
   const [isLargerThan585] = useMediaQuery("(min-width: 585px)");
+  const lastGrid = results.length;
 
   return (
     <Box
@@ -206,7 +214,12 @@ const RaceResultsTable = ({ results, cardBg, year }) => {
             </Thead>
             <Tbody>
               {results.map((res) => {
-                const positionGained = res.position ? res.grid - res.position : "R";
+                const positionGained =
+                  res.grid !== 0
+                    ? res.position
+                      ? res.grid - res.position
+                      : "R"
+                    : lastGrid - res.position;
                 return (
                   <Tr key={uuidv4()}>
                     <Td isNumeric py={2}>
