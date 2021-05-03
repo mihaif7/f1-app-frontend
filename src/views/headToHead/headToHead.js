@@ -11,6 +11,7 @@ import {
   useColorModeValue,
   useMediaQuery,
 } from "@chakra-ui/react";
+import { RepeatIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -35,6 +36,7 @@ const HeadToHead = () => {
   const cardBg = useColorModeValue("gray.100", "whiteAlpha.200");
   const orange = useColorModeValue("orange.100", "yellow.800");
   const smallText = useColorModeValue("gray.600", "whiteAlpha.600");
+  const button = useColorModeValue("blackAlpha", "gray");
 
   const handleChange = (event) => {
     setFetching(true);
@@ -250,7 +252,12 @@ const HeadToHead = () => {
                   fontSize="sm"
                   mt={4}
                   flexGrow="1">
-                  <Button onClick={swapDrivers} size="sm" w="100%" colorScheme="telegram">
+                  <Button
+                    onClick={swapDrivers}
+                    size="sm"
+                    w="100%"
+                    colorScheme={button}
+                    leftIcon={<RepeatIcon />}>
                     Swap drivers
                   </Button>
                 </Box>
