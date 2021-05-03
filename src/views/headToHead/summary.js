@@ -1,6 +1,6 @@
 import {
+  Fade,
   Flex,
-  SlideFade,
   Table,
   Tbody,
   Td,
@@ -150,7 +150,7 @@ const Summary = ({
       overflow="auto"
       minH="150px"
       flexGrow={["1", "0.5"]}>
-      <SlideFade in={!fetching} style={{ width: "100%" }}>
+      <Fade in={!fetching} style={{ width: "100%" }}>
         <Table size="sm" variant="striped" colorScheme={tableColor}>
           <Thead>
             <Tr>
@@ -327,7 +327,7 @@ const Summary = ({
             ) : null}
           </Tbody>
         </Table>
-      </SlideFade>
+      </Fade>
     </Flex>
   );
 };

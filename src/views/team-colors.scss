@@ -266,11 +266,19 @@
 .drop-text-light {
   color: #1A202C;
   font-weight: 500;
+
+  &.disabled-option {
+    color: #dfe4ee;
+  }
 }
 
 .drop-text-dark {
   color: #EEEFF0;
   font-weight: 500;
+
+  &.disabled-option {
+    color: #464646;
+  }
 }
 
 .right-select {

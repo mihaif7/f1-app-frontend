@@ -71,6 +71,16 @@ const Boxplot = ({ lapTimes1, lapTimes2, driver1, driver2, drivers }) => {
 
   let data = [];
 
+  if (boxLap2) {
+    data.push({
+      x: findDriver(driver2, drivers),
+      min: boxLap2.min,
+      median: boxLap2.median,
+      max: boxLap2.max,
+      q1: boxLap2.firstQuartile,
+      q3: boxLap2.thirdQuartile,
+    });
+  }
   if (boxLap1) {
     data.push({
       x: findDriver(driver1, drivers),
@@ -82,23 +92,11 @@ const Boxplot = ({ lapTimes1, lapTimes2, driver1, driver2, drivers }) => {
     });
   }
 
-  if (boxLap2) {
-    data.push({
-      x: findDriver(driver2, drivers),
-      min: boxLap2.min,
-      median: boxLap2.median,
-      max: boxLap2.max,
-      q1: boxLap2.firstQuartile,
-      q3: boxLap2.thirdQuartile,
-    });
-  }
-
-  console.log(boxLap1, boxLap2);
-
   return (
     <VictoryChart
       domainPadding={{ x: 90, y: 40 }}
-      padding={{ top: 20, bottom: 40, left: 50, right: 20 }}>
+      padding={{ top: 20, bottom: 40, left: 50, right: 20 }}
+      animate={{ duration: 500 }}>
       <VictoryAxis
         dependentAxis
         tickFormat={(x) => convertTime(x)}

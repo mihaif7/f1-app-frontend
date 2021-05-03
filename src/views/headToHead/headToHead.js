@@ -1,5 +1,7 @@
 import {
   Box,
+  Button,
+  Fade,
   Flex,
   Select,
   Skeleton,
@@ -105,12 +107,27 @@ const HeadToHead = () => {
       });
   };
 
+  const swapDrivers = () => {
+    const d1 = driver1;
+    const d2 = driver2;
+    setDriver1(d2);
+    setDriver2(d1);
+
+    const l1 = lapTimes1;
+    const l2 = lapTimes2;
+
+    setLapTimes1(l2);
+    setLapTimes2(l1);
+  };
+
   useEffect(() => {
     getCircuitInfo();
     getDrivers();
     window.scrollTo(0, 0);
     // eslint-disable-next-line
   }, [raceId, year]);
+
+  console.log();
 
   return drivers && driver1 && driver2 && lapTimes1 && lapTimes2 ? (
     <SlideFade in={true}>
@@ -122,7 +139,7 @@ const HeadToHead = () => {
           justifyContent="center"
           my={4}>
           <Stack direction={["column", "column", "column", "row", "row"]} spacing="4">
-            <Flex align="center" bg={cardBg} borderRadius="lg" flex="1 1 auto">
+            <Flex align="center" bg={cardBg} borderRadius="lg" flex="1 1 50%">
               <Box p="6" d="flex" flexDirection="column" justifyContent="center" w="100%">
                 <Box
                   color={smallText}
@@ -155,16 +172,8 @@ const HeadToHead = () => {
               bg={cardBg}
               borderRadius="lg"
               direction="column"
-              flex="1 1 auto">
+              flex="1 1 50%">
               <Box p="4" d="flex" flexDirection="column" w="100%">
-                <Box
-                  color={smallText}
-                  fontWeight="semibold"
-                  letterSpacing="wide"
-                  fontSize="sm"
-                  mb={4}>
-                  Select two drivers:
-                </Box>
                 <Box d="flex">
                   <Select
                     value={driver1}
@@ -187,7 +196,10 @@ const HeadToHead = () => {
                           key={driver.driverId}
                           disabled={driver.driverId === driver2}
                           className={
-                            colorMode === "light" ? "drop-text-light" : "drop-text-dark"
+                            (colorMode === "light"
+                              ? "drop-text-light"
+                              : "drop-text-dark") +
+                            (driver.driverId === driver2 ? " disabled-option" : "")
                           }>
                           {year > 2013
                             ? `#${driver.number} ${driver.code}`
@@ -217,7 +229,10 @@ const HeadToHead = () => {
                           key={driver.driverId}
                           disabled={driver.driverId === driver1}
                           className={
-                            colorMode === "light" ? "drop-text-light" : "drop-text-dark"
+                            (colorMode === "light"
+                              ? "drop-text-light"
+                              : "drop-text-dark") +
+                            (driver.driverId === driver1 ? " disabled-option" : "")
                           }>
                           {year > 2013
                             ? `#${driver.number} ${driver.code}`
@@ -227,13 +242,25 @@ const HeadToHead = () => {
                     })}
                   </Select>
                 </Box>
+
+                <Box
+                  color={smallText}
+                  fontWeight="semibold"
+                  letterSpacing="wide"
+                  fontSize="sm"
+                  mt={4}
+                  flexGrow="1">
+                  <Button onClick={swapDrivers} size="sm" w="100%" colorScheme="telegram">
+                    Swap drivers
+                  </Button>
+                </Box>
               </Box>
             </Flex>
           </Stack>
 
           <Stack direction={stackChange ? "row" : "column"} spacing="4">
-            <Box bg={cardBg} borderRadius="lg" flexGrow="1">
-              <SlideFade in={!fetching}>
+            <Box bg={cardBg} borderRadius="lg" flex="0 1 70%">
+              <Fade in={!fetching}>
                 <HthTable
                   year={year}
                   drivers={drivers}
@@ -242,9 +269,9 @@ const HeadToHead = () => {
                   lapTimes1={lapTimes1}
                   lapTimes2={lapTimes2}
                 />
-              </SlideFade>
+              </Fade>
             </Box>
-            <Stack direction={"column"} spacing="4">
+            <Stack direction={"column"} spacing="4" flex="1 0 30%">
               <Box>
                 <Summary
                   cardBg={cardBg}
@@ -260,15 +287,13 @@ const HeadToHead = () => {
               </Box>
 
               <Flex align="center" bg={cardBg} borderRadius="lg" direction="column">
-                <SlideFade in={!fetching} style={{ width: "100%" }}>
-                  <Boxplot
-                    lapTimes1={lapTimes1}
-                    lapTimes2={lapTimes2}
-                    driver1={driver1}
-                    driver2={driver2}
-                    drivers={drivers}
-                  />
-                </SlideFade>
+                <Boxplot
+                  lapTimes1={lapTimes1}
+                  lapTimes2={lapTimes2}
+                  driver1={driver1}
+                  driver2={driver2}
+                  drivers={drivers}
+                />
               </Flex>
             </Stack>
           </Stack>
@@ -285,8 +310,8 @@ const HeadToHead = () => {
           justifyContent="center"
           my={4}>
           <Stack direction={["column", "column", "column", "row", "row"]} spacing="4">
-            <Skeleton height="120px" borderRadius="lg" flex="1 1 auto" />
-            <Skeleton height="120px" borderRadius="lg" flex="1 1 auto" />
+            <Skeleton height="120px" borderRadius="lg" flex="1 1 50%" />
+            <Skeleton height="120px" borderRadius="lg" flex="1 1 50%" />
           </Stack>
 
           <Stack direction={stackChange ? "row" : "column"} spacing="4">
