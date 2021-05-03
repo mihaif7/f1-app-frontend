@@ -149,7 +149,8 @@ const Summary = ({
       py={4}
       overflow="auto"
       minH="150px"
-      flexGrow={["1", "0.5"]}>
+      flexGrow={["1", "0.5"]}
+      boxShadow={["md", "lg"]}>
       <Fade in={!fetching} style={{ width: "100%" }}>
         <Table size="sm" variant="striped" colorScheme={tableColor}>
           <Thead>

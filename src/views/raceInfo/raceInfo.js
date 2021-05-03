@@ -15,6 +15,7 @@ import DriversTable from "./driversTable";
 import QualiResultsTable from "./qualiResultsTable";
 import RaceResultsTable from "./raceResultsTable";
 import StandingsTable from "./standingsTable";
+import Tilt from "react-tilt";
 
 const RacesInfo = () => {
   let history = useHistory();
@@ -138,9 +139,14 @@ const RacesInfo = () => {
             <Stack
               width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
               direction={["column", "column", "column", "row", "row"]}
-              mb={2}
-              spacing="4">
-              <Flex align="center" bg={cardBg} borderRadius="lg" flex="1 1 33%">
+              mb={[2, 3]}
+              spacing={["4", "6"]}>
+              <Flex
+                align="center"
+                bg={cardBg}
+                borderRadius="lg"
+                flex="1 1 33%"
+                boxShadow={["md", "lg"]}>
                 <Box
                   p="6"
                   d="flex"
@@ -174,7 +180,12 @@ const RacesInfo = () => {
                   </Box>
                 </Box>
               </Flex>
-              <Flex align="center" bg={orange} borderRadius="lg" flex="1 1 33%">
+              <Flex
+                align="center"
+                bg={orange}
+                borderRadius="lg"
+                flex="1 1 33%"
+                boxShadow={["md", "lg"]}>
                 <Box
                   p="6"
                   d="flex"
@@ -211,28 +222,41 @@ const RacesInfo = () => {
                   </Box>
                 </Box>
               </Flex>
-              <Flex align="center" borderRadius="lg" flex="1 1 33%">
-                <Button
-                  d="flex"
-                  w="100%"
-                  h="100%"
-                  py={4}
-                  onClick={() => {
-                    history.push(`/season/${year}/round/${raceId}/headtohead`);
-                  }}
-                  background={hthButton}
-                  _hover={{ backgroundColor: hthButtonHover }}
-                  _active={{ backgroundColor: hthButtonHover }}>
-                  <Text
-                    fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
-                    fontWeight="semibold"
-                    textAlign="left">
-                    Head to head
-                  </Text>
 
-                  {/* <ExternalLinkIcon /> */}
-                </Button>
-              </Flex>
+              <Tilt
+                className="Tilt"
+                style={{ flex: "1 1 33%" }}
+                options={{
+                  reverse: true, // reverse the tilt direction
+                  max: 10, // max tilt rotation (degrees)
+                  perspective: 2000, // Transform perspective, the lower the more extreme the tilt gets.
+                  scale: 1, // 2 = 200%, 1.5 = 150%, etc..
+                  speed: 300, // Speed of the enter/exit transition
+                  transition: true, // Set a transition on enter/exit.
+                  easing: "cubic-bezier(.03,.98,.52,.99)", // Easing on enter/exit.
+                }}>
+                <Flex align="center" borderRadius="lg" h="100%">
+                  <Button
+                    d="flex"
+                    py={4}
+                    w="100%"
+                    h="100%"
+                    onClick={() => {
+                      history.push(`/season/${year}/round/${raceId}/headtohead`);
+                    }}
+                    background={hthButton}
+                    _hover={{ backgroundColor: hthButtonHover }}
+                    _active={{ backgroundColor: hthButtonHover }}
+                    boxShadow={["md", "lg"]}>
+                    <Text
+                      fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
+                      fontWeight="semibold"
+                      textAlign="left">
+                      Head to head
+                    </Text>
+                  </Button>
+                </Flex>
+              </Tilt>
             </Stack>
 
             <RaceResultsTable results={results} cardBg={cardBg} year={year} />
@@ -240,12 +264,12 @@ const RacesInfo = () => {
             <Stack
               width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
               direction={["column", "column", "column", "column", "column", "row"]}
-              spacing="4"
-              mt={2}>
+              spacing={["4", "6"]}
+              mt={[2, 3]}>
               <Stack
                 direction={["column", "column", "column", "row", "row"]}
                 flexGrow="1"
-                spacing="4">
+                spacing={["4", "6"]}>
                 {year > 2005 && <QualiResultsTable quali={quali} cardBg={cardBg} />}
                 <DriversTable driver={driverStandings} cardBg={cardBg} />
               </Stack>

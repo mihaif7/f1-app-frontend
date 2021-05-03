@@ -215,7 +215,8 @@ const RaceResultsTable = ({ results, cardBg, year }) => {
       bg={cardBg}
       pt={2}
       pb={isLargerThan900 ? 4 : 2}
-      my={2}>
+      my={[2, 3]}
+      boxShadow={["md","lg"]}>
       {isLargerThan900 ? (
         <>
           <Box flex="1" px="6" py="2">
@@ -278,7 +279,7 @@ const RaceResultsTable = ({ results, cardBg, year }) => {
                     <Td whiteSpace="nowrap" py={2} borderBottom={0}>
                       {res.name}
                     </Td>
-                    <Td whiteSpace="nowrap" py={2} borderBottom={0} >
+                    <Td whiteSpace="nowrap" py={2} borderBottom={0}>
                       {res.status === "Finished" ? res.time : res.status}
                     </Td>
                     <Td

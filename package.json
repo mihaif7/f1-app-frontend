@@ -17,6 +17,7 @@
     "react-intersection-observer": "^8.31.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-tilt": "^0.1.4",
     "simple-statistics": "^7.7.0",
     "uuid": "^8.3.2",
     "victory": "^35.5.1",

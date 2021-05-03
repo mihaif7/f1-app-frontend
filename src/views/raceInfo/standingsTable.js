@@ -92,14 +92,15 @@ const StandingsTable = ({ standings, cardBg }) => {
   const [isLargerThan900] = useMediaQuery("(min-width: 900px)");
 
   return (
-    <Box align="center" overflow="hidden">
+    <Box align="center">
       <Box
         borderRadius="lg"
         borderWidth="0px"
         borderColor="white"
         bg={cardBg}
         pt={2}
-        pb={isLargerThan900 ? 4 : 2}>
+        pb={isLargerThan900 ? 4 : 2}
+        boxShadow={["md","lg"]}>
         {isLargerThan900 ? (
           <>
             <Box flex="1" px="6" py="2">

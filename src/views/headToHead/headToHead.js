@@ -137,11 +137,18 @@ const HeadToHead = () => {
         <Stack
           width={["91vw", "80vw", "80vw", "80vw", "80vw"]}
           direction="column"
-          spacing="4"
+          spacing={["4", "6"]}
           justifyContent="center"
           my={4}>
-          <Stack direction={["column", "column", "column", "row", "row"]} spacing="4">
-            <Flex align="center" bg={cardBg} borderRadius="lg" flex="1 1 50%">
+          <Stack
+            direction={["column", "column", "column", "row", "row"]}
+            spacing={["4", "6"]}>
+            <Flex
+              align="center"
+              bg={cardBg}
+              borderRadius="lg"
+              flex="1 1 50%"
+              boxShadow={["md", "lg"]}>
               <Box p="6" d="flex" flexDirection="column" justifyContent="center" w="100%">
                 <Box
                   color={smallText}
@@ -174,7 +181,8 @@ const HeadToHead = () => {
               bg={cardBg}
               borderRadius="lg"
               direction="column"
-              flex="1 1 50%">
+              flex="1 1 50%"
+              boxShadow={["md", "lg"]}>
               <Box p="4" d="flex" flexDirection="column" w="100%">
                 <Box d="flex">
                   <Select
@@ -265,8 +273,8 @@ const HeadToHead = () => {
             </Flex>
           </Stack>
 
-          <Stack direction={stackChange ? "row" : "column"} spacing="4">
-            <Box bg={cardBg} borderRadius="lg" flex="0 1 70%">
+          <Stack direction={stackChange ? "row" : "column"} spacing={["4", "6"]}>
+            <Box bg={cardBg} borderRadius="lg" flex="0 1 70%" boxShadow={["md", "lg"]}>
               <Fade in={!fetching}>
                 <HthTable
                   year={year}
@@ -278,8 +286,8 @@ const HeadToHead = () => {
                 />
               </Fade>
             </Box>
-            <Stack direction={"column"} spacing="4" flex="1 0 30%">
-              <Box>
+            <Stack direction={"column"} spacing={["4", "6"]} flex="1 0 30%">
+              <Box >
                 <Summary
                   cardBg={cardBg}
                   raceId={raceId}
@@ -293,7 +301,12 @@ const HeadToHead = () => {
                 />
               </Box>
 
-              <Flex align="center" bg={cardBg} borderRadius="lg" direction="column">
+              <Flex
+                align="center"
+                bg={cardBg}
+                borderRadius="lg"
+                direction="column"
+                boxShadow={["md", "lg"]}>
                 <Boxplot
                   lapTimes1={lapTimes1}
                   lapTimes2={lapTimes2}

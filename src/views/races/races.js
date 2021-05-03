@@ -3,40 +3,54 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { useHistory, useParams } from "react-router-dom";
+import Tilt from "react-tilt";
 
 const RaceCard = ({ race, history, year }) => {
   const { ref, inView } = useInView();
   return (
     <SlideFade initialScale={0.9} in={inView}>
-      <Flex align="center" m={2} ref={ref}>
-        <Button
-          d="flex"
-          height="110px"
-          p="0"
-          onClick={() => {
-            history.push(`/season/${year}/round/${race.raceId}`);
-          }}
-          width={["91vw", "91vw", "91vw", "40vw"]}
-          borderRadius="lg">
-          <Box p="6" d="flex" flexDirection="column" justifyContent="center">
-            <Box
-              color="gray.500"
-              fontWeight="semibold"
-              letterSpacing="wide"
-              fontSize="xs"
-              textTransform="uppercase"
-              mb={2}>
-              Round {race.round} - {race.date}
+      <Flex align="center" m={3} ref={ref}>
+        <Tilt
+          className="Tilt"
+          options={{
+            reverse: true, // reverse the tilt direction
+            max: 10, // max tilt rotation (degrees)
+            perspective: 2000, // Transform perspective, the lower the more extreme the tilt gets.
+            scale: 1, // 2 = 200%, 1.5 = 150%, etc..
+            speed: 300, // Speed of the enter/exit transition
+            transition: true, // Set a transition on enter/exit.
+            easing: "cubic-bezier(.03,.98,.52,.99)", // Easing on enter/exit.
+          }}>
+          <Button
+            d="flex"
+            height={["130px", "160px"]}
+            p="0"
+            onClick={() => {
+              history.push(`/season/${year}/round/${race.raceId}`);
+            }}
+            width={["91vw", "91vw", "91vw", "40vw", "40vw", "25vw"]}
+            borderRadius="lg"
+            boxShadow="lg">
+            <Box p="6" d="flex" flexDirection="column" justifyContent="center">
+              <Box
+                color="gray.500"
+                fontWeight="semibold"
+                letterSpacing="wide"
+                fontSize="xs"
+                textTransform="uppercase"
+                mb={2}>
+                Round {race.round} - {race.date}
+              </Box>
+              <Box
+                fontWeight="semibold"
+                fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
+                lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
+                as="p">
+                {race.name}
+              </Box>
             </Box>
-            <Box
-              fontWeight="semibold"
-              fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
-              lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
-              as="p">
-              {race.name}
-            </Box>
-          </Box>
-        </Button>
+          </Button>
+        </Tilt>
       </Flex>
     </SlideFade>
   );

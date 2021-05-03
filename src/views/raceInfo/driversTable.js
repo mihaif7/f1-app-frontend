@@ -102,7 +102,8 @@ const DriversTable = ({ driver, cardBg }) => {
       overflow="hidden"
       bg={cardBg}
       pt={2}
-      pb={isLargerThan900 ? 4 : 2}>
+      pb={isLargerThan900 ? 4 : 2}
+      boxShadow={["md","lg"]}>
       {isLargerThan900 ? (
         <>
           <Box flex="1" px="6" py="2">

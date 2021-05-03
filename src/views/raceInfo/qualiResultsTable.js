@@ -170,7 +170,8 @@ const QualiResultsTable = ({ quali, cardBg }) => {
       pt={2}
       pb={isLargerThan900 ? 4 : 2}
       flexGrow={1}
-      align="center">
+      align="center"
+      boxShadow={["md","lg"]}>
       {isLargerThan900 ? (
         <Box h="100%">
           <Box px="6" py="2">

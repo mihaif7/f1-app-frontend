@@ -5,7 +5,7 @@ export default function SmallWithSocial() {
     <Box
       bg={useColorModeValue("white", "gray.800")}
       color={useColorModeValue("gray.700", "gray.200")}
-      mt={4}>
+      mt={6}>
       <Container
         as={Stack}
         maxW={"6xl"}
