@@ -5,18 +5,18 @@ import {
   Skeleton,
   SlideFade,
   Stack,
-  useColorModeValue,
   useColorMode,
+  useColorModeValue,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import HthTable from "./hthTable";
-import Summary from "./summary";
-import Boxplot from "./Boxplot";
-import ParentSize from "@visx/responsive/lib/components/ParentSize";
 import { colorHtHSelect } from "../../utils/colorLabels";
 import "./../team-colors.scss";
+import Boxplot from "./Boxplot";
+import HthTable from "./hthTable";
+import Summary from "./summary";
 
 const HeadToHead = () => {
   const [raceInfo, setRaceInfo] = useState();
@@ -26,6 +26,7 @@ const HeadToHead = () => {
   const [lapTimes1, setLapTimes1] = useState();
   const [lapTimes2, setLapTimes2] = useState();
   const [fetching, setFetching] = useState(false);
+  const [stackChange] = useMediaQuery("(min-width: 1270px)");
   let { year, raceId } = useParams();
   const { colorMode } = useColorMode();
 
@@ -115,165 +116,162 @@ const HeadToHead = () => {
     <SlideFade in={true}>
       <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
         <Stack
-          width={["91vw", "80vw", "80vw", "80vw", "50vw"]}
+          width={["91vw", "80vw", "80vw", "80vw", "80vw"]}
           direction="column"
           spacing="4"
           justifyContent="center"
           my={4}>
-          <Flex align="center" bg={cardBg} borderRadius="lg" flexGrow={(1, 0.5)}>
-            <Box p="6" d="flex" flexDirection="column" justifyContent="center" w="100%">
-              <Box
-                color={smallText}
-                fontWeight="semibold"
-                letterSpacing="wide"
-                fontSize="xs"
-                textTransform="uppercase"
-                mb={2}>
-                Race {raceInfo.round}
+          <Stack direction={["column", "column", "column", "row", "row"]} spacing="4">
+            <Flex align="center" bg={cardBg} borderRadius="lg" flex="1 1 auto">
+              <Box p="6" d="flex" flexDirection="column" justifyContent="center" w="100%">
+                <Box
+                  color={smallText}
+                  fontWeight="semibold"
+                  letterSpacing="wide"
+                  fontSize="xs"
+                  textTransform="uppercase"
+                  mb={2}>
+                  Race {raceInfo.round}
+                </Box>
+                <Box
+                  fontWeight="semibold"
+                  fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
+                  lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
+                  as="p">
+                  {raceInfo.raceName}
+                </Box>
+                <Box
+                  color={smallText}
+                  fontWeight="semibold"
+                  letterSpacing="wide"
+                  fontSize="xs"
+                  mt={2}>
+                  Date: {raceInfo.date}
+                </Box>
               </Box>
-              <Box
-                fontWeight="semibold"
-                fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
-                lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
-                as="p">
-                {raceInfo.raceName}
-              </Box>
-              <Box
-                color={smallText}
-                fontWeight="semibold"
-                letterSpacing="wide"
-                fontSize="xs"
-                mt={2}>
-                Date: {raceInfo.date}
-              </Box>
-            </Box>
-          </Flex>
-          <Flex
-            align="center"
-            bg={cardBg}
-            borderRadius="lg"
-            direction="column"
-            justifyContent="center"
-            flexGrow={["1", "0.5"]}>
-            <Box p="4" d="flex" flexDirection="column" justifyContent="center" w="100%">
-              <Box
-                color={smallText}
-                fontWeight="semibold"
-                letterSpacing="wide"
-                fontSize="sm"
-                mb={4}>
-                Select two drivers
-              </Box>
-              <Box d="flex">
-                <Select
-                  value={driver1}
-                  onChange={handleChange}
-                  pr={1}
-                  variant="filled"
-                  rootProps={
-                    year > 2013 && {
-                      className: "left-select " + colorHtHSelect(driver1, drivers, year),
+            </Flex>
+            <Flex
+              justifyContent="center"
+              bg={cardBg}
+              borderRadius="lg"
+              direction="column"
+              flex="1 1 auto">
+              <Box p="4" d="flex" flexDirection="column" w="100%">
+                <Box
+                  color={smallText}
+                  fontWeight="semibold"
+                  letterSpacing="wide"
+                  fontSize="sm"
+                  mb={4}>
+                  Select two drivers:
+                </Box>
+                <Box d="flex">
+                  <Select
+                    value={driver1}
+                    onChange={handleChange}
+                    pr={1}
+                    variant="filled"
+                    rootProps={
+                      year > 2013 && {
+                        className:
+                          "left-select " + colorHtHSelect(driver1, drivers, year),
+                      }
                     }
-                  }
-                  fontWeight={500}
-                  className={colorHtHSelect(driver1, drivers, year)}
-                  bg={year <= 2013 && orange}>
-                  {drivers.map((driver) => {
-                    return (
-                      <option
-                        value={driver.driverId}
-                        key={driver.driverId}
-                        disabled={driver.driverId === driver2}
-                        className={
-                          colorMode === "light" ? "drop-text-light" : "drop-text-dark"
-                        }>
-                        {year > 2013
-                          ? `#${driver.number} ${driver.code}`
-                          : driver.code ?? driver.surname.substring(0, 3).toUpperCase()}
-                      </option>
-                    );
-                  })}
-                </Select>
-                <Select
-                  value={driver2}
-                  onChange={handleChange2}
-                  pl={1}
-                  variant="filled"
-                  rootProps={
-                    year > 2013 && {
-                      className: "right-select " + colorHtHSelect(driver2, drivers, year),
+                    fontWeight={500}
+                    className={colorHtHSelect(driver1, drivers, year)}
+                    bg={year <= 2013 && orange}>
+                    {drivers.map((driver) => {
+                      return (
+                        <option
+                          value={driver.driverId}
+                          key={driver.driverId}
+                          disabled={driver.driverId === driver2}
+                          className={
+                            colorMode === "light" ? "drop-text-light" : "drop-text-dark"
+                          }>
+                          {year > 2013
+                            ? `#${driver.number} ${driver.code}`
+                            : driver.code ?? driver.surname.substring(0, 3).toUpperCase()}
+                        </option>
+                      );
+                    })}
+                  </Select>
+                  <Select
+                    value={driver2}
+                    onChange={handleChange2}
+                    pl={1}
+                    variant="filled"
+                    rootProps={
+                      year > 2013 && {
+                        className:
+                          "right-select " + colorHtHSelect(driver2, drivers, year),
+                      }
                     }
-                  }
-                  fontWeight={500}
-                  className={colorHtHSelect(driver2, drivers, year)}
-                  bg={year <= 2013 && orange}>
-                  {drivers.map((driver) => {
-                    return (
-                      <option
-                        value={driver.driverId}
-                        key={driver.driverId}
-                        disabled={driver.driverId === driver1}
-                        className={
-                          colorMode === "light" ? "drop-text-light" : "drop-text-dark"
-                        }>
-                        {year > 2013
-                          ? `#${driver.number} ${driver.code}`
-                          : driver.code ?? driver.surname.substring(0, 3).toUpperCase()}
-                      </option>
-                    );
-                  })}
-                </Select>
+                    fontWeight={500}
+                    className={colorHtHSelect(driver2, drivers, year)}
+                    bg={year <= 2013 && orange}>
+                    {drivers.map((driver) => {
+                      return (
+                        <option
+                          value={driver.driverId}
+                          key={driver.driverId}
+                          disabled={driver.driverId === driver1}
+                          className={
+                            colorMode === "light" ? "drop-text-light" : "drop-text-dark"
+                          }>
+                          {year > 2013
+                            ? `#${driver.number} ${driver.code}`
+                            : driver.code ?? driver.surname.substring(0, 3).toUpperCase()}
+                        </option>
+                      );
+                    })}
+                  </Select>
+                </Box>
               </Box>
-            </Box>
-          </Flex>
-          <Flex
-            align="center"
-            bg={cardBg}
-            borderRadius="lg"
-            direction="column"
-            flexGrow={["1", "0.5"]}>
-            <SlideFade in={!fetching} style={{ width: "100%" }}>
-              <HthTable
-                year={year}
-                drivers={drivers}
-                driver1={driver1}
-                driver2={driver2}
-                lapTimes1={lapTimes1}
-                lapTimes2={lapTimes2}
-              />
-            </SlideFade>
-          </Flex>
+            </Flex>
+          </Stack>
 
-          <Flex
-            align="center"
-            bg={cardBg}
-            borderRadius="lg"
-            direction="column"
-            flexGrow={["1", "0.5"]}>
-            <SlideFade in={!fetching} style={{ width: "100%", height: "50vh" }}>
-              <ParentSize>
-                {({ width, height }) => (
+          <Stack direction={stackChange ? "row" : "column"} spacing="4">
+            <Box bg={cardBg} borderRadius="lg" flexGrow="1">
+              <SlideFade in={!fetching}>
+                <HthTable
+                  year={year}
+                  drivers={drivers}
+                  driver1={driver1}
+                  driver2={driver2}
+                  lapTimes1={lapTimes1}
+                  lapTimes2={lapTimes2}
+                />
+              </SlideFade>
+            </Box>
+            <Stack direction={"column"} spacing="4">
+              <Box>
+                <Summary
+                  cardBg={cardBg}
+                  raceId={raceId}
+                  driver1={driver1}
+                  driver2={driver2}
+                  drivers={drivers}
+                  lapTimes1={lapTimes1}
+                  lapTimes2={lapTimes2}
+                  fetching={fetching}
+                  year={year}
+                />
+              </Box>
+
+              <Flex align="center" bg={cardBg} borderRadius="lg" direction="column">
+                <SlideFade in={!fetching} style={{ width: "100%" }}>
                   <Boxplot
-                    width={width}
-                    height={height}
                     lapTimes1={lapTimes1}
                     lapTimes2={lapTimes2}
+                    driver1={driver1}
+                    driver2={driver2}
+                    drivers={drivers}
                   />
-                )}
-              </ParentSize>
-            </SlideFade>
-          </Flex>
-          <Box my={4}>
-            <Summary
-              cardBg={cardBg}
-              raceId={raceId}
-              driver1={driver1}
-              driver2={driver2}
-              drivers={drivers}
-              fetching={fetching}
-              year={year}
-            />
-          </Box>
+                </SlideFade>
+              </Flex>
+            </Stack>
+          </Stack>
         </Stack>
       </Flex>
     </SlideFade>
@@ -281,21 +279,23 @@ const HeadToHead = () => {
     <>
       <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
         <Stack
-          width={["91vw", "80vw", "80vw", "80vw", "50vw"]}
+          width={["91vw", "80vw", "80vw", "80vw", "80vw"]}
           direction="column"
           spacing="4"
           justifyContent="center"
           my={4}>
-          <Stack
-            width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
-            direction={["column", "row"]}
-            spacing="4"></Stack>
+          <Stack direction={["column", "column", "column", "row", "row"]} spacing="4">
+            <Skeleton height="120px" borderRadius="lg" flex="1 1 auto" />
+            <Skeleton height="120px" borderRadius="lg" flex="1 1 auto" />
+          </Stack>
 
-          <Skeleton height="120px" borderRadius="lg" w="100%" />
-          <Skeleton height="120px" borderRadius="lg" w="100%" />
-
-          <Skeleton mt={4} height="700px" borderRadius="lg" mb={4} />
-          <Skeleton height="152px" borderRadius="lg" mb={4} />
+          <Stack direction={stackChange ? "row" : "column"} spacing="4">
+            <Skeleton height="700px" borderRadius="lg" flex={stackChange && "1 1 65%"} />
+            <Stack direction={"column"} spacing="4" flex={stackChange && "1 1 35%"}>
+              <Skeleton height="222px" borderRadius="lg" />
+              <Skeleton height="271px" borderRadius="lg" />
+            </Stack>
+          </Stack>
         </Stack>
       </Flex>
     </>

@@ -89,7 +89,7 @@ const SmallTable = ({ standings, cardBg }) => {
 const StandingsTable = ({ standings, cardBg }) => {
   let { year } = useParams();
   const [isLargerThan750] = useMediaQuery("(min-width: 750px)");
-  const [isLargerThan585] = useMediaQuery("(min-width: 585px)");
+  const [isLargerThan900] = useMediaQuery("(min-width: 900px)");
 
   return (
     <Box align="center" overflow="hidden">
@@ -99,8 +99,8 @@ const StandingsTable = ({ standings, cardBg }) => {
         borderColor="white"
         bg={cardBg}
         pt={2}
-        pb={[2, 4]}>
-        {isLargerThan585 ? (
+        pb={isLargerThan900 ? 4 : 2}>
+        {isLargerThan900 ? (
           <>
             <Box flex="1" px="6" py="2">
               <Text fontSize="xl" fontWeight="semibold" textAlign="left">

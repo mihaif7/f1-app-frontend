@@ -157,7 +157,7 @@ const BigTable = ({ quali, cardBg }) => {
 };
 
 const QualiResultsTable = ({ quali, cardBg }) => {
-  const [isLargerThan585] = useMediaQuery("(min-width: 585px)");
+  const [isLargerThan900] = useMediaQuery("(min-width: 900px)");
 
   // console.log(quali);
   return (
@@ -168,17 +168,17 @@ const QualiResultsTable = ({ quali, cardBg }) => {
       overflow="hidden"
       bg={cardBg}
       pt={2}
-      pb={[2, 4]}
+      pb={isLargerThan900 ? 4 : 2}
       flexGrow={1}
       align="center">
-      {isLargerThan585 ? (
+      {isLargerThan900 ? (
         <Box h="100%">
           <Box px="6" py="2">
             <Text fontSize="xl" fontWeight="semibold" textAlign="left">
               Qualifying
             </Text>
           </Box>
-          <BigTable quali={quali} cardBg={cardBg} isLargerThan585={isLargerThan585} />
+          <BigTable quali={quali} cardBg={cardBg} isLargerThan585={isLargerThan900} />
         </Box>
       ) : (
         <Accordion allowToggle>

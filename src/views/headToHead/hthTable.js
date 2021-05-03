@@ -7,6 +7,7 @@ import {
   Th,
   Thead,
   Tr,
+  useColorMode,
   useMediaQuery,
 } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
@@ -30,7 +31,8 @@ const TableRowSmall = ({ res1, res2, year, pit1, pit2 }) => {
           pl={noXSmall ? 4 : 0}
           pr={0}
           fontSize={isSmall ? "sm" : "xs"}
-          textAlign="right">
+          textAlign="right"
+          borderBottom={0}>
           {res1?.lap ?? res2?.lap}
         </Td>
         <Td
@@ -46,7 +48,8 @@ const TableRowSmall = ({ res1, res2, year, pit1, pit2 }) => {
                 : "red.500"
               : "gray.500"
           }
-          textAlign="right">
+          textAlign="right"
+          borderBottom={0}>
           {res1?.time}
         </Td>
         {year > 2011 && (
@@ -55,7 +58,8 @@ const TableRowSmall = ({ res1, res2, year, pit1, pit2 }) => {
             py={0}
             fontSize={isSmall ? "sm" : "xs"}
             textAlign="right"
-            color="blue.500">
+            color="blue.500"
+            borderBottom={0}>
             {pitCalc(res1?.pitMilliseconds)}
           </Td>
         )}
@@ -71,7 +75,8 @@ const TableRowSmall = ({ res1, res2, year, pit1, pit2 }) => {
                 : "red.500"
               : "gray.500"
           }
-          textAlign="right">
+          textAlign="right"
+          borderBottom={0}>
           {res2?.time}
         </Td>
         {year > 2011 && (
@@ -80,7 +85,8 @@ const TableRowSmall = ({ res1, res2, year, pit1, pit2 }) => {
             py={0}
             fontSize={isSmall ? "sm" : "xs"}
             textAlign="right"
-            color="blue.500">
+            color="blue.500"
+            borderBottom={0}>
             {pitCalc(res2?.pitMilliseconds)}
           </Td>
         )}
@@ -90,7 +96,8 @@ const TableRowSmall = ({ res1, res2, year, pit1, pit2 }) => {
           pr={noXSmall ? 4 : 0}
           fontSize={isSmall ? "sm" : "xs"}
           color={dif ? (dif < 0 ? "green.500" : "red.500") : "gray.500"}
-          textAlign="right">
+          textAlign="right"
+          borderBottom={0}>
           {dif > 0 ? `+${dif}` : dif}
         </Td>
       </Tr>
@@ -98,10 +105,22 @@ const TableRowSmall = ({ res1, res2, year, pit1, pit2 }) => {
   );
 };
 
-const SmallTable = ({ findDriver, lapTimes1, lapTimes2, driver1, driver2, year }) => {
+const SmallTable = ({
+  findDriver,
+  lapTimes1,
+  lapTimes2,
+  driver1,
+  driver2,
+  year,
+  colorMode,
+}) => {
   const [noXSmall] = useMediaQuery("(min-width: 350px)");
   return (
-    <Table size="sm" variant="unstyled" my={4} w="100%">
+    <Table
+      size="sm"
+      my={4}
+      variant="striped"
+      colorScheme={colorMode === "light" ? "blackAlpha" : "gray"}>
       <Thead>
         <Tr>
           <Th textAlign="right" py={0} pl={noXSmall ? 4 : 0} pr={0}>
@@ -192,8 +211,8 @@ const TableRowBig = ({ res1, res2, year, pit1, pit2 }) => {
   return (
     <>
       <Tr>
-        <Td textAlign="right" py={0}>
-          {res1?.lap ?? res2?.lap}
+        <Td py={0} borderBottom={0} fontWeight="normal" whiteSpace="nowrap">
+          {`Lap ${res1?.lap ?? res2?.lap}`}
         </Td>
         <Td
           py={0}
@@ -206,11 +225,12 @@ const TableRowBig = ({ res1, res2, year, pit1, pit2 }) => {
                 : "red.500"
               : "gray.500"
           }
-          textAlign="right">
+          textAlign="right"
+          borderBottom={0}>
           {res1?.time}
         </Td>
         {year > 2011 && (
-          <Td py={0} textAlign="right" color="blue.500">
+          <Td py={0} textAlign="right" color="blue.500" borderBottom={0}>
             {pitCalc(res1?.pitMilliseconds)}
           </Td>
         )}
@@ -225,18 +245,20 @@ const TableRowBig = ({ res1, res2, year, pit1, pit2 }) => {
                 : "red.500"
               : "gray.500"
           }
-          textAlign="right">
+          textAlign="right"
+          borderBottom={0}>
           {res2?.time}
         </Td>
         {year > 2011 && (
-          <Td py={0} textAlign="right" color="blue.500">
+          <Td py={0} textAlign="right" color="blue.500" borderBottom={0}>
             {pitCalc(res2?.pitMilliseconds)}
           </Td>
         )}
         <Td
           py={0}
           color={dif ? (dif < 0 ? "green.500" : "red.500") : "gray.500"}
-          textAlign="right">
+          textAlign="right"
+          borderBottom={0}>
           {dif > 0 ? `+${dif}` : dif}
         </Td>
       </Tr>
@@ -244,12 +266,24 @@ const TableRowBig = ({ res1, res2, year, pit1, pit2 }) => {
   );
 };
 
-const BigTable = ({ findDriver, lapTimes1, lapTimes2, driver1, driver2, year }) => {
+const BigTable = ({
+  findDriver,
+  lapTimes1,
+  lapTimes2,
+  driver1,
+  driver2,
+  year,
+  colorMode,
+}) => {
   return (
-    <Table size="md" my={4} variant="unstyled" w="100%">
+    <Table
+      size="md"
+      my={4}
+      variant="striped"
+      colorScheme={colorMode === "light" ? "blackAlpha" : "gray"}>
       <Thead>
         <Tr>
-          <Th textAlign="right">#</Th>
+          <Th w="99%">#</Th>
           <Th textAlign="right">{findDriver(driver1)}</Th>
           {year > 2011 && <Th textAlign="right">Pit</Th>}
           <Th textAlign="right">{findDriver(driver2)}</Th>
@@ -282,7 +316,7 @@ const BigTable = ({ findDriver, lapTimes1, lapTimes2, driver1, driver2, year }) 
       </Tbody>
       <Tfoot>
         <Tr>
-          <Th textAlign="right">#</Th>
+          <Th>#</Th>
           <Th textAlign="right">{findDriver(driver1)}</Th>
           {year > 2011 && <Th textAlign="right">Pit</Th>}
           <Th textAlign="right">{findDriver(driver2)}</Th>
@@ -296,6 +330,7 @@ const BigTable = ({ findDriver, lapTimes1, lapTimes2, driver1, driver2, year }) 
 
 const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers, year }) => {
   const [bigTable] = useMediaQuery("(min-width: 768px)");
+  const { colorMode } = useColorMode();
   const findDriver = (driverToFind) => {
     const found = drivers.find((driver) => driver.driverId === driverToFind);
     let toReturn;
@@ -317,7 +352,6 @@ const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers, year }) => 
         align="center"
         borderRadius="lg"
         borderWidth="0px"
-        width="100%"
         borderColor="white"
         overflow="auto">
         {bigTable ? (
@@ -328,6 +362,7 @@ const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers, year }) => 
             driver1={driver1}
             driver2={driver2}
             year={year}
+            colorMode={colorMode}
           />
         ) : (
           <SmallTable
@@ -337,6 +372,7 @@ const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers, year }) => 
             driver1={driver1}
             driver2={driver2}
             year={year}
+            colorMode={colorMode}
           />
         )}
       </Box>

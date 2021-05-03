@@ -15,17 +15,22 @@ import {
   Th,
   Thead,
   Tr,
+  useColorMode,
   useDisclosure,
   useMediaQuery,
 } from "@chakra-ui/react";
 import { v4 as uuidv4 } from "uuid";
-import "./../team-colors.scss";
 import { colorLabels } from "../../utils/colorLabels";
+import "./../team-colors.scss";
 
 const TableRow = ({ res, isLargerThan370, cardBg, year, lastGrid }) => {
   const { isOpen, onToggle } = useDisclosure();
   // const colorDetails = useColorModeValue("orange.100", "yellow.800");
   // const smallText = useColorModeValue("gray.600", "whiteAlpha.800");
+
+  if (res.status === "Collision damage") {
+    res.status = "Coll. damage";
+  }
 
   const positionGained =
     res.grid !== 0
@@ -56,7 +61,8 @@ const TableRow = ({ res, isLargerThan370, cardBg, year, lastGrid }) => {
           <Td
             textAlign="right"
             fontWeight="500"
-            color={positionGained > -1 ? "green.500" : "red.500"}>
+            color={positionGained > -1 ? "green.500" : "red.500"}
+            pl={0}>
             {positionGained > 0 ? `+${positionGained}` : positionGained}
           </Td>
         )}
@@ -108,7 +114,9 @@ const TableRow = ({ res, isLargerThan370, cardBg, year, lastGrid }) => {
                   <Text fontSize="sm" fontWeight="semibold" pb={1}>
                     Start Position
                   </Text>
-                  <Text fontSize="sm">{res.grid !== 0 ? `P${res.grid}` : "Pit Lane"}</Text>
+                  <Text fontSize="sm">
+                    {res.grid !== 0 ? `P${res.grid}` : "Pit Lane"}
+                  </Text>
                 </Box>
                 <Box>
                   <Text fontSize="sm" fontWeight="semibold" pb={1}>
@@ -143,7 +151,11 @@ const SmallTable = ({ results, cardBg, year }) => {
           </Th>
           <Th pr={0}>Driver</Th>
           <Th>Time</Th>
-          {isLargerThan370 && <Th textAlign="right">+/-</Th>}
+          {isLargerThan370 && (
+            <Th textAlign="right" pl={0}>
+              +/-
+            </Th>
+          )}
           <Th pl={0}>PTS</Th>
           <Th></Th>
         </Tr>
@@ -167,7 +179,11 @@ const SmallTable = ({ results, cardBg, year }) => {
           </Th>
           <Th pr={0}>Driver</Th>
           <Th>Time</Th>
-          {isLargerThan370 && <Th textAlign="right">+/-</Th>}
+          {isLargerThan370 && (
+            <Th textAlign="right" pl={0}>
+              +/-
+            </Th>
+          )}
           <Th pl={0}>PTS</Th>
           <Th></Th>
         </Tr>
@@ -177,9 +193,16 @@ const SmallTable = ({ results, cardBg, year }) => {
 };
 
 const RaceResultsTable = ({ results, cardBg, year }) => {
-  const [isLargerThan750] = useMediaQuery("(min-width: 750px)");
-  const [isLargerThan585] = useMediaQuery("(min-width: 585px)");
+  const [isLargerThan900] = useMediaQuery("(min-width: 900px)");
+  const [isLargerThan1125] = useMediaQuery("(min-width: 1125px)");
+  const { colorMode } = useColorMode();
   const lastGrid = results.length;
+
+  const { driverId } = results.reduce(function (prev, curr) {
+    return prev.fastestLapTime < curr.fastestLapTime || curr.fastestLapTime === null
+      ? prev
+      : curr;
+  });
 
   return (
     <Box
@@ -191,9 +214,9 @@ const RaceResultsTable = ({ results, cardBg, year }) => {
       overflow="hidden"
       bg={cardBg}
       pt={2}
-      pb={[2, 4]}
+      pb={isLargerThan900 ? 4 : 2}
       my={2}>
-      {isLargerThan585 ? (
+      {isLargerThan900 ? (
         <>
           <Box flex="1" px="6" py="2">
             <Text fontSize="xl" fontWeight="semibold" textAlign="left">
@@ -201,15 +224,23 @@ const RaceResultsTable = ({ results, cardBg, year }) => {
             </Text>
           </Box>
 
-          <Table size={isLargerThan750 ? "md" : "sm"}>
+          <Table
+            size={isLargerThan1125 ? "md" : "sm"}
+            variant="striped"
+            colorScheme={colorMode === "light" ? "blackAlpha" : "gray"}>
             <Thead bg={cardBg}>
               <Tr>
                 <Th isNumeric>#</Th>
                 <Th pl={0}>Driver</Th>
-                <Th w="99%">Team</Th>
-                <Th>PTS</Th>
+                <Th>Team</Th>
+                <Th>Time</Th>
                 <Th isNumeric>+/-</Th>
+                <Th textAlign="center" whiteSpace="nowrap">
+                  Start Pos.
+                </Th>
+                <Th textAlign="center">Fastest Lap</Th>
                 <Th isNumeric>Laps</Th>
+                <Th>PTS</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -222,10 +253,15 @@ const RaceResultsTable = ({ results, cardBg, year }) => {
                     : lastGrid - res.position;
                 return (
                   <Tr key={uuidv4()}>
-                    <Td isNumeric py={2}>
+                    <Td isNumeric py={2} borderBottom={0}>
                       {res.positionText}
                     </Td>
-                    <Td fontWeight="500" whiteSpace="nowrap" py={2} pl={0}>
+                    <Td
+                      fontWeight="500"
+                      whiteSpace="nowrap"
+                      py={2}
+                      pl={0}
+                      borderBottom={0}>
                       <Box d="flex">
                         {year > 2013 && (
                           <Box
@@ -236,22 +272,39 @@ const RaceResultsTable = ({ results, cardBg, year }) => {
                             mr={2}
                           />
                         )}
-                        {isLargerThan585 ? `${res.forename} ${res.surname}` : res.code}
+                        {`${res.forename} ${res.surname}`}
                       </Box>
                     </Td>
-                    <Td whiteSpace="nowrap" py={2}>
+                    <Td whiteSpace="nowrap" py={2} borderBottom={0}>
                       {res.name}
                     </Td>
-                    <Td py={2}>{res.points}</Td>
+                    <Td whiteSpace="nowrap" py={2} borderBottom={0} >
+                      {res.status === "Finished" ? res.time : res.status}
+                    </Td>
                     <Td
                       isNumeric
                       color={positionGained > -1 ? "green.500" : "red.500"}
                       py={2}
-                      fontWeight="500">
+                      fontWeight="500"
+                      borderBottom={0}>
                       {positionGained > 0 ? `+${positionGained}` : positionGained}
                     </Td>
-                    <Td isNumeric py={2}>
+                    <Td py={2} textAlign="center" whiteSpace="nowrap" borderBottom={0}>
+                      {res.grid !== 0 ? `P${res.grid}` : "Pit Lane"}
+                    </Td>
+                    <Td
+                      py={2}
+                      textAlign="center"
+                      color={res.driverId === driverId && "#A429C9"}
+                      borderBottom={0}
+                      fontWeight={500}>
+                      {res.fastestLapTime}
+                    </Td>
+                    <Td isNumeric py={2} borderBottom={0}>
                       {res.laps}
+                    </Td>
+                    <Td py={2} borderBottom={0} fontWeight={500}>
+                      {res.points}
                     </Td>
                   </Tr>
                 );
