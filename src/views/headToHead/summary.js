@@ -146,7 +146,7 @@ const Summary = ({
     <Flex
       align="center"
       bg={cardBg}
-      borderRadius="lg"
+      borderRadius="3xl"
       direction="column"
       justifyContent="center"
       py={4}

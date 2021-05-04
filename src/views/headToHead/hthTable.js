@@ -350,7 +350,7 @@ const HthTable = ({ lapTimes1, lapTimes2, driver1, driver2, drivers, year }) => 
     <>
       <Box
         align="center"
-        borderRadius="lg"
+        borderRadius="3xl"
         borderWidth="0px"
         borderColor="white"
         overflow="auto">

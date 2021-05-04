@@ -35,7 +35,7 @@ const TableRow = ({ res }) => {
               <Box
                 h="16px"
                 w="5px"
-                borderRadius="lg"
+                borderRadius="3xl"
                 className={colorLabels(res.constructorRef, year)}
                 mr={2}
               />
@@ -125,7 +125,7 @@ const BigTable = ({ quali, cardBg }) => {
                     <Box
                       h="20px"
                       w="5px"
-                      borderRadius="lg"
+                      borderRadius="3xl"
                       className={colorLabels(res.constructorRef, year)}
                       mr={2}
                     />
@@ -162,7 +162,7 @@ const QualiResultsTable = ({ quali, cardBg }) => {
   // console.log(quali);
   return (
     <Box
-      borderRadius="lg"
+      borderRadius="3xl"
       borderWidth="0px"
       borderColor="white"
       overflow="hidden"

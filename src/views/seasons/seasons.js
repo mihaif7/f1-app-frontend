@@ -9,7 +9,7 @@ const SeasonCard = ({ year, history }) => {
   const { ref, inView } = useInView();
   return (
     <SlideFade initialScale={0.9} in={inView}>
-      <Flex align="center" m={3} ref={ref}>
+      <Flex align="center" m={[2, 2, 3]} ref={ref}>
         <Tilt
           className="Tilt"
           options={{
@@ -29,7 +29,7 @@ const SeasonCard = ({ year, history }) => {
               history.push(`/season/${year}`);
             }}
             width={["91vw", "40vw", "30vw", "30vw", "20vw", "12vw"]}
-            borderRadius="lg"
+            borderRadius="3xl"
             boxShadow="lg">
             <Box p="6">
               <Box
@@ -100,12 +100,11 @@ const Seasons = () => {
             [...Array(big ? 25 : 6)].map((e, i) => (
               <Skeleton
                 key={i}
-                height="110px"
-                width={["91vw", "40vw", "30vw", "20vw"]}
+                height={["130px", "160px"]}
+                width={["91vw", "40vw", "30vw", "30vw", "20vw", "12vw"]}
                 colorScheme="gray"
-                mx={2}
-                borderRadius="lg"
-                m={2}
+                borderRadius="3xl"
+                m={[2, 2, 3]}
               />
             ))}
       </Flex>

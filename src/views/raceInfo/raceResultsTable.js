@@ -49,7 +49,7 @@ const TableRow = ({ res, isLargerThan370, cardBg, year, lastGrid }) => {
         <Td fontWeight="500">
           <Box d="flex">
             {year > 2013 && (
-              <Box h="16px" w="5px" borderRadius="lg" className={color} mr={2} />
+              <Box h="16px" w="5px" borderRadius="3xl" className={color} mr={2} />
             )}
             {res.code ?? res.surname.substring(0, 3).toUpperCase()}
           </Box>
@@ -208,7 +208,7 @@ const RaceResultsTable = ({ results, cardBg, year }) => {
     <Box
       align="center"
       width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
-      borderRadius="lg"
+      borderRadius="3xl"
       borderWidth="0px"
       borderColor="white"
       overflow="hidden"
@@ -268,7 +268,7 @@ const RaceResultsTable = ({ results, cardBg, year }) => {
                           <Box
                             h="20px"
                             w="5px"
-                            borderRadius="lg"
+                            borderRadius="3xl"
                             className={colorLabels(res.constructorRef, year)}
                             mr={2}
                           />

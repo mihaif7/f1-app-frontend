@@ -36,7 +36,7 @@ const TableRow = ({ res }) => {
               <Box
                 h="16px"
                 w="5px"
-                borderRadius="lg"
+                borderRadius="3xl"
                 className={colorLabels(res.constructorRef, year)}
                 mr={2}
               />
@@ -96,7 +96,7 @@ const DriversTable = ({ driver, cardBg }) => {
   return (
     <Box
       align="center"
-      borderRadius="lg"
+      borderRadius="3xl"
       borderWidth="0px"
       borderColor="white"
       overflow="hidden"
@@ -134,7 +134,7 @@ const DriversTable = ({ driver, cardBg }) => {
                           <Box
                             h="20px"
                             w="5px"
-                            borderRadius="lg"
+                            borderRadius="3xl"
                             className={colorLabels(res.constructorRef, year)}
                             mr={2}
                           />

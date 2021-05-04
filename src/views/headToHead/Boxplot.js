@@ -1,7 +1,13 @@
 import { useColorMode } from "@chakra-ui/react";
 import React from "react";
 import { interquartileRange, max, mean, median, min, quantile } from "simple-statistics";
-import { VictoryAxis, VictoryBoxPlot, VictoryChart, VictoryLabel } from "victory";
+import {
+  VictoryAxis,
+  VictoryBoxPlot,
+  VictoryChart,
+  VictoryContainer,
+  VictoryLabel,
+} from "victory";
 
 //find Driver code/name
 const findDriver = (driverToFind, drivers) => {
@@ -98,7 +104,16 @@ const Boxplot = ({ lapTimes1, lapTimes2, driver1, driver2, drivers }) => {
     <VictoryChart
       domainPadding={{ x: 90, y: 40 }}
       padding={{ top: 20, bottom: 40, left: 50, right: 20 }}
-      animate={{ duration: 500 }}>
+      animate={{ duration: 500 }}
+      containerComponent={
+        <VictoryContainer
+          style={{
+            pointerEvents: "auto",
+            userSelect: "auto",
+            touchAction: "auto",
+          }}
+        />
+      }>
       <VictoryAxis
         dependentAxis
         tickFormat={(x) => convertTime(x)}

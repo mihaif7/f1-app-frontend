@@ -140,154 +140,266 @@ const HeadToHead = () => {
           spacing={["4", "6"]}
           justifyContent="center"
           my={4}>
-          <Stack
-            direction={["column", "column", "column", "row", "row"]}
-            spacing={["4", "6"]}>
-            <Flex
-              align="center"
-              bg={cardBg}
-              borderRadius="lg"
-              flex="1 1 50%"
-              boxShadow={["md", "lg"]}>
-              <Box p="6" d="flex" flexDirection="column" justifyContent="center" w="100%">
-                <Box
-                  color={smallText}
-                  fontWeight="semibold"
-                  letterSpacing="wide"
-                  fontSize="xs"
-                  textTransform="uppercase"
-                  mb={2}>
-                  Race {raceInfo.round}
-                </Box>
-                <Box
-                  fontWeight="semibold"
-                  fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
-                  lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
-                  as="p">
-                  {raceInfo.raceName}
-                </Box>
-                <Box
-                  color={smallText}
-                  fontWeight="semibold"
-                  letterSpacing="wide"
-                  fontSize="xs"
-                  mt={2}>
-                  Date: {raceInfo.date}
-                </Box>
-              </Box>
-            </Flex>
-            <Flex
-              justifyContent="center"
-              bg={cardBg}
-              borderRadius="lg"
-              direction="column"
-              flex="1 1 50%"
-              boxShadow={["md", "lg"]}>
-              <Box p="4" d="flex" flexDirection="column" w="100%">
-                <Box d="flex">
-                  <Select
-                    value={driver1}
-                    onChange={handleChange}
-                    pr={1}
-                    variant="filled"
-                    rootProps={
-                      year > 2013 && {
-                        className:
-                          "left-select " + colorHtHSelect(driver1, drivers, year),
-                      }
-                    }
-                    fontWeight={500}
-                    className={colorHtHSelect(driver1, drivers, year)}
-                    bg={year <= 2013 && orange}>
-                    {drivers.map((driver) => {
-                      return (
-                        <option
-                          value={driver.driverId}
-                          key={driver.driverId}
-                          disabled={driver.driverId === driver2}
-                          className={
-                            (colorMode === "light"
-                              ? "drop-text-light"
-                              : "drop-text-dark") +
-                            (driver.driverId === driver2 ? " disabled-option" : "")
-                          }>
-                          {year > 2013
-                            ? `#${driver.number} ${driver.code}`
-                            : driver.code ?? driver.surname.substring(0, 3).toUpperCase()}
-                        </option>
-                      );
-                    })}
-                  </Select>
-                  <Select
-                    value={driver2}
-                    onChange={handleChange2}
-                    pl={1}
-                    variant="filled"
-                    rootProps={
-                      year > 2013 && {
-                        className:
-                          "right-select " + colorHtHSelect(driver2, drivers, year),
-                      }
-                    }
-                    fontWeight={500}
-                    className={colorHtHSelect(driver2, drivers, year)}
-                    bg={year <= 2013 && orange}>
-                    {drivers.map((driver) => {
-                      return (
-                        <option
-                          value={driver.driverId}
-                          key={driver.driverId}
-                          disabled={driver.driverId === driver1}
-                          className={
-                            (colorMode === "light"
-                              ? "drop-text-light"
-                              : "drop-text-dark") +
-                            (driver.driverId === driver1 ? " disabled-option" : "")
-                          }>
-                          {year > 2013
-                            ? `#${driver.number} ${driver.code}`
-                            : driver.code ?? driver.surname.substring(0, 3).toUpperCase()}
-                        </option>
-                      );
-                    })}
-                  </Select>
-                </Box>
-
-                <Box
-                  color={smallText}
-                  fontWeight="semibold"
-                  letterSpacing="wide"
-                  fontSize="sm"
-                  mt={4}
-                  flexGrow="1">
-                  <Button
-                    onClick={swapDrivers}
-                    size="sm"
-                    w="100%"
-                    colorScheme={button}
-                    leftIcon={<RepeatIcon />}>
-                    Swap drivers
-                  </Button>
-                </Box>
-              </Box>
-            </Flex>
-          </Stack>
-
           <Stack direction={stackChange ? "row" : "column"} spacing={["4", "6"]}>
-            <Box bg={cardBg} borderRadius="lg" flex="0 1 70%" boxShadow={["md", "lg"]}>
-              <Fade in={!fetching}>
-                <HthTable
-                  year={year}
-                  drivers={drivers}
-                  driver1={driver1}
-                  driver2={driver2}
-                  lapTimes1={lapTimes1}
-                  lapTimes2={lapTimes2}
-                />
-              </Fade>
-            </Box>
+            <Stack spacing={["4", "6"]} flex="0 1 70%">
+              <Flex
+                align="center"
+                bg={cardBg}
+                borderRadius="3xl"
+                flex="1 1 50%"
+                boxShadow={["md", "lg"]}>
+                <Box
+                  p="6"
+                  d="flex"
+                  flexDirection="column"
+                  justifyContent="center"
+                  w="100%">
+                  <Box
+                    color={smallText}
+                    fontWeight="semibold"
+                    letterSpacing="wide"
+                    fontSize="xs"
+                    textTransform="uppercase"
+                    mb={2}>
+                    Race {raceInfo.round}
+                  </Box>
+                  <Box
+                    fontWeight="semibold"
+                    fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
+                    lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
+                    as="p">
+                    {raceInfo.raceName}
+                  </Box>
+                  <Box
+                    color={smallText}
+                    fontWeight="semibold"
+                    letterSpacing="wide"
+                    fontSize="xs"
+                    mt={2}>
+                    Date: {raceInfo.date}
+                  </Box>
+                </Box>
+              </Flex>
+              {!stackChange && (
+                <Flex
+                  justifyContent="center"
+                  bg={cardBg}
+                  borderRadius="3xl"
+                  direction="column"
+                  h="133px"
+                  boxShadow={["md", "lg"]}>
+                  <Box p="4" d="flex" flexDirection="column" w="100%">
+                    <Box d="flex">
+                      <Select
+                        value={driver1}
+                        onChange={handleChange}
+                        pr={1}
+                        variant="filled"
+                        rootProps={
+                          year > 2013 && {
+                            className:
+                              "left-select " + colorHtHSelect(driver1, drivers, year),
+                          }
+                        }
+                        fontWeight={500}
+                        className={colorHtHSelect(driver1, drivers, year)}
+                        bg={year <= 2013 && orange}
+                        borderRadius="3xl">
+                        {drivers.map((driver) => {
+                          return (
+                            <option
+                              value={driver.driverId}
+                              key={driver.driverId}
+                              disabled={driver.driverId === driver2}
+                              className={
+                                (colorMode === "light"
+                                  ? "drop-text-light"
+                                  : "drop-text-dark") +
+                                (driver.driverId === driver2 ? " disabled-option" : "")
+                              }>
+                              {year > 2013
+                                ? `#${driver.number} ${driver.code}`
+                                : driver.code ??
+                                  driver.surname.substring(0, 3).toUpperCase()}
+                            </option>
+                          );
+                        })}
+                      </Select>
+                      <Select
+                        value={driver2}
+                        onChange={handleChange2}
+                        pl={1}
+                        variant="filled"
+                        rootProps={
+                          year > 2013 && {
+                            className:
+                              "right-select " + colorHtHSelect(driver2, drivers, year),
+                          }
+                        }
+                        fontWeight={500}
+                        className={colorHtHSelect(driver2, drivers, year)}
+                        bg={year <= 2013 && orange}
+                        borderRadius="3xl">
+                        {drivers.map((driver) => {
+                          return (
+                            <option
+                              value={driver.driverId}
+                              key={driver.driverId}
+                              disabled={driver.driverId === driver1}
+                              className={
+                                (colorMode === "light"
+                                  ? "drop-text-light"
+                                  : "drop-text-dark") +
+                                (driver.driverId === driver1 ? " disabled-option" : "")
+                              }>
+                              {year > 2013
+                                ? `#${driver.number} ${driver.code}`
+                                : driver.code ??
+                                  driver.surname.substring(0, 3).toUpperCase()}
+                            </option>
+                          );
+                        })}
+                      </Select>
+                    </Box>
+
+                    <Box
+                      color={smallText}
+                      fontWeight="semibold"
+                      letterSpacing="wide"
+                      fontSize="sm"
+                      mt={4}
+                      flexGrow="1">
+                      <Button
+                        onClick={swapDrivers}
+                        size="sm"
+                        w="100%"
+                        colorScheme={button}
+                        leftIcon={<RepeatIcon />}
+                        borderRadius="3xl">
+                        Swap drivers
+                      </Button>
+                    </Box>
+                  </Box>
+                </Flex>
+              )}
+
+              <Box bg={cardBg} borderRadius="3xl" boxShadow={["md", "lg"]}>
+                <Fade in={!fetching}>
+                  <HthTable
+                    year={year}
+                    drivers={drivers}
+                    driver1={driver1}
+                    driver2={driver2}
+                    lapTimes1={lapTimes1}
+                    lapTimes2={lapTimes2}
+                  />
+                </Fade>
+              </Box>
+            </Stack>
             <Stack direction={"column"} spacing={["4", "6"]} flex="1 0 30%">
-              <Box >
+              {stackChange && (
+                <Flex
+                  justifyContent="center"
+                  bg={cardBg}
+                  borderRadius="3xl"
+                  direction="column"
+                  h="133px"
+                  boxShadow={["md", "lg"]}>
+                  <Box p="4" d="flex" flexDirection="column" w="100%">
+                    <Box d="flex">
+                      <Select
+                        value={driver1}
+                        onChange={handleChange}
+                        pr={1}
+                        variant="filled"
+                        rootProps={
+                          year > 2013 && {
+                            className:
+                              "left-select " + colorHtHSelect(driver1, drivers, year),
+                          }
+                        }
+                        fontWeight={500}
+                        className={colorHtHSelect(driver1, drivers, year)}
+                        bg={year <= 2013 && orange}
+                        borderRadius="3xl">
+                        {drivers.map((driver) => {
+                          return (
+                            <option
+                              value={driver.driverId}
+                              key={driver.driverId}
+                              disabled={driver.driverId === driver2}
+                              className={
+                                (colorMode === "light"
+                                  ? "drop-text-light"
+                                  : "drop-text-dark") +
+                                (driver.driverId === driver2 ? " disabled-option" : "")
+                              }>
+                              {year > 2013
+                                ? `#${driver.number} ${driver.code}`
+                                : driver.code ??
+                                  driver.surname.substring(0, 3).toUpperCase()}
+                            </option>
+                          );
+                        })}
+                      </Select>
+                      <Select
+                        value={driver2}
+                        onChange={handleChange2}
+                        pl={1}
+                        variant="filled"
+                        rootProps={
+                          year > 2013 && {
+                            className:
+                              "right-select " + colorHtHSelect(driver2, drivers, year),
+                          }
+                        }
+                        fontWeight={500}
+                        className={colorHtHSelect(driver2, drivers, year)}
+                        bg={year <= 2013 && orange}
+                        borderRadius="3xl">
+                        {drivers.map((driver) => {
+                          return (
+                            <option
+                              value={driver.driverId}
+                              key={driver.driverId}
+                              disabled={driver.driverId === driver1}
+                              className={
+                                (colorMode === "light"
+                                  ? "drop-text-light"
+                                  : "drop-text-dark") +
+                                (driver.driverId === driver1 ? " disabled-option" : "")
+                              }>
+                              {year > 2013
+                                ? `#${driver.number} ${driver.code}`
+                                : driver.code ??
+                                  driver.surname.substring(0, 3).toUpperCase()}
+                            </option>
+                          );
+                        })}
+                      </Select>
+                    </Box>
+
+                    <Box
+                      color={smallText}
+                      fontWeight="semibold"
+                      letterSpacing="wide"
+                      fontSize="sm"
+                      mt={4}
+                      flexGrow="1">
+                      <Button
+                        onClick={swapDrivers}
+                        size="sm"
+                        w="100%"
+                        colorScheme={button}
+                        leftIcon={<RepeatIcon />}
+                        borderRadius="3xl">
+                        Swap drivers
+                      </Button>
+                    </Box>
+                  </Box>
+                </Flex>
+              )}
+              <Box>
                 <Summary
                   cardBg={cardBg}
                   raceId={raceId}
@@ -301,12 +413,13 @@ const HeadToHead = () => {
                 />
               </Box>
 
-              <Flex
-                align="center"
+              <Box
                 bg={cardBg}
-                borderRadius="lg"
-                direction="column"
-                boxShadow={["md", "lg"]}>
+                borderRadius="3xl"
+                boxShadow={["md", "lg"]}
+                minW="100%"
+                w="369px"
+                maxW="100%">
                 <Boxplot
                   lapTimes1={lapTimes1}
                   lapTimes2={lapTimes2}
@@ -314,7 +427,7 @@ const HeadToHead = () => {
                   driver2={driver2}
                   drivers={drivers}
                 />
-              </Flex>
+              </Box>
             </Stack>
           </Stack>
         </Stack>
@@ -326,19 +439,26 @@ const HeadToHead = () => {
         <Stack
           width={["91vw", "80vw", "80vw", "80vw", "80vw"]}
           direction="column"
-          spacing="4"
+          spacing={["4", "6"]}
           justifyContent="center"
           my={4}>
-          <Stack direction={["column", "column", "column", "row", "row"]} spacing="4">
-            <Skeleton height="120px" borderRadius="lg" flex="1 1 50%" />
-            <Skeleton height="120px" borderRadius="lg" flex="1 1 50%" />
-          </Stack>
-
-          <Stack direction={stackChange ? "row" : "column"} spacing="4">
-            <Skeleton height="700px" borderRadius="lg" flex={stackChange && "1 1 65%"} />
-            <Stack direction={"column"} spacing="4" flex={stackChange && "1 1 35%"}>
-              <Skeleton height="222px" borderRadius="lg" />
-              <Skeleton height="271px" borderRadius="lg" />
+          <Stack direction={stackChange ? "row" : "column"} spacing={["4", "6"]}>
+            <Stack spacing={["4", "6"]} flex="0 1 70%">
+              <Skeleton height="120px" borderRadius="3xl" />
+              {!stackChange && <Skeleton height="120px" borderRadius="3xl" />}
+              <Skeleton
+                height="700px"
+                borderRadius="3xl"
+                flex={stackChange && "1 1 65%"}
+              />
+            </Stack>
+            <Stack
+              direction={"column"}
+              spacing={["4", "6"]}
+              flex={stackChange && "1 1 35%"}>
+              {stackChange && <Skeleton height="120px" borderRadius="3xl" />}
+              <Skeleton height="222px" borderRadius="3xl" />
+              <Skeleton height="271px" borderRadius="3xl" />
             </Stack>
           </Stack>
         </Stack>

@@ -34,7 +34,7 @@ const TableRow = ({ res }) => {
               <Box
                 h="16px"
                 w="5px"
-                borderRadius="lg"
+                borderRadius="3xl"
                 className={colorLabels(res.constructorRef, year)}
                 mr={2}
               />
@@ -94,7 +94,7 @@ const StandingsTable = ({ standings, cardBg }) => {
   return (
     <Box align="center">
       <Box
-        borderRadius="lg"
+        borderRadius="3xl"
         borderWidth="0px"
         borderColor="white"
         bg={cardBg}
@@ -132,7 +132,7 @@ const StandingsTable = ({ standings, cardBg }) => {
                             <Box
                               h="20px"
                               w="5px"
-                              borderRadius="lg"
+                              borderRadius="3xl"
                               className={colorLabels(res.constructorRef, year)}
                               mr={2}
                             />

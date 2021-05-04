@@ -140,11 +140,11 @@ const RacesInfo = () => {
               width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
               direction={["column", "column", "column", "row", "row"]}
               mb={[2, 3]}
-              spacing={["4", "6"]}>
+              spacing={["4", "4", "6"]}>
               <Flex
                 align="center"
                 bg={cardBg}
-                borderRadius="lg"
+                borderRadius="3xl"
                 flex="1 1 33%"
                 boxShadow={["md", "lg"]}>
                 <Box
@@ -183,7 +183,7 @@ const RacesInfo = () => {
               <Flex
                 align="center"
                 bg={orange}
-                borderRadius="lg"
+                borderRadius="3xl"
                 flex="1 1 33%"
                 boxShadow={["md", "lg"]}>
                 <Box
@@ -228,14 +228,14 @@ const RacesInfo = () => {
                 style={{ flex: "1 1 33%" }}
                 options={{
                   reverse: true, // reverse the tilt direction
-                  max: 10, // max tilt rotation (degrees)
+                  max: 5, // max tilt rotation (degrees)
                   perspective: 2000, // Transform perspective, the lower the more extreme the tilt gets.
                   scale: 1, // 2 = 200%, 1.5 = 150%, etc..
                   speed: 300, // Speed of the enter/exit transition
                   transition: true, // Set a transition on enter/exit.
                   easing: "cubic-bezier(.03,.98,.52,.99)", // Easing on enter/exit.
                 }}>
-                <Flex align="center" borderRadius="lg" h="100%">
+                <Flex align="center" h="100%">
                   <Button
                     d="flex"
                     py={4}
@@ -247,7 +247,8 @@ const RacesInfo = () => {
                     background={hthButton}
                     _hover={{ backgroundColor: hthButtonHover }}
                     _active={{ backgroundColor: hthButtonHover }}
-                    boxShadow={["md", "lg"]}>
+                    boxShadow={["md", "lg"]}
+                    borderRadius="3xl">
                     <Text
                       fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
                       fontWeight="semibold"
@@ -264,12 +265,12 @@ const RacesInfo = () => {
             <Stack
               width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
               direction={["column", "column", "column", "column", "column", "row"]}
-              spacing={["4", "6"]}
+              spacing={["4", "4", "6"]}
               mt={[2, 3]}>
               <Stack
                 direction={["column", "column", "column", "row", "row"]}
                 flexGrow="1"
-                spacing={["4", "6"]}>
+                spacing={["4", "4", "6"]}>
                 {year > 2005 && <QualiResultsTable quali={quali} cardBg={cardBg} />}
                 <DriversTable driver={driverStandings} cardBg={cardBg} />
               </Stack>
@@ -281,66 +282,77 @@ const RacesInfo = () => {
         <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
           <Stack
             width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
-            direction={["column", "row"]}
-            spacing="4">
+            direction={["column", "column", "column", "row", "row"]}
+            mb={[2, 3]}
+            spacing={["4", "4", "6"]}>
             <Skeleton
               height="120px"
               align="center"
               flexGrow={["1", "0.5"]}
               bg="gray.100"
-              borderRadius="lg"
+              borderRadius="3xl"
             />
             <Skeleton
               height="120px"
               align="center"
               flexGrow={["1", "0.5"]}
               bg="gray.100"
-              borderRadius="lg"
+              borderRadius="3xl"
             />
             <Skeleton
               height="120px"
               align="center"
               flexGrow={["1", "0.5"]}
               bg="gray.100"
-              borderRadius="lg"
+              borderRadius="3xl"
             />
           </Stack>
+
           <Skeleton
             align="center"
-            m={2}
-            mt={4}
+            my={[2, 3]}
             width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
-            borderRadius="lg"
-            height="64px"
+            borderRadius="3xl"
+            height="600px"
           />
-          <Skeleton
-            align="center"
-            m={2}
+
+          <Stack
             width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
-            borderRadius="lg"
-            height="64px"
-          />
-          <Skeleton
-            align="center"
-            m={2}
-            width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
-            borderRadius="lg"
-            height="64px"
-          />
-          <Skeleton
-            align="center"
-            m={2}
-            width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
-            borderRadius="lg"
-            height="64px"
-          />
-          <Skeleton
-            align="center"
-            m={2}
-            width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
-            borderRadius="lg"
-            height="64px"
-          />
+            direction={["column", "column", "column", "column", "column", "row"]}
+            spacing={["4", "4", "6"]}
+            mt={[2, 3]}>
+            <Stack
+              direction={["column", "column", "column", "row", "row"]}
+              flexGrow="1"
+              spacing={["4", "4", "6"]}>
+              <Skeleton
+                align="center"
+                borderRadius="3xl"
+                height="100px"
+                flexGrow={["1", "0.5"]}
+              />
+              <Skeleton
+                align="center"
+                borderRadius="3xl"
+                height="100px"
+                flexGrow={["1", "0.5"]}
+              />
+            </Stack>
+
+            <Skeleton
+              align="center"
+              borderRadius="3xl"
+              height="100px"
+              flexGrow={["1", "0.5"]}
+            />
+            {/* <Skeleton
+              align="center"
+              m={2}
+              width={["91vw", "91vw", "91vw", "91vw", "80vw"]}
+              borderRadius="3xl"
+              height="64px"
+            /> */}
+          </Stack>
         </Flex>
       )}
     </>

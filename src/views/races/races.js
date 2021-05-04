@@ -9,7 +9,7 @@ const RaceCard = ({ race, history, year }) => {
   const { ref, inView } = useInView();
   return (
     <SlideFade initialScale={0.9} in={inView}>
-      <Flex align="center" m={3} ref={ref}>
+      <Flex align="center" m={[2, 2, 3]} ref={ref}>
         <Tilt
           className="Tilt"
           options={{
@@ -29,7 +29,7 @@ const RaceCard = ({ race, history, year }) => {
               history.push(`/season/${year}/round/${race.raceId}`);
             }}
             width={["91vw", "91vw", "91vw", "40vw", "40vw", "25vw"]}
-            borderRadius="lg"
+            borderRadius="3xl"
             boxShadow="lg">
             <Box p="6" d="flex" flexDirection="column" justifyContent="center">
               <Box
@@ -100,12 +100,11 @@ const Races = () => {
             [...Array(big ? 16 : 6)].map((e, i) => (
               <Skeleton
                 key={i}
-                height="110px"
-                width={["91vw", "91vw", "91vw", "40vw"]}
+                height={["130px", "160px"]}
+                width={["91vw", "91vw", "91vw", "40vw", "40vw", "25vw"]}
                 colorScheme="gray"
-                mx={2}
-                borderRadius="lg"
-                m={2}
+                m={[2, 2, 3]}
+                borderRadius="3xl"
               />
             ))}
       </Flex>
