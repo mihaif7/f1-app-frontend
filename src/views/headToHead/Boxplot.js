@@ -19,9 +19,11 @@ const findDriver = (driverToFind, drivers) => {
 
 // helper fucntions
 const convertTime = (millis) => {
+  if (millis === null) return "-";
+
   const minutes = Math.floor(millis / 60000);
-  const seconds = ((millis % 60000) / 1000).toFixed(0);
-  const milliseconds = (millis % 1000).toFixed(0);
+  const seconds = parseInt((millis % 60000) / 1000);
+  const milliseconds = parseInt(millis % 1000);
 
   return (
     (minutes !== 0 ? minutes + ":" : "") +

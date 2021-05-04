@@ -17,14 +17,14 @@ const convertTime = (millis) => {
   if (millis === null) return "-";
 
   const minutes = Math.floor(millis / 60000);
-  const seconds = ((millis % 60000) / 1000).toFixed(0);
-  const milliseconds = (millis % 1000).toFixed(0);
+  const seconds = parseInt((millis % 60000) / 1000);
+  const milliseconds = parseInt(millis % 1000);
 
   return (
     (minutes !== 0 ? minutes + ":" : "") +
     (seconds < 10 ? "0" : "") +
     seconds +
-    ":" +
+    "." +
     (milliseconds < 10 ? "00" : milliseconds < 100 ? "0" : "") +
     milliseconds
   );
@@ -39,7 +39,9 @@ const dif = (time1, time2) => {
 };
 
 const process = (laptime) => {
-  const onlyMili = laptime.map((value) => value.milliseconds);
+  const onlyMili = laptime.map((value) => value.milliseconds).sort((a, b) => a - b);
+
+  console.log(laptime);
 
   const processed = {
     fastestLap: min(onlyMili),
@@ -139,6 +141,7 @@ const Summary = ({
 
   // return <></>;
 
+  console.log(convertTime(stats1.fastestLap), stats1.fastestLap);
   return (
     <Flex
       align="center"
