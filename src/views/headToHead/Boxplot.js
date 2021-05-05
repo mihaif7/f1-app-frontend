@@ -1,5 +1,5 @@
-import { useColorMode } from "@chakra-ui/react";
-import React from "react";
+import { Box, useColorMode } from "@chakra-ui/react";
+import React, { useCallback, useState } from "react";
 import { interquartileRange, max, mean, median, min, quantile } from "simple-statistics";
 import {
   VictoryAxis,
@@ -73,6 +73,12 @@ const createBoxPlot = (lapTimes) => {
 
 const Boxplot = ({ lapTimes1, lapTimes2, driver1, driver2, drivers }) => {
   const { colorMode } = useColorMode();
+  const [boundingRect, setBoundingRect] = useState({ width: 0, height: 0 });
+  const graphRef = useCallback((node) => {
+    if (node !== null) {
+      setBoundingRect(node.getBoundingClientRect());
+    }
+  }, []);
 
   const boxLap1 = createBoxPlot(lapTimes1);
   const boxLap2 = createBoxPlot(lapTimes2);
@@ -101,61 +107,64 @@ const Boxplot = ({ lapTimes1, lapTimes2, driver1, driver2, drivers }) => {
   }
 
   return (
-    <VictoryChart
-      domainPadding={{ x: 90, y: 40 }}
-      padding={{ top: 20, bottom: 40, left: 50, right: 20 }}
-      animate={{ duration: 500 }}
-      height={400}
-      containerComponent={
-        <VictoryContainer
+    <Box h="100%" w="100%" ref={graphRef}>
+      <VictoryChart
+        domainPadding={{ x: 90, y: 40 }}
+        padding={{ top: 20, bottom: 40, left: 50, right: 20 }}
+        animate={{ duration: 500 }}
+        height={400}
+        width={boundingRect.width}
+        containerComponent={
+          <VictoryContainer
+            style={{
+              pointerEvents: "auto",
+              userSelect: "auto",
+              touchAction: "auto",
+              height: 400,
+            }}
+          />
+        }>
+        <VictoryAxis
+          dependentAxis
+          tickFormat={(x) => convertTime(x)}
           style={{
-            pointerEvents: "auto",
-            userSelect: "auto",
-            touchAction: "auto",
-            height: 400,
+            grid: { stroke: "#718096", strokeDasharray: "2 10" },
+            axis: { stroke: colorMode === "light" ? "#1a202c" : "#ffffffeb" },
+            tickLabels: { fill: colorMode === "light" ? "#1a202c" : "#ffffffeb" },
+          }}
+          fixLabelOverlap={true}
+        />
+        <VictoryAxis
+          style={{
+            grid: { stroke: "#718096", strokeDasharray: "2 10" },
+            axis: { stroke: colorMode === "light" ? "#1a202c" : "#ffffffeb" },
+            tickLabels: { fill: colorMode === "light" ? "#1a202c" : "#ffffffeb" },
           }}
         />
-      }>
-      <VictoryAxis
-        dependentAxis
-        tickFormat={(x) => convertTime(x)}
-        style={{
-          grid: { stroke: "#718096", strokeDasharray: "2 10" },
-          axis: { stroke: colorMode === "light" ? "#1a202c" : "#ffffffeb" },
-          tickLabels: { fill: colorMode === "light" ? "#1a202c" : "#ffffffeb" },
-        }}
-        fixLabelOverlap={true}
-      />
-      <VictoryAxis
-        style={{
-          grid: { stroke: "#718096", strokeDasharray: "2 10" },
-          axis: { stroke: colorMode === "light" ? "#1a202c" : "#ffffffeb" },
-          tickLabels: { fill: colorMode === "light" ? "#1a202c" : "#ffffffeb" },
-        }}
-      />
-      <VictoryBoxPlot
-        horizontal
-        boxWidth={20}
-        style={{
-          min: { stroke: colorMode === "light" ? "#1a202c" : "#ffffffeb" },
-          max: { stroke: colorMode === "light" ? "#1a202c" : "#ffffffeb" },
-          q1: { fill: "#2F9A2E" },
-          q3: { fill: "#2F9A2E" },
-          median: {
-            stroke: colorMode === "light" ? "#1a202c" : "#ffffffeb",
-            strokeWidth: 2,
-          },
-          minLabels: { fill: colorMode === "light" ? "#C330EF" : "#DC31FF" },
-          maxLabels: { fill: colorMode === "light" ? "#A48B01" : "#D8B602" },
-          medianLabels: { fill: colorMode === "light" ? "#1a202c" : "#ffffffeb" },
-        }}
-        data={data}
-        maxLabels={({ datum }) => convertTime(datum.max)}
-        minLabels={({ datum }) => convertTime(datum.min)}
-        medianLabels={({ datum }) => convertTime(datum.median)}
-        medianLabelComponent={<VictoryLabel dy={30} />}
-      />
-    </VictoryChart>
+        <VictoryBoxPlot
+          horizontal
+          boxWidth={20}
+          style={{
+            min: { stroke: colorMode === "light" ? "#1a202c" : "#ffffffeb" },
+            max: { stroke: colorMode === "light" ? "#1a202c" : "#ffffffeb" },
+            q1: { fill: "#2F9A2E" },
+            q3: { fill: "#2F9A2E" },
+            median: {
+              stroke: colorMode === "light" ? "#1a202c" : "#ffffffeb",
+              strokeWidth: 2,
+            },
+            minLabels: { fill: colorMode === "light" ? "#C330EF" : "#DC31FF" },
+            maxLabels: { fill: colorMode === "light" ? "#A48B01" : "#D8B602" },
+            medianLabels: { fill: colorMode === "light" ? "#1a202c" : "#ffffffeb" },
+          }}
+          data={data}
+          maxLabels={({ datum }) => convertTime(datum.max)}
+          minLabels={({ datum }) => convertTime(datum.min)}
+          medianLabels={({ datum }) => convertTime(datum.median)}
+          medianLabelComponent={<VictoryLabel dy={30} />}
+        />
+      </VictoryChart>
+    </Box>
   );
 };
 

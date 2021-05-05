@@ -127,6 +127,7 @@ const LineChartComponent = ({ lapTimes1, lapTimes2, driver1, driver2, drivers })
           stroke="#8884d8"
           dot={false}
           strokeWidth={2}
+          isAnimationActive={true}
         />
         <Line
           type="monotone"
@@ -134,10 +135,11 @@ const LineChartComponent = ({ lapTimes1, lapTimes2, driver1, driver2, drivers })
           stroke="#82ca9d"
           dot={false}
           strokeWidth={2}
+          isAnimationActive={true}
         />
       </LineChart>
     </ResponsiveContainer>
   );
 };
 
-export default LineChartComponent;
+export default React.memo(LineChartComponent);
