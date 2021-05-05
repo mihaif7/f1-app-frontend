@@ -1,3 +1,4 @@
+import { useColorMode } from "@chakra-ui/react";
 import React from "react";
 import {
   CartesianGrid,
@@ -45,14 +46,14 @@ const convertTime = (millis, noSeconds) => {
 
 const calcMax = (arr) => {
   const onlyMili = arr.map((value) => value.milliseconds);
-  const delimitQ3 = quantile(onlyMili, 0.9) + 1.5 * interquartileRange(onlyMili);
+  const delimitQ3 = quantile(onlyMili, 0.9) * 1.25;
   const m = delimitQ3 < max(onlyMili) ? delimitQ3 : max(onlyMili);
 
   return m;
 };
 
 const LineChartComponent = ({ lapTimes1, lapTimes2, driver1, driver2, drivers }) => {
-  // const { colorMode } = useColorMode();
+  const { colorMode } = useColorMode();
 
   let data;
   if (lapTimes1.length > lapTimes2.length) {
@@ -89,7 +90,7 @@ const LineChartComponent = ({ lapTimes1, lapTimes2, driver1, driver2, drivers })
           left: 0,
           bottom: 10,
         }}>
-        <CartesianGrid strokeDasharray="3 3" />
+        {colorMode === "light" && <CartesianGrid strokeDasharray="3 3" />}
         <XAxis dataKey="lap" />
         <YAxis
           domain={["auto", () => (maxY1 > maxY2 ? maxY1 : maxY2)]}
