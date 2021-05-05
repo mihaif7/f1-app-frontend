@@ -105,12 +105,14 @@ const Boxplot = ({ lapTimes1, lapTimes2, driver1, driver2, drivers }) => {
       domainPadding={{ x: 90, y: 40 }}
       padding={{ top: 20, bottom: 40, left: 50, right: 20 }}
       animate={{ duration: 500 }}
+      height={400}
       containerComponent={
         <VictoryContainer
           style={{
             pointerEvents: "auto",
             userSelect: "auto",
             touchAction: "auto",
+            height: 400,
           }}
         />
       }>

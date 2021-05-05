@@ -20,6 +20,7 @@ import "./../team-colors.scss";
 import Boxplot from "./Boxplot";
 import HthTable from "./hthTable";
 import Summary from "./summary";
+import LineChartComponent from "./LineChart";
 
 const HeadToHead = () => {
   const [raceInfo, setRaceInfo] = useState();
@@ -129,8 +130,6 @@ const HeadToHead = () => {
     // eslint-disable-next-line
   }, [raceId, year]);
 
-  console.log();
-
   return drivers && driver1 && driver2 && lapTimes1 && lapTimes2 ? (
     <SlideFade in={true}>
       <Flex align="center" justify="center" wrap="wrap" width="100%" px="2">
@@ -141,7 +140,7 @@ const HeadToHead = () => {
           justifyContent="center"
           my={4}>
           <Stack direction={stackChange ? "row" : "column"} spacing={["4", "6"]}>
-            <Stack spacing={["4", "6"]} flex="0 1 70%">
+            <Stack spacing={["4", "6"]} flex="1 1 50%">
               <Flex
                 align="center"
                 bg={cardBg}
@@ -283,7 +282,7 @@ const HeadToHead = () => {
                 </Flex>
               )}
 
-              <Box bg={cardBg} borderRadius="3xl" boxShadow={["md", "lg"]}>
+              <Box bg={cardBg} borderRadius="xl" boxShadow={["md", "lg"]}>
                 <Fade in={!fetching}>
                   <HthTable
                     year={year}
@@ -296,7 +295,7 @@ const HeadToHead = () => {
                 </Fade>
               </Box>
             </Stack>
-            <Stack direction={"column"} spacing={["4", "6"]} flex="1 0 30%">
+            <Stack direction={"column"} spacing={["4", "6"]} flex="1 1 50%">
               {stackChange && (
                 <Flex
                   justifyContent="center"
@@ -413,14 +412,22 @@ const HeadToHead = () => {
                 />
               </Box>
 
+              <Box bg={cardBg} borderRadius="xl" boxShadow={["md", "lg"]}>
+                <Boxplot
+                  lapTimes1={lapTimes1}
+                  lapTimes2={lapTimes2}
+                  driver1={driver1}
+                  driver2={driver2}
+                  drivers={drivers}
+                />
+              </Box>
               <Box
                 bg={cardBg}
-                borderRadius="3xl"
+                borderRadius="xl"
                 boxShadow={["md", "lg"]}
-                minW="100%"
-                w="369px"
-                maxW="100%">
-                <Boxplot
+                h={["400px", "400px", "400px", "400px", "400px", "500px"]}
+                width="99%">
+                <LineChartComponent
                   lapTimes1={lapTimes1}
                   lapTimes2={lapTimes2}
                   driver1={driver1}

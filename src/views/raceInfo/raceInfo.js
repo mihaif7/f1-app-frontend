@@ -141,87 +141,120 @@ const RacesInfo = () => {
               direction={["column", "column", "column", "row", "row"]}
               mb={[2, 3]}
               spacing={["4", "4", "6"]}>
-              <Flex
-                align="center"
-                bg={cardBg}
-                borderRadius="3xl"
-                flex="1 1 33%"
-                boxShadow={["md", "lg"]}>
-                <Box
-                  p="6"
-                  d="flex"
-                  flexDirection="column"
-                  justifyContent="center"
-                  w="100%">
-                  <Box
-                    color={smallText}
-                    fontWeight="semibold"
-                    letterSpacing="wide"
-                    fontSize="xs"
-                    textTransform="uppercase"
-                    mb={2}>
-                    Race {raceInfo.round}
-                  </Box>
-                  <Box
-                    fontWeight="semibold"
-                    fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
-                    lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
-                    as="p">
-                    {raceInfo.raceName}
-                  </Box>
-                  <Box
-                    fontWeight="semibold"
-                    letterSpacing="wide"
-                    fontSize="xs"
-                    color={smallText}
-                    mt={2}
-                    textTransform="uppercase">
-                    Date: {raceInfo.date}
-                  </Box>
-                </Box>
-              </Flex>
-              <Flex
-                align="center"
-                bg={orange}
-                borderRadius="3xl"
-                flex="1 1 33%"
-                boxShadow={["md", "lg"]}>
-                <Box
-                  p="6"
-                  d="flex"
-                  flexDirection="column"
-                  justifyContent="center"
-                  w="100%">
-                  <Box
-                    color={smallText}
-                    fontWeight="semibold"
-                    letterSpacing="wide"
-                    fontSize="xs"
-                    textTransform="uppercase"
-                    mb={2}
-                    d="flex"
-                    alignItems="center">
-                    Location
-                  </Box>
-                  <Box
-                    fontWeight="semibold"
-                    fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
-                    lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
-                    as="p"
-                    color={bigText}>
-                    {raceInfo.circuitName}
-                  </Box>
-                  <Box
-                    color={smallText}
-                    fontWeight="semibold"
-                    letterSpacing="wide"
-                    fontSize="xs"
-                    textTransform="uppercase"
-                    mt={2}>
-                    {raceInfo.location}, {raceInfo.country}
-                  </Box>
-                </Box>
-              </Flex>
+              <Tilt
+                className="Tilt"
+                style={{ flex: "1 1 33%" }}
+                options={{
+                  reverse: true, // reverse the tilt direction
+                  max: 5, // max tilt rotation (degrees)
+                  perspective: 2000, // Transform perspective, the lower the more extreme the tilt gets.
+                  scale: 1, // 2 = 200%, 1.5 = 150%, etc..
+                  speed: 300, // Speed of the enter/exit transition
+                  transition: true, // Set a transition on enter/exit.
+                  easing: "cubic-bezier(.03,.98,.52,.99)", // Easing on enter/exit.
+                }}>
+                <a href={raceInfo.raceUrl} target="_blank" rel="noreferrer">
+                  <Flex
+                    align="center"
+                    bg={cardBg}
+                    borderRadius="3xl"
+                    boxShadow={["md", "lg"]}
+                    h="100%"
+                    w="100%">
+                    <Box
+                      p="6"
+                      d="flex"
+                      flexDirection="column"
+                      justifyContent="center"
+                      w="100%">
+                      <Box
+                        color={smallText}
+                        fontWeight="semibold"
+                        letterSpacing="wide"
+                        fontSize="xs"
+                        textTransform="uppercase"
+                        mb={2}>
+                        Race {raceInfo.round}
+                      </Box>
+                      <Box
+                        fontWeight="semibold"
+                        fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
+                        lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
+                        as="p">
+                        {raceInfo.raceName}
+                      </Box>
+                      <Box
+                        fontWeight="semibold"
+                        letterSpacing="wide"
+                        fontSize="xs"
+                        color={smallText}
+                        mt={2}
+                        textTransform="uppercase">
+                        Date: {raceInfo.date}
+                      </Box>
+                    </Box>
+                  </Flex>
+                </a>
+              </Tilt>
+
+              <Tilt
+                className="Tilt"
+                style={{ flex: "1 1 33%" }}
+                options={{
+                  reverse: true, // reverse the tilt direction
+                  max: 5, // max tilt rotation (degrees)
+                  perspective: 2000, // Transform perspective, the lower the more extreme the tilt gets.
+                  scale: 1, // 2 = 200%, 1.5 = 150%, etc..
+                  speed: 300, // Speed of the enter/exit transition
+                  transition: true, // Set a transition on enter/exit.
+                  easing: "cubic-bezier(.03,.98,.52,.99)", // Easing on enter/exit.
+                }}>
+                <a href={raceInfo.circuitUrl} target="_blank" rel="noreferrer">
+                  <Flex
+                    align="center"
+                    bg={orange}
+                    borderRadius="3xl"
+                    boxShadow={["md", "lg"]}
+                    h="100%"
+                    w="100%">
+                    <Box
+                      p="6"
+                      d="flex"
+                      flexDirection="column"
+                      justifyContent="center"
+                      w="100%">
+                      <Box
+                        color={smallText}
+                        fontWeight="semibold"
+                        letterSpacing="wide"
+                        fontSize="xs"
+                        textTransform="uppercase"
+                        mb={2}
+                        d="flex"
+                        alignItems="center">
+                        Location
+                      </Box>
+                      <Box
+                        fontWeight="semibold"
+                        fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
+                        lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
+                        as="p"
+                        color={bigText}>
+                        {raceInfo.circuitName}
+                      </Box>
+                      <Box
+                        color={smallText}
+                        fontWeight="semibold"
+                        letterSpacing="wide"
+                        fontSize="xs"
+                        textTransform="uppercase"
+                        mt={2}>
+                        {raceInfo.location}, {raceInfo.country}
+                      </Box>
+                    </Box>
+                  </Flex>
+                </a>
+              </Tilt>
 
               <Tilt
                 className="Tilt"

@@ -18,7 +18,9 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-tilt": "^0.1.4",
+    "recharts": "^2.0.9",
     "simple-statistics": "^7.7.0",
+    "source-map-explorer": "^2.5.2",
     "uuid": "^8.3.2",
     "victory": "^35.5.1",
     "web-vitals": "^0.2.4",
@@ -36,6 +38,7 @@
     "workbox-streams": "^5.1.4"
   },
   "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -41,7 +41,7 @@ const dif = (time1, time2) => {
 const process = (laptime) => {
   const onlyMili = laptime.map((value) => value.milliseconds).sort((a, b) => a - b);
 
-  console.log(laptime);
+  // console.log(laptime);
 
   const processed = {
     fastestLap: min(onlyMili),
@@ -141,12 +141,12 @@ const Summary = ({
 
   // return <></>;
 
-  console.log(convertTime(stats1.fastestLap), stats1.fastestLap);
+  // console.log(convertTime(stats1.fastestLap), stats1.fastestLap);
   return (
     <Flex
       align="center"
       bg={cardBg}
-      borderRadius="3xl"
+      borderRadius="xl"
       direction="column"
       justifyContent="center"
       py={4}
