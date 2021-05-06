@@ -10,7 +10,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { interquartileRange, max, quantile } from "simple-statistics";
+import { max, quantile } from "simple-statistics";
 
 //find Driver code/name
 const findDriver = (driverToFind, drivers) => {
