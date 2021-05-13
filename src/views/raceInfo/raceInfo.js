@@ -364,7 +364,7 @@ const RacesInfo = () => {
                     d="flex"
                     py={4}
                     w="100%"
-                    h="100%"
+                    h={["62px", "100%"]}
                     onClick={() => {
                       history.push(`/season/${year}/round/${raceId}/headtohead`);
                     }}
