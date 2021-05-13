@@ -3,6 +3,7 @@ import {
   Button,
   Flex,
   Skeleton,
+  SlideFade,
   useColorMode,
   useMediaQuery,
 } from "@chakra-ui/react";
@@ -36,60 +37,65 @@ const SeasonCard = ({ year, history }) => {
     active: "linear(315deg, #99645f 0%, #500d34 74%)",
   };
   return (
-    <Flex align="center" m={[2, 2, 3]}>
-      <Tilt
-        className="Tilt"
-        options={{
-          reverse: true, // reverse the tilt direction
-          max: 12, // max tilt rotation (degrees)
-          perspective: 1000, // Transform perspective, the lower the more extreme the tilt gets.
-          scale: 1, // 2 = 200%, 1.5 = 150%, etc..
-          speed: 300, // Speed of the enter/exit transition
-          transition: true, // Set a transition on enter/exit.
-          easing: "cubic-bezier(.03,.98,.52,.99)", // Easing on enter/exit.
-        }}>
-        <Button
-          d="flex"
-          height={["130px", "160px"]}
-          p="0"
-          onClick={() => {
-            history.push(`/season/${year}`);
-          }}
-          width={["91vw", "40vw", "30vw", "30vw", "20vw", "12vw"]}
-          borderRadius="3xl"
-          boxShadow="lg"
-          bgGradient={colorMode === "light" ? lightGradient.normal : darkGradient.normal}
-          _hover={{
-            bgGradient: colorMode === "light" ? lightGradient.hover : darkGradient.hover,
-          }}
-          _active={{
-            bgGradient:
-              colorMode === "light" ? lightGradient.active : darkGradient.active,
+    <SlideFade in={true}>
+      <Flex align="center" m={[2, 2, 3]}>
+        <Tilt
+          className="Tilt"
+          options={{
+            reverse: true, // reverse the tilt direction
+            max: 12, // max tilt rotation (degrees)
+            perspective: 1000, // Transform perspective, the lower the more extreme the tilt gets.
+            scale: 1, // 2 = 200%, 1.5 = 150%, etc..
+            speed: 300, // Speed of the enter/exit transition
+            transition: true, // Set a transition on enter/exit.
+            easing: "cubic-bezier(.03,.98,.52,.99)", // Easing on enter/exit.
           }}>
-          <Box p="6">
-            <Box
-              fontWeight="semibold"
-              fontSize="3rem"
-              lineHeight="3rem"
-              as="p"
-              minW="110px"
-              color={colorMode === "light" ? "blackAlpha.700" : "whiteAlpha.800"}>
-              {year}
-            </Box>
-            <Box d="flex" justifyContent="flex-end">
+          <Button
+            d="flex"
+            height={["130px", "160px"]}
+            p="0"
+            onClick={() => {
+              history.push(`/season/${year}`);
+            }}
+            width={["91vw", "40vw", "30vw", "30vw", "20vw", "12vw"]}
+            borderRadius="3xl"
+            boxShadow="lg"
+            bgGradient={
+              colorMode === "light" ? lightGradient.normal : darkGradient.normal
+            }
+            _hover={{
+              bgGradient:
+                colorMode === "light" ? lightGradient.hover : darkGradient.hover,
+            }}
+            _active={{
+              bgGradient:
+                colorMode === "light" ? lightGradient.active : darkGradient.active,
+            }}>
+            <Box p="6">
               <Box
-                color={colorMode === "light" ? "blackAlpha.600" : "whiteAlpha.700"}
                 fontWeight="semibold"
-                letterSpacing="wide"
-                fontSize="xs"
-                textTransform="uppercase">
-                Season
+                fontSize="3rem"
+                lineHeight="3rem"
+                as="p"
+                minW="110px"
+                color={colorMode === "light" ? "blackAlpha.700" : "whiteAlpha.800"}>
+                {year}
+              </Box>
+              <Box d="flex" justifyContent="flex-end">
+                <Box
+                  color={colorMode === "light" ? "blackAlpha.600" : "whiteAlpha.700"}
+                  fontWeight="semibold"
+                  letterSpacing="wide"
+                  fontSize="xs"
+                  textTransform="uppercase">
+                  Season
+                </Box>
               </Box>
             </Box>
-          </Box>
-        </Button>
-      </Tilt>
-    </Flex>
+          </Button>
+        </Tilt>
+      </Flex>
+    </SlideFade>
   );
 };
 
