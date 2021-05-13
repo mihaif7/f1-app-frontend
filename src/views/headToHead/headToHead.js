@@ -1,3 +1,4 @@
+import { RepeatIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -11,16 +12,28 @@ import {
   useColorModeValue,
   useMediaQuery,
 } from "@chakra-ui/react";
-import { RepeatIcon } from "@chakra-ui/icons";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Tilt from "react-tilt";
 import { colorHtHSelect } from "../../utils/colorLabels";
 import "./../team-colors.scss";
 import Boxplot from "./Boxplot";
 import HthTable from "./hthTable";
-import Summary from "./summary";
 import LineChartComponent from "./LineChart";
+import Summary from "./summary";
+
+const lightGradient = {
+  normal: "linear(315deg, #FDB4C7 0%, #FFECD3 95%)",
+  hover: "linear(315deg, #fdbccd 0%, #ffeed7 95%)",
+  active: "linear(315deg, #e4a2b3 0%, #e6d4be 95%)",
+};
+
+const darkGradient = {
+  normal: "linear(315deg, #ffa69e 0%, #861657 95%)",
+  hover: "linear(315deg, #cc857e 0%, #6b1246 95%)",
+  active: "linear(315deg, #99645f 0%, #500d34 95%)",
+};
 
 const HeadToHead = () => {
   const [raceInfo, setRaceInfo] = useState();
@@ -141,44 +154,71 @@ const HeadToHead = () => {
           my={4}>
           <Stack direction={stackChange ? "row" : "column"} spacing={["4", "6"]}>
             <Stack spacing={["4", "6"]} flex="1 1 50%">
-              <Flex
-                align="center"
-                bg={cardBg}
-                borderRadius="3xl"
-                flex="1 1 50%"
-                boxShadow={["md", "lg"]}>
-                <Box
-                  p="6"
-                  d="flex"
-                  flexDirection="column"
-                  justifyContent="center"
-                  w="100%">
-                  <Box
-                    color={smallText}
-                    fontWeight="semibold"
-                    letterSpacing="wide"
-                    fontSize="xs"
-                    textTransform="uppercase"
-                    mb={2}>
-                    Race {raceInfo.round}
-                  </Box>
-                  <Box
-                    fontWeight="semibold"
-                    fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
-                    lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
-                    as="p">
-                    {raceInfo.raceName}
-                  </Box>
-                  <Box
-                    color={smallText}
-                    fontWeight="semibold"
-                    letterSpacing="wide"
-                    fontSize="xs"
-                    mt={2}>
-                    Date: {raceInfo.date}
-                  </Box>
-                </Box>
-              </Flex>
+              <Tilt
+                className="Tilt"
+                style={{ flex: "1 1 33%" }}
+                options={{
+                  reverse: true, // reverse the tilt direction
+                  max: 5, // max tilt rotation (degrees)
+                  perspective: 2000, // Transform perspective, the lower the more extreme the tilt gets.
+                  scale: 1, // 2 = 200%, 1.5 = 150%, etc..
+                  speed: 300, // Speed of the enter/exit transition
+                  transition: true, // Set a transition on enter/exit.
+                  easing: "cubic-bezier(.03,.98,.52,.99)", // Easing on enter/exit.
+                }}>
+                <a href={raceInfo.raceUrl} target="_blank" rel="noreferrer">
+                  <Flex
+                    align="center"
+                    bgGradient={
+                      colorMode === "light" ? lightGradient.normal : darkGradient.normal
+                    }
+                    _hover={{
+                      bgGradient:
+                        colorMode === "light" ? lightGradient.hover : darkGradient.hover,
+                    }}
+                    _active={{
+                      bgGradient:
+                        colorMode === "light"
+                          ? lightGradient.active
+                          : darkGradient.active,
+                    }}
+                    borderRadius="3xl"
+                    flex="1 1 50%"
+                    boxShadow={["md", "lg"]}>
+                    <Box
+                      p="6"
+                      d="flex"
+                      flexDirection="column"
+                      justifyContent="center"
+                      w="100%">
+                      <Box
+                        color={smallText}
+                        fontWeight="semibold"
+                        letterSpacing="wide"
+                        fontSize="xs"
+                        textTransform="uppercase"
+                        mb={2}>
+                        Race {raceInfo.round}
+                      </Box>
+                      <Box
+                        fontWeight="semibold"
+                        fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
+                        lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
+                        as="p">
+                        {raceInfo.raceName}
+                      </Box>
+                      <Box
+                        color={smallText}
+                        fontWeight="semibold"
+                        letterSpacing="wide"
+                        fontSize="xs"
+                        mt={2}>
+                        Date: {raceInfo.date}
+                      </Box>
+                    </Box>
+                  </Flex>
+                </a>
+              </Tilt>
               {!stackChange && (
                 <Flex
                   justifyContent="center"
@@ -433,6 +473,7 @@ const HeadToHead = () => {
                   driver1={driver1}
                   driver2={driver2}
                   drivers={drivers}
+                  size={stackChange}
                 />
               </Box>
             </Stack>

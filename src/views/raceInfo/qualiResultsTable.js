@@ -15,6 +15,7 @@ import {
   Thead,
   Tr,
   useMediaQuery,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import "./../team-colors.scss";
@@ -99,11 +100,16 @@ const SmallTable = ({ quali }) => {
 
 const BigTable = ({ quali, cardBg }) => {
   const [isLargerThan750] = useMediaQuery("(min-width: 750px)");
+  const { colorMode } = useColorMode();
   let { year } = useParams();
   // console.log(quali);
   return (
-    <Table size={isLargerThan750 ? "md" : "sm"} flexGrow={1}>
-      <Thead bg={cardBg}>
+    <Table
+      size={isLargerThan750 ? "md" : "sm"}
+      flexGrow={1}
+      variant="striped"
+      colorScheme={colorMode === "light" ? "blackAlpha" : "gray"}>
+      <Thead>
         <Tr>
           <Th isNumeric>#</Th>
           <Th w="99%">Driver</Th>
@@ -116,10 +122,10 @@ const BigTable = ({ quali, cardBg }) => {
         {quali.map((res, index) => {
           return (
             <Tr key={res.driverId}>
-              <Td isNumeric py={2}>
+              <Td isNumeric py={2} borderBottom={0}>
                 {res.position}
               </Td>
-              <Td fontWeight="500" whiteSpace="nowrap" px={0} py={2}>
+              <Td fontWeight="500" whiteSpace="nowrap" px={0} py={2} borderBottom={0}>
                 <Box d="flex">
                   {year > 2013 && (
                     <Box
@@ -133,17 +139,17 @@ const BigTable = ({ quali, cardBg }) => {
                   {`${res.forename} ${res.surname}`}
                 </Box>
               </Td>
-              <Td textAlign="center" py={2} px={2}>
+              <Td textAlign="center" py={2} px={2} borderBottom={0}>
                 <Badge borderRadius="full" px="2" colorScheme="yellow">
                   {res.q1}
                 </Badge>
               </Td>
-              <Td textAlign="center" py={2} px={2}>
+              <Td textAlign="center" py={2} px={2} borderBottom={0}>
                 <Badge borderRadius="full" px="2" colorScheme="green">
                   {res.q2}
                 </Badge>
               </Td>
-              <Td textAlign="center" py={2} pl={2}>
+              <Td textAlign="center" py={2} pl={2} borderBottom={0}>
                 <Badge borderRadius="full" px="2" colorScheme="purple">
                   {res.q3}
                 </Badge>
@@ -171,7 +177,7 @@ const QualiResultsTable = ({ quali, cardBg }) => {
       pb={isLargerThan900 ? 4 : 2}
       flexGrow={1}
       align="center"
-      boxShadow={["md","lg"]}>
+      boxShadow={["md", "lg"]}>
       {isLargerThan900 ? (
         <Box h="100%">
           <Box px="6" py="2">

@@ -52,7 +52,14 @@ const calcMax = (arr) => {
   return m;
 };
 
-const LineChartComponent = ({ lapTimes1, lapTimes2, driver1, driver2, drivers }) => {
+const LineChartComponent = ({
+  lapTimes1,
+  lapTimes2,
+  driver1,
+  driver2,
+  drivers,
+  size,
+}) => {
   const { colorMode } = useColorMode();
 
   let data;
@@ -87,7 +94,7 @@ const LineChartComponent = ({ lapTimes1, lapTimes2, driver1, driver2, drivers })
         margin={{
           top: 20,
           right: 15,
-          left: 0,
+          left: size ? 0 : 15,
           bottom: 10,
         }}>
         {colorMode === "light" && <CartesianGrid strokeDasharray="3 3" />}
@@ -98,9 +105,10 @@ const LineChartComponent = ({ lapTimes1, lapTimes2, driver1, driver2, drivers })
             return convertTime(tick, true);
           }}
           allowDataOverflow={true}
+          hide={!size}
         />
         <Tooltip
-          formatter={(value, name, props) => {
+          formatter={(value, name) => {
             let newName = "";
             switch (name) {
               case "time1":
@@ -117,7 +125,7 @@ const LineChartComponent = ({ lapTimes1, lapTimes2, driver1, driver2, drivers })
           }}
         />
         <Legend
-          formatter={(value, name, props) => {
+          formatter={(value) => {
             if (value === "time1") return d1;
             else if (value === "time2") return d2;
           }}

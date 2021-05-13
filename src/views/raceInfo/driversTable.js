@@ -15,6 +15,7 @@ import {
   Thead,
   Tr,
   useMediaQuery,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
@@ -90,6 +91,7 @@ const SmallTable = ({ driver, cardBg }) => {
 const DriversTable = ({ driver, cardBg }) => {
   const [isLargerThan750] = useMediaQuery("(min-width: 750px)");
   const [isLargerThan900] = useMediaQuery("(min-width: 900px)");
+  const { colorMode } = useColorMode();
   let { year } = useParams();
 
   // console.log("valoare", driver);
@@ -103,7 +105,8 @@ const DriversTable = ({ driver, cardBg }) => {
       bg={cardBg}
       pt={2}
       pb={isLargerThan900 ? 4 : 2}
-      boxShadow={["md","lg"]}>
+      boxShadow={["md", "lg"]}
+      flexGrow="1">
       {isLargerThan900 ? (
         <>
           <Box flex="1" px="6" py="2">
@@ -111,7 +114,10 @@ const DriversTable = ({ driver, cardBg }) => {
               Drivers
             </Text>
           </Box>
-          <Table size={isLargerThan750 ? "md" : "sm"}>
+          <Table
+            size={isLargerThan750 ? "md" : "sm"}
+            variant="striped"
+            colorScheme={colorMode === "light" ? "blackAlpha" : "gray"}>
             <Thead bg={cardBg}>
               <Tr>
                 <Th isNumeric>#</Th>
@@ -125,10 +131,15 @@ const DriversTable = ({ driver, cardBg }) => {
               {driver.map((res) => {
                 return (
                   <Tr key={res.driverId}>
-                    <Td isNumeric py={2}>
+                    <Td isNumeric py={2} borderBottom={0}>
                       {res.position}
                     </Td>
-                    <Td fontWeight="500" whiteSpace="nowrap" py={2} pl={0}>
+                    <Td
+                      fontWeight="500"
+                      whiteSpace="nowrap"
+                      py={2}
+                      pl={0}
+                      borderBottom={0}>
                       <Box d="flex">
                         {year > 2013 && (
                           <Box
@@ -142,7 +153,7 @@ const DriversTable = ({ driver, cardBg }) => {
                         {`${res.forename} ${res.surname}`}
                       </Box>
                     </Td>
-                    <Td textAlign="center" py={2}>
+                    <Td textAlign="center" py={2} borderBottom={0}>
                       <Badge borderRadius="full" px="2" colorScheme="orange" minW="37px">
                         {res.points}
                       </Badge>

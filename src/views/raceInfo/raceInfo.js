@@ -209,17 +209,17 @@ const RacesInfo = () => {
                   <Flex
                     align="center"
                     bgGradient={
-                      colorMode === "light" ? lightGradient.normal : darkGradient.normal
+                      colorMode === "light" ? lightGradient.normal : iDarkGradient.normal
                     }
                     _hover={{
                       bgGradient:
-                        colorMode === "light" ? lightGradient.hover : darkGradient.hover,
+                        colorMode === "light" ? lightGradient.hover : iDarkGradient.hover,
                     }}
                     _active={{
                       bgGradient:
                         colorMode === "light"
                           ? lightGradient.active
-                          : darkGradient.active,
+                          : iDarkGradient.active,
                     }}
                     borderRadius="3xl"
                     boxShadow={["md", "lg"]}

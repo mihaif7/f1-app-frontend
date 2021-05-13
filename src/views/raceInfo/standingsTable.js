@@ -15,6 +15,7 @@ import {
   Thead,
   Tr,
   useMediaQuery,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import "./../team-colors.scss";
@@ -88,6 +89,7 @@ const SmallTable = ({ standings, cardBg }) => {
 
 const StandingsTable = ({ standings, cardBg }) => {
   let { year } = useParams();
+  const { colorMode } = useColorMode();
   const [isLargerThan750] = useMediaQuery("(min-width: 750px)");
   const [isLargerThan900] = useMediaQuery("(min-width: 900px)");
 
@@ -110,7 +112,10 @@ const StandingsTable = ({ standings, cardBg }) => {
               </Text>
             </Box>
 
-            <Table size={isLargerThan750 ? "md" : "sm"}>
+            <Table
+              size={isLargerThan750 ? "md" : "sm"}
+              variant="striped"
+              colorScheme={colorMode === "light" ? "blackAlpha" : "gray"}>
               <Thead bg={cardBg}>
                 <Tr>
                   <Th isNumeric>#</Th>
@@ -124,10 +129,15 @@ const StandingsTable = ({ standings, cardBg }) => {
                 {standings.map((res) => {
                   return (
                     <Tr key={res.constructorId}>
-                      <Td isNumeric py={2}>
+                      <Td isNumeric py={2} borderBottom={0}>
                         {res.position}
                       </Td>
-                      <Td fontWeight="500" whiteSpace="nowrap" py={2} pl={0}>
+                      <Td
+                        fontWeight="500"
+                        whiteSpace="nowrap"
+                        py={2}
+                        pl={0}
+                        borderBottom={0}>
                         <Box d="flex">
                           {year > 2013 && (
                             <Box
@@ -141,7 +151,7 @@ const StandingsTable = ({ standings, cardBg }) => {
                           {res.name}
                         </Box>
                       </Td>
-                      <Td textAlign="center" py={2}>
+                      <Td textAlign="center" py={2} borderBottom={0}>
                         <Badge
                           borderRadius="full"
                           px="2"

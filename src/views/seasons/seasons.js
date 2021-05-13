@@ -13,6 +13,8 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Tilt from "react-tilt";
 
+import "../team-colors.scss";
+
 // Create `axios-cache-adapter` instance
 const cache = setupCache({
   maxAge: 15 * 60 * 1000,
@@ -32,9 +34,9 @@ const SeasonCard = ({ year, history }) => {
     active: "linear(315deg, #e4a2b3 0%, #e6d4be 74%)",
   };
   const darkGradient = {
-    normal: "linear(315deg, #ffa69e 0%, #861657 74%)",
-    hover: "linear(315deg, #cc857e 0%, #6b1246 74%)",
-    active: "linear(315deg, #99645f 0%, #500d34 74%)",
+    normal: "linear(315deg, #861657  0%, #ffa69e  74%)",
+    hover: "linear(315deg, #6b1246  0%, #cc857e  74%)",
+    active: "linear(315deg, #500d34 0%, #99645f  74%)",
   };
   return (
     <SlideFade in={true}>
