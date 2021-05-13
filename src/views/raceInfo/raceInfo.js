@@ -7,15 +7,66 @@ import {
   Stack,
   Text,
   useColorModeValue,
+  useColorMode,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { setupCache } from "axios-cache-adapter";
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import Tilt from "react-tilt";
 import DriversTable from "./driversTable";
 import QualiResultsTable from "./qualiResultsTable";
 import RaceResultsTable from "./raceResultsTable";
 import StandingsTable from "./standingsTable";
-import Tilt from "react-tilt";
+
+// Create `axios-cache-adapter` instance
+const cache = setupCache({
+  maxAge: 15 * 60 * 1000,
+});
+
+// Create `axios` instance passing the newly created `cache.adapter`
+const api = axios.create({
+  adapter: cache.adapter,
+});
+
+// normal Gradient
+const lightGradient = {
+  normal: "linear(315deg, #FDB4C7 0%, #FFECD3 95%)",
+  hover: "linear(315deg, #fdbccd 0%, #ffeed7 95%)",
+  active: "linear(315deg, #e4a2b3 0%, #e6d4be 95%)",
+};
+
+const darkGradient = {
+  normal: "linear(315deg, #ffa69e 0%, #861657 95%)",
+  hover: "linear(315deg, #cc857e 0%, #6b1246 95%)",
+  active: "linear(315deg, #99645f 0%, #500d34 95%)",
+};
+
+// inverted Gradient
+const iLightGradient = {
+  normal: "linear(315deg, #FFECD3 0%, #FDB4C7 95%)",
+  hover: "linear(315deg, #ffeed7 0%, #fdbccd 95%)",
+  active: "linear(315deg, #e6d4be 0%, #e4a2b3 95%)",
+};
+
+const iDarkGradient = {
+  normal: "linear(315deg, #861657 0%, #ffa69e 95%)",
+  hover: "linear(315deg, #6b1246 0%, #cc857e 95%)",
+  active: "linear(315deg, #500d34 0%, #99645f 95%)",
+};
+
+// hth Gradient
+const hLightGradient = {
+  normal: "linear(315deg, #ACF386 0%, #56E2FB 95%)",
+  hover: "linear(315deg, #9bdb79 0%, #4dcbe2 95%)",
+  active: "linear(315deg, #8ac26b 0%, #45b5c9 95%)",
+};
+
+const hDarkGradient = {
+  normal: "linear(315deg,#84B46A 0%,#14ADC8 95%)",
+  hover: "linear(315deg, #77a25f 0%, #129cb4 95%)",
+  active: "linear(315deg, #6a9055 0%, #108aa0 95%)",
+};
 
 const RacesInfo = () => {
   let history = useHistory();
@@ -25,16 +76,17 @@ const RacesInfo = () => {
   const [standings, setStandings] = useState();
   const [driverStandings, setDriverStandings] = useState();
   let { year, raceId } = useParams();
+  const { colorMode } = useColorMode();
 
   const cardBg = useColorModeValue("gray.100", "whiteAlpha.200");
-  const orange = useColorModeValue("orange.100", "yellow.800");
-  const hthButton = useColorModeValue("green.100", "green.700");
-  const hthButtonHover = useColorModeValue("green.200", "green.800");
-  const smallText = useColorModeValue("gray.600", "whiteAlpha.600");
-  const bigText = useColorModeValue("grey.200", "whiteAlpha.900");
+  // const orange = useColorModeValue("orange.100", "yellow.800");
+  // const hthButton = useColorModeValue("green.100", "green.700");
+  // const hthButtonHover = useColorModeValue("green.200", "green.800");
+  // const smallText = useColorModeValue("gray.600", "whiteAlpha.600");
+  // const bigText = useColorModeValue("grey.200", "whiteAlpha.900");
 
   const getCircuitInfo = async () => {
-    await axios
+    await api
       .get(`${process.env.REACT_APP_API_URL}/api/circuit/${raceId}`, {
         headers: {
           "Content-Type": "application/json",
@@ -51,7 +103,7 @@ const RacesInfo = () => {
   };
 
   const getResults = async () => {
-    await axios
+    await api
       .get(`${process.env.REACT_APP_API_URL}/api/results/${raceId}`, {
         headers: {
           "Content-Type": "application/json",
@@ -68,7 +120,7 @@ const RacesInfo = () => {
   };
 
   const getQuali = async () => {
-    await axios
+    await api
       .get(`${process.env.REACT_APP_API_URL}/api/results/quali/${raceId}`, {
         headers: {
           "Content-Type": "application/json",
@@ -85,7 +137,7 @@ const RacesInfo = () => {
   };
 
   const getStandingsConstructors = async () => {
-    await axios
+    await api
       .get(
         `${process.env.REACT_APP_API_URL}/api/results/standings/constructors/${raceId}`,
         {
@@ -105,7 +157,7 @@ const RacesInfo = () => {
   };
 
   const getStandingsDrivers = async () => {
-    await axios
+    await api
       .get(`${process.env.REACT_APP_API_URL}/api/results/standings/drivers/${raceId}`, {
         headers: {
           "Content-Type": "application/json",
@@ -156,7 +208,19 @@ const RacesInfo = () => {
                 <a href={raceInfo.raceUrl} target="_blank" rel="noreferrer">
                   <Flex
                     align="center"
-                    bg={cardBg}
+                    bgGradient={
+                      colorMode === "light" ? lightGradient.normal : darkGradient.normal
+                    }
+                    _hover={{
+                      bgGradient:
+                        colorMode === "light" ? lightGradient.hover : darkGradient.hover,
+                    }}
+                    _active={{
+                      bgGradient:
+                        colorMode === "light"
+                          ? lightGradient.active
+                          : darkGradient.active,
+                    }}
                     borderRadius="3xl"
                     boxShadow={["md", "lg"]}
                     h="100%"
@@ -168,7 +232,9 @@ const RacesInfo = () => {
                       justifyContent="center"
                       w="100%">
                       <Box
-                        color={smallText}
+                        color={
+                          colorMode === "light" ? "blackAlpha.600" : "whiteAlpha.800"
+                        }
                         fontWeight="semibold"
                         letterSpacing="wide"
                         fontSize="xs"
@@ -180,14 +246,19 @@ const RacesInfo = () => {
                         fontWeight="semibold"
                         fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
                         lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
-                        as="p">
+                        as="p"
+                        color={
+                          colorMode === "light" ? "blackAlpha.700" : "whiteAlpha.900"
+                        }>
                         {raceInfo.raceName}
                       </Box>
                       <Box
                         fontWeight="semibold"
                         letterSpacing="wide"
                         fontSize="xs"
-                        color={smallText}
+                        color={
+                          colorMode === "light" ? "blackAlpha.600" : "whiteAlpha.800"
+                        }
                         mt={2}
                         textTransform="uppercase">
                         Date: {raceInfo.date}
@@ -212,7 +283,21 @@ const RacesInfo = () => {
                 <a href={raceInfo.circuitUrl} target="_blank" rel="noreferrer">
                   <Flex
                     align="center"
-                    bg={orange}
+                    bgGradient={
+                      colorMode === "light" ? iLightGradient.normal : iDarkGradient.normal
+                    }
+                    _hover={{
+                      bgGradient:
+                        colorMode === "light"
+                          ? iLightGradient.hover
+                          : iDarkGradient.hover,
+                    }}
+                    _active={{
+                      bgGradient:
+                        colorMode === "light"
+                          ? iLightGradient.active
+                          : iDarkGradient.active,
+                    }}
                     borderRadius="3xl"
                     boxShadow={["md", "lg"]}
                     h="100%"
@@ -224,7 +309,9 @@ const RacesInfo = () => {
                       justifyContent="center"
                       w="100%">
                       <Box
-                        color={smallText}
+                        color={
+                          colorMode === "light" ? "blackAlpha.600" : "whiteAlpha.800"
+                        }
                         fontWeight="semibold"
                         letterSpacing="wide"
                         fontSize="xs"
@@ -239,11 +326,15 @@ const RacesInfo = () => {
                         fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
                         lineHeight={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
                         as="p"
-                        color={bigText}>
+                        color={
+                          colorMode === "light" ? "blackAlpha.700" : "whiteAlpha.900"
+                        }>
                         {raceInfo.circuitName}
                       </Box>
                       <Box
-                        color={smallText}
+                        color={
+                          colorMode === "light" ? "blackAlpha.600" : "whiteAlpha.800"
+                        }
                         fontWeight="semibold"
                         letterSpacing="wide"
                         fontSize="xs"
@@ -277,15 +368,28 @@ const RacesInfo = () => {
                     onClick={() => {
                       history.push(`/season/${year}/round/${raceId}/headtohead`);
                     }}
-                    background={hthButton}
-                    _hover={{ backgroundColor: hthButtonHover }}
-                    _active={{ backgroundColor: hthButtonHover }}
+                    bgGradient={
+                      colorMode === "light" ? hLightGradient.normal : hDarkGradient.normal
+                    }
+                    _hover={{
+                      bgGradient:
+                        colorMode === "light"
+                          ? hLightGradient.hover
+                          : hDarkGradient.hover,
+                    }}
+                    _active={{
+                      bgGradient:
+                        colorMode === "light"
+                          ? hLightGradient.active
+                          : hDarkGradient.active,
+                    }}
                     boxShadow={["md", "lg"]}
                     borderRadius="3xl">
                     <Text
                       fontSize={["1.35rem", "1.5rem", "2rem", "2.05rem"]}
                       fontWeight="semibold"
-                      textAlign="left">
+                      textAlign="left"
+                      color={colorMode === "light" ? "blackAlpha.700" : "whiteAlpha.900"}>
                       Head to head
                     </Text>
                   </Button>

@@ -10,6 +10,7 @@
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "axios": "^0.21.1",
+    "axios-cache-adapter": "^2.7.3",
     "framer-motion": "^4.1.9",
     "node-sass": "^5.0.0",
     "react": "^17.0.2",
