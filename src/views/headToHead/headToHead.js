@@ -30,9 +30,9 @@ const lightGradient = {
 };
 
 const darkGradient = {
-  normal: "linear(315deg, #ffa69e 0%, #861657 95%)",
-  hover: "linear(315deg, #cc857e 0%, #6b1246 95%)",
-  active: "linear(315deg, #99645f 0%, #500d34 95%)",
+  normal: "linear(315deg, #861657 0%, #ffa69e 95%)",
+  hover: "linear(315deg, #6b1246 0%, #cc857e 95%)",
+  active: "linear(315deg, #500d34 0%, #99645f 95%)",
 };
 
 const HeadToHead = () => {
